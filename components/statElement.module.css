@@ -1,0 +1,36 @@
+.rectangle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 20%;
+  border-radius: 1rem;
+  padding: 1rem 0 1rem 1rem;
+  background-color: var(--gray-opacity);
+  overflow: hidden;
+}
+
+.circle {
+  height: 100%;
+  z-index: -1;
+  aspect-ratio: 1/2;
+  border-radius: 30rem 2rem 2rem 30rem;
+  filter: blur(1rem);
+}
+
+.yellowCircle {
+  background: radial-gradient(circle at right, var(--yellow), var(--gray));
+}
+
+.greenCircle {
+  background: radial-gradient(circle at right, var(--green), var(--gray));
+}
+
+.redCircle {
+  background: radial-gradient(circle at right, var(--red), var(--gray));
+}
+
+.whiteCircle {
+  background: radial-gradient(circle at right, var(--text-primary), var(--gray));
+}

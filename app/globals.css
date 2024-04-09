@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Colors */
+  --black: #000000;
+  --gray: #313131;
+  --gray-opacity: rgba(49, 49, 49, 0.5);
+  --gray-2: #454545;
+  --text-primary: #ffffff;
+  --text-secondary: #999999;
+  --yellow: #ffd645;
+  --red: #ff004d;
+  --green: #00ff85;
+  /* Gradients */
+  --bg-gradient: -webkit-linear-gradient(#313131, #000000);
+  --yellow-gradient: -webkit-linear-gradient(#ffdc61, #c79b00);
+  --red-gradient: -webkit-linear-gradient(#ff004d, #860028);
+  --green-gradient: -webkit-linear-gradient(#00ff85, #008243);
+  --silver-gradient: -webkit-linear-gradient(#ffffff, #999999);
+}
+
+/* Base configuration */
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Background */
+body {
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  height: 100dvh;
+  width: 100dvw;
+}
