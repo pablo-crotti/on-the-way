@@ -4,17 +4,28 @@ generator client {
 
 datasource db {
     provider  = "postgresql"
-    url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+    url       = env("POSTGRES_PRISMA_URL")
+    directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model user {
-    id             String              @id @default(cuid())
-    name           String
-    email          String              @unique
-    password       String
-    createdAt      DateTime            @default(now()) @map(name: "created_at")
-    updatedAt      DateTime            @updatedAt @map(name: "updated_at")
+    id           String   @id @default(cuid())
+    email        String   @unique
+    password     String?
+    token        String
+    isSuperAdmin Boolean  @default(false)
+    createdAt    DateTime @default(now()) @map(name: "created_at")
+    updatedAt    DateTime @updatedAt @map(name: "updated_at")
 
     @@map(name: "users")
+}
+
+model message {
+    id         String   @id @default(cuid())
+    sender     String
+    text       String
+    isFavorite Boolean  @default(false)
+    createdAt  DateTime @default(now()) @map(name: "created_at")
+
+    @@map(name: "messages")
 }

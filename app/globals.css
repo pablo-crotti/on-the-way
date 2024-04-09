@@ -21,17 +21,4 @@
   --silver-gradient: -webkit-linear-gradient(#ffffff, #999999);
 }
 
-/* Base configuration */
-* {
-  font-family: "Roboto", sans-serif;
-  margin: 0;
-  padding: 0;
-}
 
-/* Background */
-body {
-  background: var(--bg-gradient);
-  color: var(--text-primary);
-  height: 100dvh;
-  width: 100dvw;
-}
