@@ -3,8 +3,6 @@ import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
 import {useRouter} from "next/navigation";
 
-const router = useRouter();
-
 export async function GET(request : NextRequest) {
     const token = new URL(request.url).searchParams.get("token")
     const user = await prisma.user.findFirst({
