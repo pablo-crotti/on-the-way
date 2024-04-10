@@ -37,6 +37,9 @@ export default function SignUpConfirmPage() {
       });
 
       if (!response.ok) {
+        if (response.status === 404) {
+          router.replace("/signin");
+        }
         throw new Error(response.statusText);
       } else {
         router.replace("/admin");
