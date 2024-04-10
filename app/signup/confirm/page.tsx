@@ -41,7 +41,7 @@ export default function SignUpConfirmPage() {
       } else {
         router.replace("/admin");
       }
-    } catch (error) {
+    } catch (error: any) {
       alert(error.message);
     }
 

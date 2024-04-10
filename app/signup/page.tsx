@@ -17,7 +17,7 @@ export default function SignUpPage() {
 
       const responseData = await response.text();
       alert(responseData);
-    } catch (error) {
+    } catch (error: any) {
       alert(error.message);
     }
   };
