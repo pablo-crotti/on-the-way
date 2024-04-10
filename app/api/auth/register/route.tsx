@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
-import {useRouter} from "next/navigation";
 
 export async function GET(request : NextRequest) {
     const token = new URL(request.url).searchParams.get("token")
