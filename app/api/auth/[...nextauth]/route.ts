@@ -34,7 +34,7 @@ const handler = NextAuth ({
 
         const isPasswordValid = await compare(
           credentials.password,
-          user.password || ""
+          user.password || "" // password is nullable
         );
 
         if (!isPasswordValid) {
