@@ -31,30 +31,35 @@ export async function PUT(request : NextRequest) {
     const password = formData.get("password");
     const confirmPassword = formData.get("confirmPassword");
 
+    if (!password) {
+        return new Response("Password is required", { status: 400 });
+    }
+
     if (password !== confirmPassword) {
         return new Response("Les mots de passe ne sont pas identiques", { status: 400 });
     }
 
-    if (password.length < 8) {
+    const passwordString = password as string;
+    if (passwordString.length < 8) {
         return new Response("Le mot de passe doit contenir au moins 8 caractères", { status: 400 });
     }
 
-    if (password.length > 50) {
+    if (passwordString.length > 50) {
         return new Response("Le mot de passe doit contenir au maximum 50 caractères", { status: 400 });
     }
 
     const specialChar = /[!@#$%^&*(),.?":{}|<>]/;
-    if (!specialChar.test(password)) {
+    if (!specialChar.test(password as string)) {
         return new Response("Le mot de passe doit contenir au moins un caractère spécial", { status: 400 });
     }
 
     const number = /[0-9]/;
-    if (!number.test(password)) {
+    if (!number.test(password as string)) {
         return new Response("Le mot de passe doit contenir au moins un chiffre", { status: 400 });
     }
 
     const upperCase = /[A-Z]/;
-    if (!upperCase.test(password)) {
+    if (!upperCase.test(password as string)) {
         return new Response("Le mot de passe doit contenir au moins une lettre majuscule", { status: 400 });
     }
 
