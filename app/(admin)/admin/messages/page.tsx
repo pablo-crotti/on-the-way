@@ -10,7 +10,7 @@ export default function MessagesPage() {
     }
 
     const getMessages = () => {
-        fetch("http://localhost:3000/api/contact", {
+        fetch(`${process.env.NEXTAUTH_URL}/api/contact`, {
           method: "GET",
         })
           .then((res) => res.json())
@@ -26,7 +26,7 @@ export default function MessagesPage() {
         formData.append("favorite", favorite ? "false" : "true");
         
 
-        fetch("http://localhost:3000/api/contact", {
+        fetch(`${process.env.NEXTAUTH_URL}/api/contact`, {
             method: "PUT",
             body: formData,
         }).catch((error) => console.error("Error setting favorite:", error));

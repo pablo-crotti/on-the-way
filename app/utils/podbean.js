@@ -31,36 +31,36 @@ export const fetchOAuthToken = async () => {
         formData.append('expires', expires);
 
 
-        try {
-            const response = await fetch("http://localhost:3000/api/auth/cookies", {
-                method: "POST",
-                body: formData
-            });
+        // try {
+        //     const response = await fetch("http://localhost:3000/api/auth/cookies", {
+        //         method: "POST",
+        //         body: formData
+        //     });
         
-            if (response.ok) {
-                console.log("Cookie set successfully");
-            } else {
-                console.error("Failed to set cookie");
-            }
-        } catch (error) {
-            console.error("Failed to set cookie", error);
-        }
+        //     if (response.ok) {
+        //         console.log("Cookie set successfully");
+        //     } else {
+        //         console.error("Failed to set cookie");
+        //     }
+        // } catch (error) {
+        //     console.error("Failed to set cookie", error);
+        // }
 
 
-        try {
-            const response = await fetch("http://localhost:3000/api/auth/cookies", {
-                method: "GET",
-            });
+        // try {
+        //     const response = await fetch("http://localhost:3000/api/auth/cookies", {
+        //         method: "GET",
+        //     });
         
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Cookie retrieved successfully", data);
-            } else {
-                console.error("Failed to get cookie");
-            }
-        } catch (error) {
-            console.error("Failed to get cookie", error);
-        }
+        //     if (response.ok) {
+        //         const data = await response.json();
+        //         console.log("Cookie retrieved successfully", data);
+        //     } else {
+        //         console.error("Failed to get cookie");
+        //     }
+        // } catch (error) {
+        //     console.error("Failed to get cookie", error);
+        // }
 
 
 

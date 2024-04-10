@@ -14,7 +14,7 @@ export default function ContactPage() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(`${process.env.NEXTAUTH_URL}/api/contact`, {
         method: "POST",
         body: formData,
       });
