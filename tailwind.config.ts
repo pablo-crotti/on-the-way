@@ -22,6 +22,21 @@ const config: Config = {
           "800": "#1e40af",
           "900": "#1e3a8a",
           "950": "#172554"
+        },
+        comment: {
+          "500": "#ff0000",
+        },
+        question : {
+          "500": "#00ff00",
+        },
+        partnership: {
+
+        }, 
+        location: {
+
+        },
+        other: {
+
         }
       }
     },

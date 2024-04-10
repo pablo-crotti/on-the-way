@@ -25,4 +25,47 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         return NextResponse.json({ error: 'An error occured' }, { status: 500 });
     }
-}   
+}
+
+export async function GET(request: NextRequest) {
+
+    const messages = await prisma.message.findMany({
+        orderBy: {
+            createdAt: 'desc'
+        }
+    });
+
+    return NextResponse.json(messages);
+}
+
+export async function PUT(request: NextRequest) {
+    const formData = await request.formData();
+    const id = formData.get('id');
+    const favorite = formData.get('favorite');
+
+    if (!id) {
+        return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+    }
+
+    let fav = false;
+
+    if (favorite == "true") {
+        fav = true;
+    } else if (favorite == "false") {
+        fav = false;
+    }
+
+    try {
+        const message = await prisma.message.update({
+            where: {
+                id: id as string
+            },
+            data: {
+                isFavorite: fav
+            }
+        });
+        return NextResponse.json(message);
+    } catch (error) {
+        return NextResponse.json({ error: 'An error occured' }, { status: 500 });
+    }
+}
