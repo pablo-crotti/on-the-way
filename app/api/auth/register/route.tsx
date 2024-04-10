@@ -1,17 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
+import {useRouter} from "next/navigation";
+
+const router = useRouter();
 
 export async function GET(request : NextRequest) {
     const token = new URL(request.url).searchParams.get("token")
-
+    console.log(1)
     const user = await prisma.user.findFirst({
         where: {
             token: `${token}`
         }
     });
 
+    console.log(user)
+
     if (!user) {
+        console.log("User not found")
+        router.replace("/signin");
         return new Response("User not found", { status: 404 });
     }
 

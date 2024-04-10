@@ -34,7 +34,7 @@ const handler = NextAuth ({
 
         const isPasswordValid = await compare(
           credentials.password,
-          user.password
+          user.password || ""
         );
 
         if (!isPasswordValid) {
@@ -44,7 +44,6 @@ const handler = NextAuth ({
         return {
           id: user.id + "",
           email: user.email,
-          name: user.name,
           randomKey: "randomValue",
         };
       },
