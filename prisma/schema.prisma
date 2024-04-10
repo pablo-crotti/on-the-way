@@ -23,9 +23,19 @@ model user {
 model message {
     id         String   @id @default(cuid())
     sender     String
+    category   Category
+    object     String
     text       String
     isFavorite Boolean  @default(false)
     createdAt  DateTime @default(now()) @map(name: "created_at")
 
     @@map(name: "messages")
+}
+
+enum Category {
+    COMMENT
+    QUESTION
+    PARTNERSHIP
+    LOCATION
+    OTHER
 }
