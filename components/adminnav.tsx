@@ -12,7 +12,7 @@ export const AdminNav = () => {
         data-drawer-toggle="default-sidebar"
         aria-controls="default-sidebar"
         type="button"
-        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-secondary dark:focus:ring-gray-600"
       >
         <span className="sr-only">Open sidebar</span>
         <svg
@@ -35,22 +35,22 @@ export const AdminNav = () => {
         className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-secondary">
           <ul className="space-y-2 font-medium">
             <li>
               <a
                 href="/admin"
                 className={
                   url === "/admin"
-                    ? "flex items-center p-2 text-gray-900 rounded-lg dark:text-white bg-gray-100 dark:bg-gray-700 group"
-                    : "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    ? "flex items-center p-2 rounded-lg text-white bg-primary group"
+                    : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
                 }
               >
                 <svg
                   className={
                     url === "/admin"
-                      ? "flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white"
-                      : "flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                      ? "flex-shrink-0 w-5 h-5 text-white"
+                      : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
                   }
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
@@ -70,15 +70,15 @@ export const AdminNav = () => {
                 href="/admin/episodes"
                 className={
                   url === "/admin/episodes"
-                    ? "flex items-center p-2 text-gray-900 rounded-lg dark:text-white bg-gray-100 dark:bg-gray-700 group"
-                    : "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    ? "flex items-center p-2 rounded-lg text-white bg-primary group"
+                    : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
                 }
               >
                 <svg
                   className={
                     url === "/admin/episodes"
-                      ? "flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white"
-                      : "flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                      ? "flex-shrink-0 w-5 h-5 text-white"
+                      : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
                   }
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -96,15 +96,15 @@ export const AdminNav = () => {
                 href="#"
                 className={
                   url === "/admin/statistiques"
-                    ? "flex items-center p-2 text-gray-900 rounded-lg dark:text-white bg-gray-100 dark:bg-gray-700 group"
-                    : "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    ? "flex items-center p-2 rounded-lg text-white bg-primary group"
+                    : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
                 }
               >
                 <svg
                   className={
                     url === "/admin/statistiques"
-                      ? "flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white"
-                      : "flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                      ? "flex-shrink-0 w-5 h-5 text-white"
+                      : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
                   }
                   aria-hidden="true"
                   fill="currentColor"
@@ -123,16 +123,14 @@ export const AdminNav = () => {
                 href="/admin/messages"
                 className={
                   url === "/admin/messages"
-                    ? "flex items-center p-2 text-gray-900 rounded-lg dark:text-white bg-gray-100 dark:bg-gray-700 group"
-                    : "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                }
+                  ? "flex-shrink-0 w-5 h-5 text-white"
+                  : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"                }
               >
                 <svg
                   className={
                     url === "/admin/messages"
-                      ? "flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white"
-                      : "flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  }
+                    ? "flex-shrink-0 w-5 h-5 text-white"
+                    : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"                  }
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -149,15 +147,14 @@ export const AdminNav = () => {
                 href="/admin/user"
                 className={
                   url === "/admin/user"
-                    ? "flex items-center p-2 text-gray-900 rounded-lg dark:text-white bg-gray-100 dark:bg-gray-700 group"
-                    : "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                }
+                  ? "flex-shrink-0 w-5 h-5 text-white"
+                  : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"                }
               >
                 <svg
                   className={
                     url === "/admin/user"
-                      ? "flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white"
-                      : "flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                      ? "flex items-center p-2 rounded-lg text-white bg-primary group"
+                      : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
                   }
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -174,13 +171,13 @@ export const AdminNav = () => {
             </li>
 
             <li>
-              <div className="rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <div className="flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group">
                 <button
-                  className="flex items-center p-2 text-gray-900 dark:text-white"
+                  className="flex items-center p-2text-white"
                   onClick={() => signOut()}
                 >
                   <svg
-                    className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    className="flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

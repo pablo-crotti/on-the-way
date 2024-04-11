@@ -3,20 +3,20 @@ import { usePathname } from "next/navigation";
 export const AdminHeader = () => {
   const url = usePathname();
   return (
-    <div className="hidden justify-end sm:flex ">
+    <div className="hidden justify-end gap-4 sm:flex ">
       <a
         href="/admin/messages"
         className={
           url === "/admin/messages"
-            ? "flex items-center p-2 text-gray-900 rounded-lg dark:text-white bg-gray-100 dark:bg-gray-700 group"
-            : "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            ? "flex items-center p-2 rounded-lg text-white bg-primary group"
+            : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
         }
       >
         <svg
           className={
             url === "/admin/messages"
-              ? "flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white"
-              : "flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              ? "flex-shrink-0 w-5 h-5 text-white"
+              : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
           }
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -25,23 +25,21 @@ export const AdminHeader = () => {
           <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
           <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
         </svg>
-
-        
       </a>
 
       <a
         href="/admin/user"
         className={
           url === "/admin/user"
-            ? "flex items-center p-2 text-gray-900 rounded-lg dark:text-white bg-gray-100 dark:bg-gray-700 group"
-            : "flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            ? "flex items-center p-2 rounded-lg text-white bg-primary group"
+            : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
         }
       >
         <svg
           className={
             url === "/admin/user"
-              ? "flex-shrink-0 w-5 h-5 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white"
-              : "flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              ? "flex-shrink-0 w-5 h-5 text-white"
+              : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
           }
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
