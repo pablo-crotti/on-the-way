@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 
 
 export async function GET(request: NextRequest) {
-    const tokens = await prisma.apitoken.findMany();
+    const tokens = await prisma.apitoken.findFirst();
 
     if (!tokens) {
         return new Response("No tokens found", { status: 404 });
