@@ -27,21 +27,11 @@ const config: Config = {
           "900": "#1e3a8a",
           "950": "#172554"
         },
-        comment: {
-          "500": "#87CEEB",
-        },
-        question: {
-          "500": "#98FB98",
-        },
-        partnership: {
-          "500": "#FFC0CB",
-        },
-        location: {
-          "500": "#D3D3D3",
-        },
-        other: {
-          "500": "#F5F5DC",
-        }
+        comment: "#6A5ACD",
+        question: "#808000",
+        partnership: "#483C32",
+        location: "#4682B4",
+        other: "#708090",
       }
     },
     fontFamily: {
