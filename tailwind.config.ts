@@ -1,11 +1,15 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  // darkMode: 'class',
+  plugins: [
+    require('flowbite/plugin')
+  ],
+  darkMode: 'media',
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
@@ -24,19 +28,19 @@ const config: Config = {
           "950": "#172554"
         },
         comment: {
-          "500": "#ff0000",
+          "500": "#87CEEB",
         },
-        question : {
-          "500": "#00ff00",
+        question: {
+          "500": "#98FB98",
         },
         partnership: {
-
-        }, 
+          "500": "#FFC0CB",
+        },
         location: {
-
+          "500": "#D3D3D3",
         },
         other: {
-
+          "500": "#F5F5DC",
         }
       }
     },
