@@ -1,9 +1,9 @@
-import { fetchOAuthToken } from "../utils/podbean";
+import { getToken } from "../utils/podbean";
 
 import { cookies } from "next/headers";
 
 export default async function Page() {
-  const token = await fetchOAuthToken();
+  const token = await getToken();
 //   const theme = cookieStore.get("theme");
 
 

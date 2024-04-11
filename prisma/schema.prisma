@@ -32,6 +32,14 @@ model message {
     @@map(name: "messages")
 }
 
+model apitoken {
+    id        String   @id @default(cuid())
+    token     String
+    expiration DateTime
+
+    @@map(name: "api_tokens")
+}
+
 enum Category {
     COMMENT
     QUESTION
