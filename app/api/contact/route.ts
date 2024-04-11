@@ -69,3 +69,23 @@ export async function PUT(request: NextRequest) {
         return NextResponse.json({ error: 'An error occured' }, { status: 500 });
     }
 }
+
+export async function DELETE(request: NextRequest) {
+    const idsToDelete = await request.json();
+    if (!idsToDelete) {
+        return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+    }
+
+    const idsArray = Array.isArray(idsToDelete) ? idsToDelete.map(id => id.toString()) : [idsToDelete.toString()];
+
+    try {
+        await prisma.message.deleteMany({
+            where: {
+                id: { in: idsArray }
+            }
+        });
+        return NextResponse.json({ message: 'Message deleted' });
+    } catch (error) {
+        return NextResponse.json({ error: 'An error occured' }, { status: 500 });
+    }
+}
