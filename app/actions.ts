@@ -1,3 +1,4 @@
+"use server"
 
 import axios from 'axios';
 
@@ -52,7 +53,7 @@ export const fetchOAuthToken = async () => {
     }
 }
 
-export const verifyTokenAge = (expiration) => {
+export const verifyTokenAge = (expiration: any) => {
     expiration = new Date(expiration);
     const now = new Date();
 
@@ -88,7 +89,6 @@ export const getToken = async () => {
     }
 }
 
-
 export const fetchPodcasts = async () => {
     const token = await getToken();
     const url = `${BASE_URL}/episodes`;
@@ -98,14 +98,17 @@ export const fetchPodcasts = async () => {
 
     const response = await axios.get(url, { headers });
 
-    console.log(response.data);
+    if (response.data) {
+        return response.data;
+    } else {
+        console.error("Failed to fetch podcasts");
+    }
 }
 
-export const fetchPresignedAmazonUrl = async (file) => {
-    console.log("fetchPresignedAmazonUrl")
+
+export const fetchPresignedAmazonUrl = async (file: any) => {
     const token = await getToken();
-    console.log("token", token)
-    const url = `${BASE_URL}//files/uploadAuthorize`;
+    const url = `${BASE_URL}/files/uploadAuthorize`;
 
     const headers = {
         Authorization: `Bearer ${token}`,
@@ -119,5 +122,64 @@ export const fetchPresignedAmazonUrl = async (file) => {
 
     const response = await axios.get(url, { headers, params });
 
-    console.log(response.data);
+    if (response.data) {
+        return [response.data.presigned_url, response.data.file_key];
+    } else {
+        console.error("Failed to get presigned url");
+    }
+}
+
+export const storeOnAmazon = async (formData: FormData, url: string) => {
+    const file = formData.get('file');
+
+    console.log(url);
+    console.log(file);
+
+    if (!url || !file) {
+        console.error("Missing presigned URL or file");
+        return;
+    }
+
+    const response = await axios.put(url, formData, {
+        headers: {
+            'Content-Type': file instanceof Blob ? file.type : '',
+        },
+    });
+
+    console.log(response);
+
+    if (response.status === 200) {
+        return true;
+    } else {
+        console.error("Failed to store file on Amazon");
+    }
+}
+
+export const publishPodcast = async (podcast: any) => {
+    const token = await getToken();
+    const url = `${BASE_URL}/episodes`;
+
+    const headers = {
+        Authorization: `Bearer ${token}`,
+    };
+
+    const requestBody = new URLSearchParams();
+    requestBody.append('title', podcast.title);
+    requestBody.append('content', podcast.content);
+    requestBody.append('status', `${podcast.status}`);
+    requestBody.append('type', podcast.type);
+    requestBody.append('logo_key', podcast.logo_key);
+    requestBody.append('media_key', podcast.media_key);
+
+    const fullUrl = `${url}?${requestBody.toString()}`;
+    console.log(fullUrl);
+
+    try {
+        const response = await axios.post(url, requestBody, { headers });
+        console.log('Podcast publié avec succès:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Erreur lors de la publication du podcast:', error);
+        throw error;
+    }
 }

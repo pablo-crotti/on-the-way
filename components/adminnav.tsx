@@ -17,7 +17,7 @@ export const AdminNav = () => {
         <span className="sr-only">Open sidebar</span>
         <svg
           className="w-6 h-6"
-          aria-hidden="true"
+          // aria-hidden="true"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ export const AdminNav = () => {
                       ? "flex-shrink-0 w-5 h-5 text-white"
                       : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
                   }
-                  aria-hidden="true"
+                  // ariaHidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
                   viewBox="0 0 18 18"
@@ -87,7 +87,36 @@ export const AdminNav = () => {
                   <path d="M8.25 4.5a3.75 3.75 0 1 1 7.5 0v8.25a3.75 3.75 0 1 1-7.5 0V4.5Z" />
                   <path d="M6 10.5a.75.75 0 0 1 .75.75v1.5a5.25 5.25 0 1 0 10.5 0v-1.5a.75.75 0 0 1 1.5 0v1.5a6.751 6.751 0 0 1-6 6.709v2.291h3a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 1 0-1.5h3v-2.291a6.751 6.751 0 0 1-6-6.709v-1.5A.75.75 0 0 1 6 10.5Z" />
                 </svg>
-                <span className="ms-3">Épisodes</span>
+                <span className="ms-3">Podcasts</span>
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/admin/new"
+                className={
+                  url === "/admin/new"
+                    ? "flex items-center p-2 rounded-lg text-white bg-primary group"
+                    : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
+                }
+              >
+                <svg
+                  className={
+                    url === "/admin/new"
+                      ? "flex-shrink-0 w-5 h-5 text-white"
+                      : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
+                  }
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span className="ms-3">Publier un épisode</span>
               </a>
             </li>
 
@@ -106,7 +135,7 @@ export const AdminNav = () => {
                       ? "flex-shrink-0 w-5 h-5 text-white"
                       : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
                   }
-                  aria-hidden="true"
+                  // aria-hidden="true"
                   fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 22 21"
@@ -123,14 +152,16 @@ export const AdminNav = () => {
                 href="/admin/messages"
                 className={
                   url === "/admin/messages"
-                  ? "flex-shrink-0 w-5 h-5 text-white"
-                  : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"                }
+                    ? "flex-shrink-0 w-5 h-5 text-white"
+                    : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
+                }
               >
                 <svg
                   className={
                     url === "/admin/messages"
-                    ? "flex-shrink-0 w-5 h-5 text-white"
-                    : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"                  }
+                      ? "flex-shrink-0 w-5 h-5 text-white"
+                      : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
+                  }
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
@@ -147,8 +178,9 @@ export const AdminNav = () => {
                 href="/admin/user"
                 className={
                   url === "/admin/user"
-                  ? "flex-shrink-0 w-5 h-5 text-white"
-                  : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"                }
+                    ? "flex-shrink-0 w-5 h-5 text-white"
+                    : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
+                }
               >
                 <svg
                   className={
@@ -163,7 +195,7 @@ export const AdminNav = () => {
                   <path
                     fillRule="evenodd"
                     d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
                 <span className="ms-3">Utilisateur</span>
@@ -178,7 +210,7 @@ export const AdminNav = () => {
                 >
                   <svg
                     className="flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
-                    aria-hidden="true"
+                    // aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 18 16"

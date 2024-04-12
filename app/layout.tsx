@@ -1,7 +1,8 @@
+"use client"
 import "./globals.css";
 import "./globalicon.css";
 import React from "react";
-
+import { Nav } from "@/components/nav";
 
 export default async function RootLayout({
   children,
@@ -11,7 +12,7 @@ export default async function RootLayout({
   return (
     <html lang="fr">
       <body className="w-full h-full dark:bg-darkbg-900">
-        <div className="w-full min-h-screen">{children}</div>
+          {children}
       </body>
     </html>
   );

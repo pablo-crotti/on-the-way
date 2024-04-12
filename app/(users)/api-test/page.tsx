@@ -1,15 +1,11 @@
-import { getToken } from "../utils/podbean";
+// import { fetchPodcasts } from "../utils/podbean";
+import { fetchPodcasts } from "../actions";
 
 import { cookies } from "next/headers";
 
 export default async function Page() {
-  const token = await getToken();
-//   const theme = cookieStore.get("theme");
 
-
-  // console.log(token)
-  //
-  // Cookies.set('token', token[0], { expires: 7 })
+  const podcasts = fetchPodcasts();
 
   return (
     <div>

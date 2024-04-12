@@ -33,11 +33,21 @@ model message {
 }
 
 model apitoken {
-    id        String   @id @default(cuid())
-    token     String
+    id         String   @id @default(cuid())
+    token      String
     expiration DateTime
 
     @@map(name: "api_tokens")
+}
+
+model collection {
+    id        String   @id @default(cuid())
+    name      String
+    number    Int
+    createdAt DateTime @default(now()) @map(name: "created_at")
+    updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+    @@map(name: "collections")
 }
 
 enum Category {
