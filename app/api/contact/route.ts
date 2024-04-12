@@ -28,14 +28,23 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-
-    const messages = await prisma.message.findMany({
-        orderBy: {
-            createdAt: 'desc'
-        }
-    });
-
-    return NextResponse.json(messages);
+    const params = request.nextUrl.searchParams;
+    const total = params.get('total');
+    const take = params.get('take');
+    const skip = params.get('skip');
+    if (total) {
+        const messages = await prisma.message.findMany({});
+        return NextResponse.json(messages.length);
+    } else {
+        const messages = await prisma.message.findMany({
+            take: take ? parseInt(take) : 8,
+            skip: skip ? parseInt(skip) : 0,
+            orderBy: {
+                createdAt: 'desc'
+            }
+        });
+        return NextResponse.json(messages);
+    }
 }
 
 export async function PUT(request: NextRequest) {
