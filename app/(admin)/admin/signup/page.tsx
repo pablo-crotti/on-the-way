@@ -6,7 +6,7 @@ export default function SignUpPage() {
 
     const formData = new FormData(event.target);
     try {
-      const response = await fetch("/api/auth/signup", {
+      const response = await fetch(`${process.env.BASE_URL}/api/auth/signup`, {
         method: "POST",
         body: formData,
       });

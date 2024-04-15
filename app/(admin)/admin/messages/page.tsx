@@ -29,7 +29,7 @@ function MessagesContent() {
   const getMessages = (take: number) => {
     const page = searchParams.get("page");
     const skip = page ? (parseInt(page) - 1) * take : 0;
-    fetch(`/api/contact?take=${take}&skip=${skip}`, {
+    fetch(`${process.env.BASE_URL}/api/contact?take=${take}&skip=${skip}`, {
       method: "GET",
     })
       .then((res) => res.json())

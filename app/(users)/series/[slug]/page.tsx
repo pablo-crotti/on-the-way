@@ -52,7 +52,7 @@ export default function Page() {
   };
 
   const getCollection = () => {
-    fetch(`http://localhost:3000/api/collection?id=${slug}`).then((res) =>
+    fetch(`${process.env.BASE_URL}/api/collection?id=${slug}`).then((res) =>
       res.json().then((data) => {
         setCollection(data);
         fetchCollectionPodcast(data.number).then((episodesData) =>
