@@ -1,5 +1,5 @@
 // import { fetchPodcasts } from "../utils/podbean";
-"use client"
+/*"use client"
 
 import { cookies } from "next/headers";
 import { useState, useRef, useEffect } from "react";
@@ -98,4 +98,7 @@ const repeat = () => {
     </div>
     </div>  
   );
+}*/
+export default function Page() {
+  return <p>Hello</p>;
 }
