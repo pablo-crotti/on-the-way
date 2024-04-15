@@ -2,10 +2,11 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
+const token = useSearchParams().get("token");
 
 export default function SignUpConfirmPage() {
   const router = useRouter();
-  const token = useSearchParams().get("token");
+  
 
   if(!token) {
     router.replace("/signin");

@@ -2,6 +2,8 @@
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
+const searchParams = useSearchParams()
+
 export default function MessagesPage() {
   const [messages, setMessages] = useState<any>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
@@ -9,7 +11,7 @@ export default function MessagesPage() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedMessages, setSelectedMessages] = useState<string[]>([]);
   const take = 8;
-  const searchParams = useSearchParams()
+  
 
   const getClass = (str: string) => {
     return `bg-${str.toLowerCase()} text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded-full`;
