@@ -58,6 +58,7 @@ export async function GET(request: NextRequest) {
     const params = request.nextUrl.searchParams;
     const number = params.get('number');
     const id = params.get('id');
+    const all = params.get('all');
 
     if (number) {
         const collection = await prisma.collection.findFirst({
@@ -71,6 +72,15 @@ export async function GET(request: NextRequest) {
         const collection = await prisma.collection.findFirst({
             where: {
                 id: id
+            }
+        });
+
+        return new NextResponse(JSON.stringify(collection), { status: 200 });
+
+    } else if (all) {
+        const collection = await prisma.collection.findMany({
+            orderBy: {
+                number: 'desc'
             }
         });
 

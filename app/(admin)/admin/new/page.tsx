@@ -1,10 +1,12 @@
 "use client";
 
 import PrimaryButton from "@/components/primarybutton";
+import { useEffect, useState } from "react";
 import {
   fetchPresignedAmazonUrl,
   storeOnAmazon,
   publishPodcast,
+  fetchCollectionPodcast,
 } from "@/app/actions";
 
 export default function NewEpisodePage() {
@@ -33,8 +35,8 @@ export default function NewEpisodePage() {
       .replaceAll("'", "")
       .toLowerCase()}_${generateId()}.${audioFileExtension}`;
 
-      console.log(event.target.illustration.files[0])
-      console.log(event.target.audio.files[0])
+    console.log(event.target.illustration.files[0]);
+    console.log(event.target.audio.files[0]);
 
     const image = {
       filename: imageTitle,
@@ -50,9 +52,6 @@ export default function NewEpisodePage() {
 
     const imageUrlData = await fetchPresignedAmazonUrl(image);
     const audioUrlData = await fetchPresignedAmazonUrl(audioFile);
-
-    console.log(imageUrlData);
-    console.log(audioUrlData);
 
     if (!imageUrlData || !audioUrlData) {
       console.error("Failed to get presigned URLs");
@@ -70,12 +69,6 @@ export default function NewEpisodePage() {
       file_key: audioUrlData[1],
     };
 
-    console.log(imageWithPresignedUrl);
-    console.log(audioFileWithPresignedUrl);
-
-    console.log(event.target.illustration.files[0])
-    console.log(imageUrlData[0])
-
     const imageFormData = new FormData();
     imageFormData.append("file", event.target.illustration.files[0]);
 
@@ -85,21 +78,52 @@ export default function NewEpisodePage() {
     await storeOnAmazon(imageFormData, imageUrlData[0]);
     await storeOnAmazon(audioFileFormData, audioUrlData[0]);
 
-    const episode = {
-      title: event.target.title.value,
-      content: event.target.description.value,
-      status: "publish",
-      type: "public",
-      logo_key: imageWithPresignedUrl.file_key,
-      media_key: audioFileWithPresignedUrl.file_key,
-    };
+    event.preventDefault();
 
-    console.log(episode);
-    const simpleEpisode = Object.assign({}, episode);
+    let status = "";
+    switch (event.target.publish.checked) {
+      case true:
+        status = "publish";
+        break;
+      case false:
+        status = "draft";
+        break;
+    }
 
+    const collectionNumber = event.target.collection.value as number;
 
-    publishPodcast(simpleEpisode);
+    fetchCollectionPodcast(+collectionNumber).then((episodesData) => {
+      const episodeNumber = episodesData.length + 1;
+
+      const episode = {
+        title: event.target.title.value,
+        content: event.target.description.value,
+        status: status,
+        type: "public",
+        logo_key: imageWithPresignedUrl.file_key,
+        media_key: audioFileWithPresignedUrl.file_key,
+        season_number: event.target.collection.value,
+        episode_number: episodeNumber,
+      };
+
+      const simpleEpisode = Object.assign({}, episode);
+
+      publishPodcast(simpleEpisode);
+    });
   };
+
+  const [collections, setCollections] = useState({});
+
+  const getCollections = () => {
+    fetch(`http://localhost:3000/api/collection?all=true}`).then((res) =>
+      res.json().then((data) => {
+        setCollections(data);
+      })
+    );
+  };
+  useEffect(() => {
+    getCollections();
+  }, []);
   return (
     <div className="w-full h-full flex-col justify-center align-center p-4">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
@@ -174,8 +198,35 @@ export default function NewEpisodePage() {
                 />
               </div>
               <div>
+                <label
+                  htmlFor="collection"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Choisir une saison *
+                </label>
+                <select
+                  id="collection"
+                  name="collection"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
+                >
+                  {collections &&
+                    Array.isArray(collections) &&
+                    collections.map((collection: any) => (
+                      <option key={collection.id} value={collection.number}>
+                        Série no. {collection.number} | {collection.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <div>
                 <label className="inline-flex items-center mb-5 cursor-pointer">
-                  <input type="checkbox" value="" className="sr-only peer" />
+                  <input
+                    name="publish"
+                    type="checkbox"
+                    value=""
+                    className="sr-only peer"
+                  />
                   <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-darkbg-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-darkbg-600 peer-checked:bg-primary"></div>
                   <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
                     Toggle me

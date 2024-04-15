@@ -21,9 +21,7 @@ export const fetchOAuthToken = async () => {
         const response = await axios.post(url, data, { headers });
 
         const token = response.data.access_token;
-
-        console.log("New token")
-        const expires = 60
+        const expires = response.data.expires_in;
 
         const expiration = new Date();
         expiration.setSeconds(expiration.getSeconds() + (expires ? parseInt(expires.toString()) : 0));
@@ -99,6 +97,12 @@ export const fetchPodcasts = async () => {
     const response = await axios.get(url, { headers });
 
     if (response.data) {
+        response.data.episodes.sort((a: any, b: any) => {
+            if (a.season_number === b.season_number) {
+                return b.episode_number - a.episode_number;
+            }
+            return b.season_number - a.season_number;
+        });
         return response.data;
     } else {
         console.error("Failed to fetch podcasts");
@@ -107,14 +111,18 @@ export const fetchPodcasts = async () => {
 
 export const fetchCollectionPodcast = async (collectionNumber: number) => {
     const podcasts = await fetchPodcasts();
-
-    // console.log(podcasts);
+ 
     
     const episodesOfSeason = podcasts.episodes.filter((episode: any) => episode.season_number === collectionNumber);
+    episodesOfSeason.sort((a: any, b: any) => a.episode_number - b.episode_number);
 
-    console.log(episodesOfSeason);
+    episodesOfSeason.forEach((episode: any, index: number) => {
+        if (episode.status === 'draft') {
+            episodesOfSeason.splice(index, 1);
+        }
+    });
     
-    // return episodesOfSeason;
+    return episodesOfSeason;
 }
 
 
@@ -187,6 +195,8 @@ export const publishPodcast = async (podcast: any) => {
     requestBody.append('type', podcast.type);
     requestBody.append('logo_key', podcast.logo_key);
     requestBody.append('media_key', podcast.media_key);
+    requestBody.append('season_number', podcast.season_number.toString());
+    requestBody.append('episode_number', podcast.episode_number.toString());
 
     const fullUrl = `${url}?${requestBody.toString()}`;
     console.log(fullUrl);
