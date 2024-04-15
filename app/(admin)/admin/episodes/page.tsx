@@ -1,5 +1,5 @@
 import {fetchPodcasts} from '../../../actions';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 export default function EpisodesPage() {
