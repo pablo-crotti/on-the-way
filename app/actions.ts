@@ -105,6 +105,19 @@ export const fetchPodcasts = async () => {
     }
 }
 
+export const fetchCollectionPodcast = async (collectionNumber: number) => {
+    const podcasts = await fetchPodcasts();
+
+    // console.log(podcasts);
+    
+    const episodesOfSeason = podcasts.episodes.filter((episode: any) => episode.season_number === collectionNumber);
+
+    console.log(episodesOfSeason);
+    
+    // return episodesOfSeason;
+}
+
+
 
 export const fetchPresignedAmazonUrl = async (file: any) => {
     const token = await getToken();
@@ -130,30 +143,34 @@ export const fetchPresignedAmazonUrl = async (file: any) => {
 }
 
 export const storeOnAmazon = async (formData: FormData, url: string) => {
-    const file = formData.get('file');
-
-    console.log(url);
-    console.log(file);
+    const file = formData.get('file') as File | null;
 
     if (!url || !file) {
         console.error("Missing presigned URL or file");
         return;
     }
 
-    const response = await axios.put(url, formData, {
-        headers: {
-            'Content-Type': file instanceof Blob ? file.type : '',
-        },
-    });
+    try {
+        const fileBuffer = await file.arrayBuffer();
+        const config = {
+            headers: {
+                'Content-Type': file.type,
+            },
+        };
 
-    console.log(response);
+        const response = await axios.put(url, Buffer.from(fileBuffer), config);
 
-    if (response.status === 200) {
-        return true;
-    } else {
-        console.error("Failed to store file on Amazon");
+        console.log(response);
+
+        if (response.status === 200) {
+            return true;
+        } else {
+            console.error("Failed to store file on Amazon");
+        }
+    } catch (error) {
+        console.error("An error occurred while uploading file to Amazon:", error);
     }
-}
+};
 
 export const publishPodcast = async (podcast: any) => {
     const token = await getToken();

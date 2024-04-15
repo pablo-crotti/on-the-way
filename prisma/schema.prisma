@@ -43,7 +43,8 @@ model apitoken {
 model collection {
     id        String   @id @default(cuid())
     name      String
-    number    Int
+    image     String
+    number    Int      @unique
     createdAt DateTime @default(now()) @map(name: "created_at")
     updatedAt DateTime @updatedAt @map(name: "updated_at")
 

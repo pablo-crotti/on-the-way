@@ -12,13 +12,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const session = await getServerSession();
   return (
     <div>
       <Nav />
         <div className="p-4">{children}</div>
     </div>
 
-    // <div classNameName="w-full min-h-screen">{children}</div>
   );
 }

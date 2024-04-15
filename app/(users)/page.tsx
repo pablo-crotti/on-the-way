@@ -1,14 +1,34 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { Title } from "@/components/title";
 import { Text } from "@/components/text";
+import { fetchPodcasts } from "../actions";
 
-import { fetchPodcasts } from "./actions";
+export default function Home() {
+  const collectionModel = {
+    id: "",
+    name: "",
+    image: "",
+    number: 0,
+    createdAt: "",
+    updatedAt: "",
+  };
+  const [lastCollection, setLastCollection] = useState(collectionModel);
 
-export default async function Home() {
-  console.log('Hello')
-  // const podcasts = await fetchPodcasts();
-  // console.log(podcasts)
+  const getLastCollection = () => {
+    fetch("http://localhost:3000/api/collection").then((res) =>
+      res.json().then((data) => setLastCollection(data))
+    );
+  };
 
-  // console.log(fetchPodcasts());
+
+  useEffect(() => {
+    getLastCollection();
+  }, []);
+
+  // console.log(lastCollection)
+
   return (
     <>
       <div>
@@ -16,6 +36,26 @@ export default async function Home() {
         <img src="/logo/on-the-way.png" alt="podcast" />
       </div>
 
+      <div className="mb-8 flex justify-center">
+        <a
+          href={`/series/${lastCollection.id}`}
+          className="flex items-center bg-white border border-gray-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+        >
+          <img
+            className="object-cover h-auto w-1/3 rounded-none rounded-s-lg"
+            src={`/illustrations/${lastCollection.image}`}
+            alt=""
+          />
+          <div className="flex flex-col justify-between p-4 leading-normal">
+            <h5 className="mb-2 text-l text-left font-bold tracking-tight text-gray-900 dark:text-white">
+              {lastCollection.name}
+            </h5>
+            <div>
+              
+            </div>
+          </div>
+        </a>
+      </div>
       <div className="mb-8">
         <Title type="h2">À propos</Title>
         <Text>
@@ -34,8 +74,6 @@ export default async function Home() {
           aucun épisode !!
         </Text>
       </div>
-
-      
     </>
   );
 }
