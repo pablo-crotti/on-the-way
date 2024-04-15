@@ -115,7 +115,7 @@ export default function NewEpisodePage() {
   const [collections, setCollections] = useState({});
 
   const getCollections = () => {
-    fetch(`${process.env.BASE_URL}/api/collection?all=true}`).then((res) =>
+    fetch(`/api/collection?all=true}`).then((res) =>
       res.json().then((data) => {
         setCollections(data);
       })

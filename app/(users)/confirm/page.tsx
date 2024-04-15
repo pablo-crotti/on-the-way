@@ -26,7 +26,7 @@ function SignUpConfirmContent() {
   const [userId, setUserId] = useState("");
   const [userEmail, setUserEmail] = useState("");
 
-  const request = fetch(`${process.env.BASE_URL}/api/auth/register?token=${token}`)
+  const request = fetch(`/api/auth/register?token=${token}`)
     .then((response) => response.json())
     .then((data) => {
       if (!data.id) router.replace("/signin");
