@@ -17,7 +17,7 @@ export default function Home() {
   const [lastCollection, setLastCollection] = useState(collectionModel);
 
   const getLastCollection = () => {
-    fetch("http://localhost:3000/api/collection").then((res) =>
+    fetch("/api/collection").then((res) =>
       res.json().then((data) => setLastCollection(data))
     );
   };
