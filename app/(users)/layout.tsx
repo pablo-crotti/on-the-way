@@ -1,7 +1,5 @@
 "use client";
 
-import type { Metadata, Viewport } from "next";
-
 import "../globals.css";
 import "../globalicon.css";
 import React from "react";
@@ -13,10 +11,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
-      <Nav />
-        <div className="p-4">{children}</div>
-    </div>
-
+    <html lang="fr">
+      <body className="w-full h-full dark:bg-darkbg-900">
+        <div>
+          <Nav />
+          <div className="p-4">{children}</div>
+        </div>
+      </body>
+    </html>
   );
 }
