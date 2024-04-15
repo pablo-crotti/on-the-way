@@ -1,3 +1,4 @@
+"use client"
 import {fetchPodcasts} from '../../../actions';
 import { useState, useEffect } from 'react';
 
