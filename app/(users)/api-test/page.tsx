@@ -1,5 +1,5 @@
 // import { fetchPodcasts } from "../utils/podbean";
-/*"use client"
+"use client"
 
 import { cookies } from "next/headers";
 import { useState, useRef, useEffect } from "react";
@@ -95,7 +95,7 @@ function repeat (){
   }
 };
 
-function handleProgressChange(e){
+function handleProgressChange(e : React.MouseEvent<HTMLDivElement>){
 
   const clicked = e.clientX;
  
@@ -118,8 +118,8 @@ audioRef.current.currentTime = time;
 
     <div>
       <audio controls
-      src="https://s307.podbean.com/pb/56ae0b311b472d5c49b9a9a712aef284/661da8be/data1/fs99/18367003/uploads/ceciestl_pisodesp_ciallo_c_wrdh26eb6.mp3?pbss=30dbc01f-e16a-54c5-9dd4-020568941934"
-      //src="https://mcdn.podbean.com/mf/web/7hwf5hmcypbqjj8b/eng.mp3"
+      //src="https://s307.podbean.com/pb/56ae0b311b472d5c49b9a9a712aef284/661da8be/data1/fs99/18367003/uploads/ceciestl_pisodesp_ciallo_c_wrdh26eb6.mp3?pbss=30dbc01f-e16a-54c5-9dd4-020568941934"
+      src="https://mcdn.podbean.com/mf/web/7hwf5hmcypbqjj8b/eng.mp3"
       //onLoadedMetadata={onLoadedMetadata}
       onLoadedData	= {onLoadedMetadata}
       onEnded={handleNext}
@@ -158,7 +158,4 @@ audioRef.current.currentTime = time;
     </div>
     </div>  
   );
-}*/
-export default function Page() {
-  return <p>Hello</p>;
 }
