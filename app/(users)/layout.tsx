@@ -4,7 +4,8 @@ import "../globals.css";
 import "../globalicon.css";
 import React from "react";
 import { Nav } from "@/components/nav";
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/react";
 
 export default async function RootLayout({
   children,
@@ -19,6 +20,7 @@ export default async function RootLayout({
           <Nav />
           <div className="p-4">{children}</div>
         </div>
+        <Analytics />
         <GoogleAnalytics gaId={gaId} />
       </body>
     </html>
