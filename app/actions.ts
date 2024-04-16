@@ -116,11 +116,11 @@ export const fetchCollectionPodcast = async (collectionNumber: number) => {
     const episodesOfSeason = podcasts.episodes.filter((episode: any) => episode.season_number === collectionNumber);
     episodesOfSeason.sort((a: any, b: any) => a.episode_number - b.episode_number);
 
-    episodesOfSeason.forEach((episode: any, index: number) => {
-        if (episode.status === 'draft') {
-            episodesOfSeason.splice(index, 1);
-        }
-    });
+    // episodesOfSeason.forEach((episode: any, index: number) => {
+    //     if (episode.status === 'draft') {
+    //         episodesOfSeason.splice(index, 1);
+    //     }
+    // });
     
     return episodesOfSeason;
 }

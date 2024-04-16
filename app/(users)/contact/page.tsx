@@ -1,6 +1,8 @@
-"use client"
+"use client";
 
 import { useState } from "react";
+import { Title } from "@/components/title";
+import { Text } from "@/components/text";
 
 export default function ContactPage() {
   const [email, setEmail] = useState("");
@@ -22,7 +24,7 @@ export default function ContactPage() {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      
+
       setEmail("");
       setCategory("");
       setObject("");
@@ -40,63 +42,100 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
-      <h1 className="text-white font-bold">Contactez-nous</h1>
-      <form className="flex flex-col w-3/5 gap-2" onSubmit={handleSubmit}>
-        <label htmlFor="email" className="text-white">
-          Email
-        </label>
-        <input
-          type="text"
-          placeholder="john.doe@mail.com"
-          name="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="category" className="text-white">
-          Sujet
-        </label>
-        <select
-          name="category"
-          required
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="">--Choix du sujet--</option>
-          <option value="COMMENT">Commentaire</option>
-          <option value="QUESTION">Question</option>
-          <option value="PARTNERSHIP">Partenariat (entreprise)</option>
-          <option value="LOCATION">Proposition de lieu (auditeur)</option>
-          <option value="OTHER">Autre (champ libre)</option>
-        </select>
-        <label htmlFor="object" className="text-white">
-          Objet
-        </label>
-        <input
-          type="text"
-          placeholder="Episode X..."
-          name="object"
-          required
-          value={object}
-          onChange={(e) => setObject(e.target.value)}
-        />
-        <label htmlFor="message" className="text-white">
-          Message
-        </label>
-        <input
-          type="text"
-          placeholder="Concernant l'épisode X..."
-          name="message"
-          required
-          className="mb-8"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button type="submit" className="bg-white" disabled={submitting}>
-          Envoyer
-        </button>
-      </form>
+    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+          <Title type="h1">Contact</Title>
+          <p className="text-base text-center text-gray-900 dark:text-white">
+            Contactez-nous via ce formulaire de contact.
+          </p>
+          <h1 className="text-white font-bold">Contactez-nous</h1>
+          <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label
+                htmlFor="email"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Email
+              </label>
+              <input
+                type="text"
+                placeholder="john.doe@mail.com"
+                name="email"
+                required
+                value={email}
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="category"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Sujet
+              </label>
+              <select
+                name="category"
+                required
+                value={category}
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="">--Choix du sujet--</option>
+                <option value="COMMENT">Commentaire</option>
+                <option value="QUESTION">Question</option>
+                <option value="PARTNERSHIP">Partenariat (entreprise)</option>
+                <option value="LOCATION">Proposition de lieu (auditeur)</option>
+                <option value="OTHER">Autre (champ libre)</option>
+              </select>
+            </div>
+            <div>
+              <label
+                htmlFor="object"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Objet
+              </label>
+              <input
+                type="text"
+                placeholder="Episode X..."
+                name="object"
+                required
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                value={object}
+                onChange={(e) => setObject(e.target.value)}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="message"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Message
+              </label>
+              <input
+                type="text"
+                placeholder="Concernant l'épisode X..."
+                name="message"
+                required
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
+            </div>
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="text-white bg-primary hover:bg-primarydark focus:outline-none focus:ring-0 font-medium rounded-full text-sm px-7 py-2.5 text-center me-2 mb-2"
+                disabled={submitting}
+              >
+                Envoyer
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
