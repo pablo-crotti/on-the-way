@@ -103,7 +103,7 @@ export const fetchPodcasts = async () => {
             }
             return b.season_number - a.season_number;
         });
-        return response.data;
+        return response.data.episodes;
     } else {
         console.error("Failed to fetch podcasts");
     }
@@ -111,17 +111,11 @@ export const fetchPodcasts = async () => {
 
 export const fetchCollectionPodcast = async (collectionNumber: number) => {
     const podcasts = await fetchPodcasts();
- 
-    
-    const episodesOfSeason = podcasts.episodes.filter((episode: any) => episode.season_number === collectionNumber);
+
+
+    const episodesOfSeason = podcasts.filter((episode: any) => episode.season_number === collectionNumber);
     episodesOfSeason.sort((a: any, b: any) => a.episode_number - b.episode_number);
 
-    // episodesOfSeason.forEach((episode: any, index: number) => {
-    //     if (episode.status === 'draft') {
-    //         episodesOfSeason.splice(index, 1);
-    //     }
-    // });
-    
     return episodesOfSeason;
 }
 
@@ -168,8 +162,6 @@ export const storeOnAmazon = async (formData: FormData, url: string) => {
 
         const response = await axios.put(url, Buffer.from(fileBuffer), config);
 
-        console.log(response);
-
         if (response.status === 200) {
             return true;
         } else {
@@ -199,7 +191,6 @@ export const publishPodcast = async (podcast: any) => {
     requestBody.append('episode_number', podcast.episode_number.toString());
 
     const fullUrl = `${url}?${requestBody.toString()}`;
-    console.log(fullUrl);
 
     try {
         const response = await axios.post(url, requestBody, { headers });
@@ -210,3 +201,90 @@ export const publishPodcast = async (podcast: any) => {
         throw error;
     }
 }
+
+export const updatePodcast = async (podcast: any) => {
+    const token = await getToken();
+    const url = `${BASE_URL}/episodes/${podcast.id}`;
+
+    const headers = {
+        Authorization: `Bearer ${token}`,
+    };
+
+
+
+    const requestBody = new URLSearchParams();
+    requestBody.append('title', podcast.title);
+    requestBody.append('content', podcast.content);
+    requestBody.append('status', `${podcast.status}`);
+    requestBody.append('type', podcast.type);
+
+    if (podcast.logo_key) {
+        requestBody.append('logo_key', podcast.logo_key);
+    }
+
+    if (podcast.media_key) {
+        requestBody.append('media_key', podcast.media_key);
+    }
+
+
+    try {
+        const response = await axios.post(url, requestBody, { headers });
+        console.log('Podcast mis à jour avec succès:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Erreur lors de la mise à jour du podcast:', error);
+        throw error;
+    }
+}
+
+export const fetchPodcast = async (id: string) => {
+    const token = await getToken();
+    const url = `${BASE_URL}/episodes/${id}`;
+    const headers = {
+        Authorization: `Bearer ${token}`,
+    };
+
+    const response = await axios.get(url, { headers });
+
+    if (response.data) {
+        return response.data;
+    } else {
+        console.error("Failed to fetch podcast");
+    }
+
+}
+
+export const fetchPodcastEngagementStats = async () => {
+    const token = await getToken();
+    const url = `${BASE_URL}/podcastStats/stats`;
+    const headers = {
+        Authorization: `Bearer ${token}`,
+    };
+
+    // const year = new Date().getFullYear();
+
+    const today = new Date();
+
+    const past30Days = new Date(today);
+    past30Days.setDate(today.getDate() - 30);
+
+    const past60Days = new Date(today);
+    past60Days.setDate(today.getDate() - 60);
+
+    let params = {
+        start: `${past30Days.getFullYear()}-${past30Days.getMonth() + 1}-${past30Days.getDate()}`,
+        end: ''
+    };
+
+    const last30 = await axios.get(url, { headers, params });
+
+    params = {
+        start: `${past60Days.getFullYear()}-${past60Days.getMonth() + 1}-${past60Days.getDate()}`,
+        end: `${past30Days.getFullYear()}-${past30Days.getMonth() + 1}-${past30Days.getDate()}`,
+    };
+
+    const last60 = await axios.get(url, { headers, params });
+    
+    return { last30: last30.data, last60: last60.data };
+}
+

@@ -104,6 +104,8 @@ export default function Page() {
       <Title type="h2">{episodes[index].title}</Title>
       <Text>{constDeleteDscHTML(episodes[index].content)}</Text>
 
+      
+
       <div className="flex justify-center ">
         {index == 0 ? (
           <button disabled className="text-secondary">

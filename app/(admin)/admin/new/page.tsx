@@ -35,9 +35,6 @@ export default function NewEpisodePage() {
       .replaceAll("'", "")
       .toLowerCase()}_${generateId()}.${audioFileExtension}`;
 
-    console.log(event.target.illustration.files[0]);
-    console.log(event.target.audio.files[0]);
-
     const image = {
       filename: imageTitle,
       filesize: event.target.illustration.files[0].size,
@@ -77,8 +74,6 @@ export default function NewEpisodePage() {
 
     await storeOnAmazon(imageFormData, imageUrlData[0]);
     await storeOnAmazon(audioFileFormData, audioUrlData[0]);
-
-    event.preventDefault();
 
     let status = "";
     switch (event.target.publish.checked) {
@@ -229,7 +224,7 @@ export default function NewEpisodePage() {
                   />
                   <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-darkbg-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-darkbg-600 peer-checked:bg-primary"></div>
                   <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    Toggle me
+                    Publier tout de suite
                   </span>
                 </label>
               </div>

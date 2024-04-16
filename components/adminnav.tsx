@@ -3,6 +3,8 @@ import { signOut } from "next-auth/react";
 
 export const AdminNav = () => {
   const url = usePathname();
+  
+
   return (
     <div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
@@ -17,7 +19,6 @@ export const AdminNav = () => {
         <span className="sr-only">Open sidebar</span>
         <svg
           className="w-6 h-6"
-          // aria-hidden="true"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -69,14 +70,14 @@ export const AdminNav = () => {
               <a
                 href="/admin/episodes"
                 className={
-                  url === "/admin/episodes"
+                  url === "/admin/episodes" || url.split("/").slice(0, 3).join("/") === "/admin/episodes"
                     ? "flex items-center p-2 rounded-lg text-white bg-primary group"
                     : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
                 }
               >
                 <svg
                   className={
-                    url === "/admin/episodes"
+                    url === "/admin/episodes" || url.split("/").slice(0, 3).join("/") === "/admin/episodes"
                       ? "flex-shrink-0 w-5 h-5 text-white"
                       : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
                   }
@@ -135,7 +136,6 @@ export const AdminNav = () => {
                       ? "flex-shrink-0 w-5 h-5 text-white"
                       : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
                   }
-                  // aria-hidden="true"
                   fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 22 21"
@@ -210,7 +210,6 @@ export const AdminNav = () => {
                 >
                   <svg
                     className="flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
-                    // aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 18 16"
