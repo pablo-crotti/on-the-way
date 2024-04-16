@@ -11,14 +11,17 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^1.5.2",
-    "@next/third-parties": "^14.2.0",
+    "@google-analytics/data": "^4.4.0",
+    "@next/third-parties": "^14.2.1",
     "@prisma/client": "^5.9.1",
+    "@vercel/analytics": "^1.2.2",
     "@vercel/postgres": "^0.7.2",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "cookie-cutter": "^0.2.0",
     "flowbite": "^2.3.0",
     "fs": "^0.0.1-security",
+    "google-gax": "^4.3.2",
     "js-cookie": "^3.0.5",
     "next": "14.1.0",
     "next-auth": "^4.24.6",
@@ -27,7 +30,8 @@
     "path": "^0.12.7",
     "react": "^18",
     "react-dom": "^18",
-    "react-modal": "^3.16.1"
+    "react-modal": "^3.16.1",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

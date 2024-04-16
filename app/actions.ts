@@ -33,7 +33,7 @@ export const fetchOAuthToken = async () => {
         formData.append('expires', expirationTime);
 
         try {
-            const response = await fetch("http://localhost:3000/api/auth/apitoken", {
+            const response = await fetch(`${process.env.BASE_URL}/api/auth/apitoken`, {
                 method: "POST",
                 body: formData
             });
@@ -60,7 +60,7 @@ export const verifyTokenAge = (expiration: any) => {
 
 export const getToken = async () => {
     try {
-        const response = await fetch("http://localhost:3000/api/auth/apitoken");
+        const response = await fetch(`${process.env.BASE_URL}/api/auth/apitoken`);
 
         if (response.ok) {
             const token = await response.json();
@@ -116,11 +116,11 @@ export const fetchCollectionPodcast = async (collectionNumber: number) => {
     const episodesOfSeason = podcasts.episodes.filter((episode: any) => episode.season_number === collectionNumber);
     episodesOfSeason.sort((a: any, b: any) => a.episode_number - b.episode_number);
 
-    episodesOfSeason.forEach((episode: any, index: number) => {
-        if (episode.status === 'draft') {
-            episodesOfSeason.splice(index, 1);
-        }
-    });
+    // episodesOfSeason.forEach((episode: any, index: number) => {
+    //     if (episode.status === 'draft') {
+    //         episodesOfSeason.splice(index, 1);
+    //     }
+    // });
     
     return episodesOfSeason;
 }

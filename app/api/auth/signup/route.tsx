@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
             to: email,
             subject: "Bienvenue dans l'équipe On the way !",
             text: "Bienvenue dans l'équipe On the way !",
-            html: "<strong>Bienvenue dans l'équipe On the way !</strong><p>Pour finaliser votre inscription, nous vous veuillez vous connecter via ce lien : </p><a href='http://localhost:3000/signup/confirm?token="+token+"'>Confirmer mon inscription</a>",
+            html: "<strong>Bienvenue dans l'équipe On the way !</strong><p>Pour finaliser votre inscription, nous vous veuillez vous connecter via ce lien : </p><a href='http://localhost:3000/confirm?token="+token+"'>Confirmer mon inscription</a>",
         }); 
 
 

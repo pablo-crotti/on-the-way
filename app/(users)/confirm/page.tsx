@@ -2,10 +2,21 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import { Suspense } from "react";
+
 
 export default function SignUpConfirmPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignUpConfirmContent />
+    </Suspense>
+  );
+}
+
+function SignUpConfirmContent() {
   const router = useRouter();
   const token = useSearchParams().get("token");
+  
 
   if(!token) {
     router.replace("/signin");

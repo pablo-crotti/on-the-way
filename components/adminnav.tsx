@@ -122,7 +122,7 @@ export const AdminNav = () => {
 
             <li>
               <a
-                href="#"
+                href="/admin/statistiques"
                 className={
                   url === "/admin/statistiques"
                     ? "flex items-center p-2 rounded-lg text-white bg-primary group"

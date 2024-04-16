@@ -1,8 +1,18 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import { Suspense } from "react";
+
 
 export default function MessagesPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MessagesContent />
+    </Suspense>
+  );
+}
+
+function MessagesContent() {
   const [messages, setMessages] = useState<any>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [totalMessages, setTotalMessages] = useState<number>(0);
@@ -10,6 +20,7 @@ export default function MessagesPage() {
   const [selectedMessages, setSelectedMessages] = useState<string[]>([]);
   const take = 8;
   const searchParams = useSearchParams()
+  
 
   const getClass = (str: string) => {
     return `bg-${str.toLowerCase()} text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded-full`;
