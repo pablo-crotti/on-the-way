@@ -1,8 +1,7 @@
 // import { fetchPodcasts } from "../utils/podbean";
 "use client"
 
-import { cookies } from "next/headers";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, use } from "react";
 import './styles.css';
 import { Play } from "@/components/play";
 
@@ -11,6 +10,7 @@ export default function Page() {
 const [isPlaying, setIsPlaying] = useState(false);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [episodeSource, setEpisodeSource] = useState("");
 const audioRef = useRef<HTMLAudioElement| null>(null);
 const playAnimationRef = useRef<Number | null>(null);
 const ProgressBarRef = useRef<HTMLInputElement| null>(null);
@@ -18,6 +18,12 @@ const borderProgressBarRef = useRef<HTMLDivElement| null>(null);
 
 
 
+function getData () {
+  const duration: number = 86.12275;
+  const source= "https://s307.podbean.com/pb/56ae0b311b472d5c49b9a9a712aef284/661da8be/data1/fs99/18367003/uploads/ceciestl_pisodesp_ciallo_c_wrdh26eb6.mp3";
+  setDuration(duration);
+  setEpisodeSource(source);
+}
 
 function togglePlayPause (){
   setIsPlaying((prev) => !prev);
@@ -37,24 +43,6 @@ function togglePlayPause (){
 
 
 
-function onLoadedMetadata(){
-  console.log("loaded")
-  if(audioRef.current) {
-    const seconds = audioRef.current.duration;
-      
-    setDuration(seconds);
-    if (ProgressBarRef.current) {
-      ProgressBarRef.current.max = String(seconds);
-      ProgressBarRef.current.value = "0";
-
-      
-      ProgressBarRef.current.style.setProperty(
-        '--range-progress',
-        "0%"
-      );
-    }
-  }
-}
 
 
 function formatTime(time: number) {
@@ -109,22 +97,25 @@ const time = (percentage * duration) / 100;
 setTimeProgress(time);
 audioRef.current.currentTime = time;
   }
-}
 
+}
+  useEffect(() => {
+    getData();
+  }, []);
 
 
 
   return (
 
     <div>
+
       <audio controls
-      //src="https://s307.podbean.com/pb/56ae0b311b472d5c49b9a9a712aef284/661da8be/data1/fs99/18367003/uploads/ceciestl_pisodesp_ciallo_c_wrdh26eb6.mp3?pbss=30dbc01f-e16a-54c5-9dd4-020568941934"
-      src="https://mcdn.podbean.com/mf/web/7hwf5hmcypbqjj8b/eng.mp3"
-      //onLoadedMetadata={onLoadedMetadata}
-      onLoadedData	= {onLoadedMetadata}
+      src={episodeSource}
+    preload="auto"
       onEnded={handleNext}
       ref={audioRef}
        >
+
     </audio>
       <div className="audio-container">
         
