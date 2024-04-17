@@ -6,6 +6,7 @@ import { fetchCollectionPodcast } from "../../../actions";
 import { Title } from "@/components/title";
 import { Text } from "@/components/text";
 import { Foot } from "@/components/foot";
+import {AudioPlayer} from "@/components/audioplayer/AudioPlayer";
 
 export default function Page() {
   const collectionModel = {
@@ -196,6 +197,7 @@ export default function Page() {
           </button>
         )}
       </div>
+      <AudioPlayer episodeSource={episodes[index].media_url}/>
     </div>
   );
 }

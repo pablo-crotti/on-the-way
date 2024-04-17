@@ -1,4 +1,4 @@
-// import { fetchPodcasts } from "../utils/podbean";
+
 "use client"
 
 import { useState, useRef, useEffect, use } from "react";
@@ -6,11 +6,11 @@ import './styles.css';
 import { Play } from "@/components/play";
 
 
-export default function Page() {
+export const  AudioPlayer = ({ episodeSource }: {episodeSource: string}) => {
+
 const [isPlaying, setIsPlaying] = useState(false);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [episodeSource, setEpisodeSource] = useState("");
 const audioRef = useRef<HTMLAudioElement| null>(null);
 const playAnimationRef = useRef<Number | null>(null);
 const ProgressBarRef = useRef<HTMLInputElement| null>(null);
@@ -18,12 +18,7 @@ const borderProgressBarRef = useRef<HTMLDivElement| null>(null);
 
 
 
-function getData () {
-  const duration: number = 86.12275;
-  const source= "https://s307.podbean.com/pb/56ae0b311b472d5c49b9a9a712aef284/661da8be/data1/fs99/18367003/uploads/ceciestl_pisodesp_ciallo_c_wrdh26eb6.mp3";
-  setDuration(duration);
-  setEpisodeSource(source);
-}
+
 
 function togglePlayPause (){
   setIsPlaying((prev) => !prev);
@@ -99,9 +94,12 @@ audioRef.current.currentTime = time;
   }
 
 }
-  useEffect(() => {
-    getData();
-  }, []);
+
+function test(){
+  if(audioRef.current) {
+    setDuration(audioRef.current.duration);
+  }
+}
 
 
 
@@ -109,14 +107,15 @@ audioRef.current.currentTime = time;
 
     <div>
 
-      <audio controls
-      src={episodeSource}
-    preload="auto"
-      onEnded={handleNext}
-      ref={audioRef}
-       >
+        <audio
+        src={episodeSource}
+      preload="auto"
+        onEnded={handleNext}
+        ref={audioRef}
+        onLoadedMetadata={test}
+         >
 
-    </audio>
+      </audio>
       <div className="audio-container">
         
     <button
