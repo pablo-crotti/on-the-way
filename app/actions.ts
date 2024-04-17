@@ -119,6 +119,14 @@ export const fetchCollectionPodcast = async (collectionNumber: number) => {
     return episodesOfSeason;
 }
 
+export const countCollectionPodcast = async (collectionNumber: number) => {
+    const podcasts = await fetchPodcasts();
+
+    const episodesOfSeason = podcasts.filter((episode: any) => episode.season_number === collectionNumber);
+
+    return episodesOfSeason.length;
+}
+
 
 
 export const fetchPresignedAmazonUrl = async (file: any) => {
