@@ -152,8 +152,8 @@ export const AdminNav = () => {
                 href="/admin/messages"
                 className={
                   url === "/admin/messages"
-                    ? "flex-shrink-0 w-5 h-5 text-white"
-                    : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
+                    ? "flex items-center p-2 rounded-lg text-white bg-primary group"
+                    : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
                 }
               >
                 <svg
@@ -178,15 +178,15 @@ export const AdminNav = () => {
                 href="/admin/user"
                 className={
                   url === "/admin/user"
-                    ? "flex-shrink-0 w-5 h-5 text-white"
-                    : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
+                    ? "flex items-center p-2 rounded-lg text-white bg-primary group"
+                    : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
                 }
               >
                 <svg
                   className={
                     url === "/admin/user"
-                      ? "flex items-center p-2 rounded-lg text-white bg-primary group"
-                      : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
+                      ? "flex-shrink-0 w-5 h-5 text-white"
+                      : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
                   }
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"

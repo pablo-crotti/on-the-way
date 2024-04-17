@@ -261,7 +261,6 @@ export const fetchPodcastEngagementStats = async () => {
         Authorization: `Bearer ${token}`,
     };
 
-    // const year = new Date().getFullYear();
 
     const today = new Date();
 

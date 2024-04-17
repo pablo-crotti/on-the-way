@@ -6,6 +6,7 @@ import PrimaryButton from "@/components/primarybutton";
 import { useState } from "react";
 
 export default function NewCollectionPage() {
+  const [character, setCharacter] = useState([0]);
   const generateRandomString = (length: number) => {
     let result = "";
     const characters =
@@ -16,6 +17,21 @@ export default function NewCollectionPage() {
     }
     return result;
   };
+
+  const newCharacter = (value: any, index: number) => {
+    console.log(character, index, value)
+    if (!value) {
+      if(index === 0) {
+        return;
+      } else {
+        setCharacter(character.slice(0, -1))
+      }
+    }
+    else if (index === character.length - 1) {
+      setCharacter([...character, 0]);
+    }
+    
+  }
 
   const handelSubmit = (event: any) => {
     event.preventDefault();
@@ -75,7 +91,22 @@ export default function NewCollectionPage() {
                   required
                 />
               </div>
-
+              <div>
+                <label
+                  htmlFor="description"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Description de la série *
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows={4}
+                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                  placeholder="Découvret l'histoire insolite de..."
+                  required
+                ></textarea>
+              </div>
               <div>
                 <label
                   htmlFor="illustration"
@@ -90,6 +121,27 @@ export default function NewCollectionPage() {
                   required
                 />
               </div>
+              {character.map((_, index) => (
+                <div key={index}>
+                  <label
+                  htmlFor={`characterName${index}`}
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Nom du personnage {index + 1}
+                </label>
+                <input
+                  type="text"
+                  name={`characterName${index}`}
+                  id={`characterName${index}`}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                  placeholder="Nom de la série"
+                  onChange={(e) => {newCharacter(e.target.value, index)}}
+                  required={index === 0 ? true : false}
+                />
+                </div>
+              ))}
+
+              
 
               <div className="flex justify-end">
                 <PrimaryButton type="submit">Publier</PrimaryButton>
