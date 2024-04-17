@@ -41,14 +41,23 @@ model apitoken {
 }
 
 model collection {
-    id        String   @id @default(cuid())
-    name      String
-    image     String
-    number    Int      @unique
-    createdAt DateTime @default(now()) @map(name: "created_at")
-    updatedAt DateTime @updatedAt @map(name: "updated_at")
+    id          String   @id @default(cuid())
+    name        String
+    description String   @default("")
+    image       String
+    number      Int      @unique
+    createdAt   DateTime @default(now()) @map(name: "created_at")
+    updatedAt   DateTime @updatedAt @map(name: "updated_at")
 
     @@map(name: "collections")
+}
+
+model character {
+    id           String   @id @default(cuid())
+    name         String
+    description  String[]
+    image        String
+    collectionId String   @map(name: "collection_id")
 }
 
 enum Category {

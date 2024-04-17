@@ -3,7 +3,6 @@ import { signOut } from "next-auth/react";
 
 export const AdminNav = () => {
   const url = usePathname();
-  
 
   return (
     <div>
@@ -70,14 +69,16 @@ export const AdminNav = () => {
               <a
                 href="/admin/episodes"
                 className={
-                  url === "/admin/episodes" || url.split("/").slice(0, 3).join("/") === "/admin/episodes"
+                  url === "/admin/episodes" ||
+                  url.split("/").slice(0, 3).join("/") === "/admin/episodes"
                     ? "flex items-center p-2 rounded-lg text-white bg-primary group"
                     : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
                 }
               >
                 <svg
                   className={
-                    url === "/admin/episodes" || url.split("/").slice(0, 3).join("/") === "/admin/episodes"
+                    url === "/admin/episodes" ||
+                    url.split("/").slice(0, 3).join("/") === "/admin/episodes"
                       ? "flex-shrink-0 w-5 h-5 text-white"
                       : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
                   }
@@ -118,6 +119,37 @@ export const AdminNav = () => {
                   />
                 </svg>
                 <span className="ms-3">Publier un épisode</span>
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/admin/new-collection"
+                className={
+                  url === "/admin/new-collection"
+                    ? "flex items-center p-2 rounded-lg text-white bg-primary group"
+                    : "flex items-center p-2 rounded-lg text-primary hover:text-white hover:bg-primary group"
+                }
+              >
+      
+
+                <svg
+                className={
+                  url === "/admin/new-collection"
+                    ? "flex-shrink-0 w-5 h-5 text-white"
+                    : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
+                }
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M19.5 21a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3h-5.379a.75.75 0 0 1-.53-.22L11.47 3.66A2.25 2.25 0 0 0 9.879 3H4.5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h15Zm-6.75-10.5a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V10.5Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span className="ms-3">Nouvelle série</span>
               </a>
             </li>
 

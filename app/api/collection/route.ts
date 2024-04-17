@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
     const file = formData.get('illustration') as File | null;
     const imgName = formData.get('imgName') as string;
     let uploadPath = '';
-
     if (file) {
         const fileBuffer = await file.arrayBuffer();
         uploadPath = path.join(process.cwd(), 'public', 'illustrations', imgName);
@@ -37,10 +36,42 @@ export async function POST(request: NextRequest) {
             const upload = await prisma.collection.create({
                 data: {
                     name: formData.get('title') as string,
+                    description: formData.get('description') as string,
                     image: imgName,
                     number: number
                 }
             });
+
+            const uplodadId = upload.id;
+            const indexSum = formData.get('indexSum');
+
+
+
+            const indexSumValue = parseInt(indexSum as string);
+
+            for (let i = 0; i < indexSumValue; i++) {
+                uploadPath = '';
+                if (formData.get(`characterIllustration${i}`) as File) {
+                    const illustration = formData.get(`characterIllustration${i}`) as File;
+                    const fileBuffer = await illustration.arrayBuffer();
+                    uploadPath = path.join(process.cwd(), 'public', 'illustrations', illustration.name);
+                    try {
+                        await fs.promises.writeFile(uploadPath, Buffer.from(fileBuffer));
+                    } catch (err) {
+                        console.error('Erreur lors de l\'écriture du fichier :', err);
+                        return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
+                    }
+
+                    const uploadCharacter = await prisma.character.create({
+                        data: {
+                            name: formData.get(`characterName${i}`) as string,
+                            description: formData.getAll(`characterDescription${i}`) as string[],
+                            image: illustration.name,
+                            collectionId: uplodadId
+                        }
+                    });
+                }
+            }
 
             return new NextResponse(JSON.stringify(upload), { status: 200 });
 
@@ -52,6 +83,15 @@ export async function POST(request: NextRequest) {
         console.error('Aucun fichier trouvé dans la requête.');
         return new NextResponse('Aucun fichier trouvé dans la requête.', { status: 400 });
     }
+
+
+
+
+    // const characters = formData.get('characters') as unknown as Array<any>;
+    // console.log(characters);
+    // characters.forEach 
+
+    // 
 }
 
 export async function GET(request: NextRequest) {
