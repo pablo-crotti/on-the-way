@@ -12,9 +12,25 @@ export async function POST(request: NextRequest) {
     if (file) {
         const fileBuffer = await file.arrayBuffer();
         uploadPath = path.join(process.cwd(), 'public', 'illustrations', imgName);
+        
 
         try {
             await fs.promises.writeFile(uploadPath, Buffer.from(fileBuffer));
+            uploadPath = ''
+            let documentName = "";
+            if(formData.get('document') && formData.get("documentName")) {
+                const document = formData.get('document') as File;
+                documentName = formData.get('documentName') as string;
+                const documentBuffer = await document.arrayBuffer();
+                const documentPath = path.join(process.cwd(), 'public', 'documents', documentName);
+
+                try {
+                    await fs.promises.writeFile(documentPath, Buffer.from(documentBuffer));
+                } catch (err) {
+                    console.error('Erreur lors de l\'écriture du fichier :', err);
+                    return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
+                }
+            } 
 
             const max = await prisma.collection.findFirst({
                 select: {
@@ -32,13 +48,15 @@ export async function POST(request: NextRequest) {
             } else {
                 number = 1;
             }
-
+            
             const upload = await prisma.collection.create({
                 data: {
                     name: formData.get('title') as string,
                     description: formData.get('description') as string,
                     image: imgName,
-                    number: number
+                    number: number,
+                    places: formData.getAll('places') as string[],
+                    document: documentName
                 }
             });
 
@@ -83,15 +101,6 @@ export async function POST(request: NextRequest) {
         console.error('Aucun fichier trouvé dans la requête.');
         return new NextResponse('Aucun fichier trouvé dans la requête.', { status: 400 });
     }
-
-
-
-
-    // const characters = formData.get('characters') as unknown as Array<any>;
-    // console.log(characters);
-    // characters.forEach 
-
-    // 
 }
 
 export async function GET(request: NextRequest) {
