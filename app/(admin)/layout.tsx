@@ -1,10 +1,14 @@
-"use client";
 
 import "../globals.css";
 import "../globalicon.css";
 import React from "react";
 import { AdminNav } from "@/components/adminnav";
 import { AdminHeader } from "@/components/adminheader";
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'On The Way - Podcasts | Admin',
+}
 
 export default async function RootLayout({
   children,
