@@ -14,10 +14,12 @@ export default function SignInPage() {
 
   const handelSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(email.current, password.current)
+    const target = e.target as HTMLFormElement;
+    console.log(target.password.value, target.email.value);
+    console.log(email.current, password.current);
     const response = await signIn("credentials", {
-      email: email.current,
-      password: password.current,
+      email: target.email.value,
+      password: target.password.value,
       redirect: false,
     });
     if (response && response.error) {
