@@ -77,6 +77,8 @@ export default function SignInPage() {
             >
               Valider
             </button>
+            {error && (
+              <div className="text-red-500 text-center">{result}</div>)}
           </form>
         </div>
       </div>
