@@ -42,15 +42,15 @@ export default function SeriesPage() {
               <div className="flex justify-center" key={index}>
                 <a
                   href={`/series/${collection.id}`}
-                  className="flex items-center bg-white border border-gray-200 rounded-lg shadow flex-row md:max-w-xl md:h-48 hover:bg-gray-100 dark:border-darkbg-700 dark:bg-darkbg-800 dark:hover:bg-darkbg-700"
+                  className="flex items-center bg-white border border-gray-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-gray-100 dark:border-darkbg-700 dark:bg-darkbg-800 dark:hover:bg-darkbg-700"
                 >
                   <img
                     className="object-cover h-auto w-1/3 rounded-none rounded-s-lg"
                     src={`/illustrations/${collection.image}`}
                     alt=""
                   />
-                  <div className="flex flex-col justify-between p-4 leading-normal w-full">
-                    <h5 className="mb-2 text-lg text-left font-bold tracking-tight text-gray-900 dark:text-white">
+                  <div className="flex flex-col justify-between p-4 leading-normal w-2/3">
+                    <h5 className="w-full break-words mb-2 text-lg text-left font-bold tracking-tight text-gray-900 dark:text-white">
                       {collection.name}
                     </h5>
                     <div className="flex flex-row w-full justify-between">
