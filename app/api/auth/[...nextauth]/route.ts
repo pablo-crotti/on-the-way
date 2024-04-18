@@ -28,6 +28,8 @@ const handler = NextAuth ({
           },
         });
 
+        console.log(user)
+
         if (!user) {
           throw new Error("Adresse e-mail ou mot de passe incorrect.");
         }
@@ -36,6 +38,8 @@ const handler = NextAuth ({
           credentials.password,
           user.password || "" 
         );
+
+        console.log(isPasswordValid)
 
         if (!isPasswordValid) {
           throw new Error("Adresse e-mail ou mot de passe incorrect.");

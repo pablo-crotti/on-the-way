@@ -7,6 +7,8 @@ import { Nav } from "@/components/nav";
 import { Analytics } from "@vercel/analytics/react";
 import Footer from "@/components/footer";
 
+
+
 export default async function RootLayout({
   children,
 }: Readonly<{
