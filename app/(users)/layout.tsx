@@ -6,6 +6,7 @@ import React from "react";
 import { Nav } from "@/components/nav";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/react";
+import Footer from "@/components/footer";
 
 export default async function RootLayout({
   children,
@@ -22,6 +23,7 @@ export default async function RootLayout({
         </div>
         <Analytics />
         <GoogleAnalytics gaId={gaId} />
+        <Footer></Footer>
       </body>
     </html>
   );
