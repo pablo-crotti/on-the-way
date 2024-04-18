@@ -14,6 +14,7 @@ export default function SignInPage() {
 
   const handelSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(email.current, password.current)
     const response = await signIn("credentials", {
       email: email.current,
       password: password.current,
