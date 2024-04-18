@@ -291,7 +291,7 @@ export const fetchPodcastEngagementStats = async () => {
     };
 
     const last60 = await axios.get(url, { headers, params });
-    
+
     return { last30: last30.data, last60: last60.data };
 }
 

@@ -33,7 +33,8 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
     "react-modal": "^3.16.1",
-    "swr": "^2.2.5"
+    "swr": "^2.2.5",
+    "tw-elements": "^2.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

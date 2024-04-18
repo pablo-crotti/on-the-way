@@ -5,17 +5,16 @@ import { useEffect, useState } from "react";
 import { fetchCollectionPodcast } from "../../../actions";
 import { Title } from "@/components/title";
 import { Text } from "@/components/text";
-import { Foot } from "@/components/foot";
-import { AudioPlayer } from "@/components/audioplayer/AudioPlayer";
+import { Accordion } from "@/components/accordion";
 
 export default function Page() {
   const collectionModel = {
-    id: "",
     name: "",
     image: "",
     number: 0,
-    createdAt: "",
-    updatedAt: "",
+    description: "",
+    places: [],
+    document: "",
   };
 
   const episodesModel = [
@@ -41,22 +40,61 @@ export default function Page() {
     },
   ];
 
+  const charactersModel = [
+    {
+      name: "",
+      image: "",
+      description: [],
+    },
+  ];
+
   const [collection, setCollection] = useState(collectionModel);
   const [episodes, setEpisodes] = useState(episodesModel);
-  const [index, setIndex] = useState(0);
+  const [characters, setCharacters] = useState(charactersModel);
   const [loading, setLoading] = useState(true);
 
   const pathname = usePathname();
   const slug = pathname.split("/").pop();
 
-  const constDeleteDscHTML = (str: string) => {
-    return str.replace(/<[^>]*>/g, "");
+  const secondsToMinutes = (seconds: number) => {
+    return new Date(seconds * 1000).getMinutes();
+  };
+
+  const getCharacters = (collectionId: string) => {
+    fetch(`/api/characters?collection=${collectionId}`).then((res) =>
+      res.json().then((data) => {
+        setCharacters(data);
+        const tempCharacters: {
+          name: string;
+          description: any;
+          image: string;
+        }[] = [];
+        data.forEach((character: any) => {
+          const tempCharacter = {
+            name: character.name,
+            description: JSON.parse(character.description[0]),
+            image: character.image,
+          };
+          tempCharacters.push(tempCharacter);
+        });
+        setCharacters(tempCharacters);
+      })
+    );
   };
 
   const getCollection = () => {
     fetch(`/api/collection?id=${slug}`).then((res) =>
       res.json().then((data) => {
-        setCollection(data);
+        const tempCollection = {
+          name: data.name,
+          image: data.image,
+          number: data.number,
+          description: data.description,
+          places: JSON.parse(data.places[0]),
+          document: data.document,
+        };
+        setCollection(tempCollection);
+
         fetchCollectionPodcast(data.number).then((episodesData) => {
           episodesData.forEach((episode: any, index: number) => {
             if (episode.status === "draft") {
@@ -86,19 +124,16 @@ export default function Page() {
             }[]
           );
         });
+
+        getCharacters(data.id);
+        setLoading(false);
       })
     );
   };
 
-  function handleLoaded() {
-    console.log("audio loaded");
-    setLoading(false);
-  }
-
   useEffect(() => {
     getCollection();
   }, []);
-
   return (
     <div>
       {loading ? (
@@ -111,133 +146,104 @@ export default function Page() {
         </div>
       ) : (
         <>
-          <Title type="h2">{collection.name}</Title>
-          <img
-            className="mb-2"
-            src={episodes[index].logo}
-            alt="Image de l'épisode"
-          />
-          <Title type="h2">Épisode {episodes[index].episode_number}</Title>
-          <Title type="h2">{episodes[index].title}</Title>
-          <Text>{constDeleteDscHTML(episodes[index].content)}</Text>
-
-          <div className="flex justify-center ">
-            {index == 0 ? (
-              <button disabled className="text-secondary">
-                <span className="sr-only">Previous</span>
-                <svg
-                  className="w-5 h-5 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 1 1 5l4 4"
-                  />
-                </svg>
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  setIndex(index - 1);
-                  setLoading(true);
-                }}
-                className="text-primary"
-              >
-                <span className="sr-only">Previous</span>
-                <svg
-                  className="w-5 h-5 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 1 1 5l4 4"
-                  />
-                </svg>
-              </button>
-            )}
-            {episodes &&
-              episodes.map((episode, i) => (
-                <button
-                  className="flex items-center p-0"
-                  key={i}
-                  onClick={() => {
-                    setIndex(i);
-                    setLoading(true);
-                  }}
-                >
-                  {i == index ? (
-                    <Foot active={true} />
-                  ) : (
-                    <Foot active={false} />
-                  )}
-                </button>
-              ))}
-            {index == episodes.length - 1 ? (
-              <button disabled className="text-secondary">
-                <span className="sr-only">Previous</span>
-                <svg
-                  className="w-5 h-5 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 9 4-4-4-4"
-                  />
-                </svg>
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  setIndex(index + 1);
-                  setLoading(true);
-                }}
-                className="text-primary"
-              >
-                <span className="sr-only">Previous</span>
-                <svg
-                  className="w-5 h-5 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 9 4-4-4-4"
-                  />
-                </svg>
-              </button>
-            )}
+          <Title type="h1">{collection.name}</Title>
+          <div className="mb-6">
+            <Text>{collection.description}</Text>
           </div>
+          <div className="mb-6">
+            <Text>
+              La série sera composée de 6 épisodes et chaque épisode sortira le
+              lundi aux alentours de 7h30. Ne ratez donc aucun épisode !!
+            </Text>
+          </div>
+          <img src={`/illustrations/${collection.image}`} />
+          <Accordion title="Épisodes">
+            {episodes.map((episode, index) => (
+              <div key={index} className="mb-4 flex justify-center">
+                <a
+                  href={`/series/${slug}/episodes?id=${episode.episode_number}`}
+                  className="flex items-center w-full bg-white border border-gray-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+                >
+                  <img
+                    className="object-cover h-full w-1/3 rounded-none rounded-s-lg"
+                    src={episode.logo}
+                    alt="Pochette épisode"
+                  />
+                  <div className="w-full flexflex-col justify-between p-4 leading-normal">
+                    <h5 className="mb-2 text-l text-left font-bold tracking-tight text-gray-900 dark:text-white">
+                      {episode.title}
+                    </h5>
+                    <div className="w-full flex justify-between">
+                      <p className="text-gray-400">
+                        Série {episode.season_number}, Épisode{" "}
+                        {episode.episode_number}
+                      </p>
+                      <p className="text-right text-gray-400">
+                        {secondsToMinutes(episode.duration)}min
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            ))}
+          </Accordion>
+          <Accordion title="Personnages">
+            {characters.map((character, index) => (
+              <div key={index} className="mb-4 flex justify-center">
+                <div className="flex items-center w-full bg-white border border-gray-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  <img
+                    className="object-cover h-full w-1/3 rounded-none rounded-s-lg"
+                    src={`/illustrations/${character.image}`}
+                    alt="Pochette épisode"
+                  />
+                  <div className="w-full flexflex-col justify-between p-4 leading-normal">
+                    <h5 className="mb-2 text-l text-left font-bold tracking-tight text-gray-900 dark:text-white">
+                      {character.name}
+                    </h5>
+                    <div className="w-full">
+                      <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                        {character.description.map((desc: any, index) => {
+                          return desc ? <li key={index}>{desc}</li> : null;
+                        })}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Accordion>
+          <Accordion title="Lieux">
+            <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+              {collection.places.map(
+                (place, index) =>
+                  place[1] && (
+                    <li key={index}>
+                      <a
+                        className="text-primary underline hover:text-secondary"
+                        href={place[1]}
+                        target="_blank"
+                      >
+                        {place[0]}
+                      </a>
+                    </li>
+                  )
+              )}
+            </ul>
+          </Accordion>
+          {collection.document && (
+            <Accordion title="Document">
+              <a
+                className="text-primary underline hover:text-secondary"
+                href={`/documents/${collection.document}`}
+                target="_blank"
+              >
+                Infos supplémentaires
+              </a>
+            </Accordion>
+          
+          )}
         </>
       )}
-      <div className={loading ? "invisible" : ""}>
-        <AudioPlayer
-          episodeSource={episodes[index].media_url}
-          onAudioLoaded={handleLoaded}
-        />
-      </div>
     </div>
   );
 }
