@@ -216,7 +216,7 @@ export const AdminNav = () => {
               >
                 <svg
                   className={
-                    url === "/admin/messages"
+                    url === "/admin/messages?page=1"
                       ? "flex-shrink-0 w-5 h-5 text-white"
                       : "flex-shrink-0 w-5 h-5  transition duration-75 text-primary group-hover:text-white"
                   }
