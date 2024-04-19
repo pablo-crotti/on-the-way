@@ -6,7 +6,7 @@ export const AdminHeader = () => {
   return (
     <div className="hidden justify-end gap-4 sm:flex ">
       <a
-        href="/admin/messages"
+        href="/admin/messages?page=1"
         className={
           url === "/admin/messages"
             ? "flex items-center p-2 rounded-lg text-white bg-primary group"

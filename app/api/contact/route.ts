@@ -32,6 +32,8 @@ export async function GET(request: NextRequest) {
     const total = params.get('total');
     const take = params.get('take');
     const skip = params.get('skip');
+    const sort = params.get('sort');
+    const orderBy = sort ? sort.split('-') : null;
     if (total) {
         const messages = await prisma.message.findMany({});
         return NextResponse.json(messages.length);
@@ -39,7 +41,9 @@ export async function GET(request: NextRequest) {
         const messages = await prisma.message.findMany({
             take: take ? parseInt(take) : 8,
             skip: skip ? parseInt(skip) : 0,
-            orderBy: {
+            orderBy: orderBy ? {
+                [orderBy[0]]: orderBy[1]
+            } : {
                 createdAt: 'desc'
             }
         });
