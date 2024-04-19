@@ -101,21 +101,21 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) f
 - Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud
 - City of Yverdon
 - All contributors and participants of the project :
-- - Achard Julie
-- - Azizi Nisa
-- - Crotti Pablo
-- - Da Fonseca Pinto Carina
-- - De Kerchove Marion
-- - Delgado Miranda Ricardo
-- - Fontaine Loïc
-- - Mauron Catherine
-- - Mendes Gonçalves Daniel
-- - Meuwly Nicolas
-- - Pinto Da Silva Vítor Emanuel
-- - Sanjuan Neyla
-- - Stojanovic Jovan
-- - Talon Léa
+  - Achard Julie
+  - Azizi Nisa
+  - Crotti Pablo
+  - Da Fonseca Pinto Carina
+  - De Kerchove Marion
+  - Delgado Miranda Ricardo
+  - Fontaine Loïc
+  - Mauron Catherine
+  - Mendes Gonçalves Daniel
+  - Meuwly Nicolas
+  - Pinto Da Silva Vítor Emanuel
+  - Sanjuan Neyla
+  - Stojanovic Jovan
+  - Talon Léa
 - Project supervisors :
-- - Chabloz Nicolas
-- - Joset Patrick
-- - Renou Sylvain
+  - Chabloz Nicolas
+  - Joset Patrick
+  - Renou Sylvain
