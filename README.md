@@ -33,7 +33,7 @@ The application employs Prisma as its ORM, facilitating effective database manag
 - **Character :** Details characters featured within the podcast series, linked to specific collections.
 
 
-> **ApiToken model explanation :_** 
+> **_ApiToken model explanation :_** 
 > The ApiToken model in the database serves as a mechanism to efficiently manage API tokens used for external services like Podbean. Here's the rationale and functionality of this model :
 > - **Token storage and management :** The ApiToken model stores tokens along with their expiration dates. This avoids the need to request a new token from the Podbean API with each fetch operation, minimizing request overhead and potential delays.
 > - **Expiration handling :** Each stored token includes an expiration attribute. To ensure continuity and minimize the risk of token expiration during an operation, the system subtracts one minute from the actual expiration time provided by Podbean. This ensures that the token is refreshed proactively before it truly expires.
