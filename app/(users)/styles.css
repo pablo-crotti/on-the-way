@@ -1,0 +1,82 @@
+.carousel-container {
+    width: 70%;
+    position: relative;
+    margin: 50px auto 0;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    padding-bottom: 40%;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.animate {
+    -webkit-transition-duration: .5s;
+    -moz-transition-duration: .5s;
+    -o-transition-duration: .5s;
+    transition-duration: .5s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+}
+
+.slide {
+    list-style: none;
+    float: left;
+    position: relative;
+    flex-direction: column;
+    right: 0px;
+    top: 0px;
+    margin: 0 50px
+}
+
+
+
+.slide.before {
+
+    transform: translateX(-500px);
+    visibility: hidden;
+    sdisplay: none;
+}
+
+.slide.after {
+    transform: translateX(500px);
+    visibility: hidden;
+    sdisplay: none;
+}
+
+
+
+#controls {
+    position: absolute;
+    width: 100%;
+    top: calc(50% - 25px);
+    margin: 0 -60px;
+}
+
+#controls span {
+    width: 50px;
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+#controls span:hover {
+    opacity: 1;
+}
+
+.prev {
+    float: left;
+}
+
+.next {
+    float: right;
+}
+
+.active {
+    position: absolute;
+}
