@@ -1,9 +1,9 @@
-# On The Way Podcast Platform 🎧
+# 🎧 On The Way Podcast Platform 
 
-## Project overview 🌐
+## 🌐 Project overview 
 "On The Way" is a podcast platform developed for the city of Yverdon as part of the integration project at the Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud, media engineering track. The platform facilitates communication between the city and its residents through multimedia content.
 
-## Key features ✨
+## ✨ Key features 
 
 ### Admin part
 Administrators from the city have access to a variety of tools designed to manage and distribute podcast content effectively :
@@ -19,7 +19,7 @@ The public interface allows users to :
 - **Media playback :** Listen to episodes directly on the platform.
 - **EEngagement :** Contact the creators with feedback or questions through an integrated messaging system.
 
-## Technical architecture 🏗️
+## 🏗️ Technical architecture 
 
 ### Database integration
 The platform utilizes Vercel for hosting and directly interacts with a PostgreSQL database configured through Vercel environment variables. This setup ensures streamlined deployment and management processes, aligning with modern cloud architecture practices.
@@ -42,7 +42,8 @@ The application employs Prisma as its ORM, facilitating effective database manag
 
 ### Styling 
 The platform's user interface is primarily styled using TailwindCSS, a utility-first CSS framework that enables rapid and efficient custom styling. This choice allows for flexible and maintainable design implementations, facilitating a cohesive visual experience across the entire platform. TailwindCSS's utility classes help streamline the development process, making it easier to build responsive and visually attractive interfaces quickly.
-## Setup instructions 🛠️
+
+## 🛠️ Setup instructions 
 ### Step 1 : Clone the repository
 Start by cloning the repository to your local machine using Git :
 
@@ -93,13 +94,13 @@ Ensure that your application is running correctly by navigating to `http://local
 
 By following these setup instructions, you should have a fully operational instance of the "On The Way" podcast platform running in your development environment. This setup provides a solid foundation for further development and customization of the platform.
 
-## Contributing 🤝
+## 🤝 Contributing 
 Contributions to the platform are welcome. Please fork the repository, make your changes, and submit a pull request for review.
 
-## License 📄
+## 📄 License 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
 
-## Acknowledgements 🙏
+## 🙏 Acknowledgements 
 - Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud
 - City of Yverdon
 - All contributors and participants of the project :
