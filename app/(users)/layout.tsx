@@ -21,7 +21,7 @@ export default async function RootLayout({
       <body className="w-full h-full dark:bg-darkbg-900">
         <div>
           <Nav />
-          <div className="p-4">{children}</div>
+          <div className="">{children}</div>
         </div>
         <Analytics />
         <Footer />
