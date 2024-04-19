@@ -295,3 +295,24 @@ export const fetchPodcastEngagementStats = async () => {
     return { last30: last30.data, last60: last60.data };
 }
 
+export const fetchPodcastStats = async (interval: number) => {
+    const token = await getToken();
+    const url = `${BASE_URL}/podcastStats/stats`;
+    const headers = {
+        Authorization: `Bearer ${token}`,
+    };
+
+    const today = new Date();
+
+    const pastXDays = new Date(today);
+    pastXDays.setDate(today.getDate() - interval);
+
+    let params = {
+        start: `${pastXDays.getFullYear()}-${pastXDays.getMonth() + 1}-${pastXDays.getDate()}`,
+        end: ''
+    };
+
+    const lastX = await axios.get(url, { headers, params });
+
+    return lastX.data;
+}

@@ -1,13 +1,15 @@
 "use client";
 import { Title } from "@/components/title";
 import { useEffect, useState } from "react";
-import { Donut, VerticalBar } from "@/components/charts";
+import { Donut, LineChart, VerticalBar } from "@/components/charts";
+import { fetchPodcastStats } from "../../../actions";
 
 export default function StatsPage() {
   const [countryStats, setCountryStats] = useState<any[]>([]);
   const [referrerStats, setReferrerStats] = useState<any[]>([]);
   const [deviceStats, setDeviceStats] = useState<any[]>([]);
   const [interval, setInterval] = useState<number>(1);
+  const [podcastStats, setPodcastStats] = useState<any>({});
 
   const getStats = (category: string, interval: number, callback: any): void => {
     const toDateTime = new Date();
@@ -31,15 +33,22 @@ export default function StatsPage() {
       });
   };
 
+  const getPodcastAudience = () => {
+    fetchPodcastStats(interval).then((data) => {
+      setPodcastStats(data);
+    });
+  }
+
   useEffect(() => {
     getStats("country", 1000 * 60 * 60 * 24 * interval, setCountryStats);
     getStats("referrer", 1000 * 60 * 60 * 24 * interval, setReferrerStats);
     getStats("os_name", 1000 * 60 * 60 * 24 * interval, setDeviceStats);
+    getPodcastAudience();
   }, [interval]);
   return (
     <div>
       <Title type="h1" children="Statistiques" />
-      <select value={interval} onChange={(e) => {setInterval(+e.target.value)}} className="ml-10 mb-10 bg-white dark:bg-darkbg-800 text-darkbg-900 dark:text-white rounded-lg focus:ring-primary focus:border-primary">
+      <select name="sorting" value={interval} onChange={(e) => { setInterval(+e.target.value) }} className="ml-10 mb-10 bg-white dark:bg-darkbg-800 text-darkbg-900 dark:text-white rounded-lg focus:ring-primary focus:border-primary">
         <option value="1">Dernières 24h</option>
         <option value="7">7 derniers jours</option>
         <option value="30">30 derniers jours</option>
@@ -48,6 +57,7 @@ export default function StatsPage() {
         <Donut data={countryStats} title="Visiteurs par pays" type="donut" />
         <Donut data={deviceStats} title="Visiteurs par appareil" type="pie" />
         <VerticalBar data={referrerStats} title="Visiteurs par source" />
+        <LineChart data={podcastStats} title="Auditeurs" />
       </div>
     </div>
   );

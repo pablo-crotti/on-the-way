@@ -107,7 +107,7 @@ function MessagesContent() {
         Messages
       </h1>
       <div className="my-4 flex flex-row justify-between items-center">
-        <select value={sorting} onChange={(e) => { setSorting(e.target.value) }} className="bg-white dark:bg-darkbg-800 text-darkbg-900 dark:text-white rounded-lg focus:ring-primary focus:border-primary">
+        <select name="sorting" value={sorting} onChange={(e) => { setSorting(e.target.value) }} className="bg-white dark:bg-darkbg-800 text-darkbg-900 dark:text-white rounded-lg focus:ring-primary focus:border-primary">
           <option value="createdAt-desc">Les plus récents</option>
           <option value="createdAt-asc">Les moins récents</option>
           <option value="isFavorite-desc">Favoris</option>
