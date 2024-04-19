@@ -40,6 +40,8 @@ The application employs Prisma as its ORM, facilitating effective database manag
 > - **Validation and refresh :** When an API request is made, the system first checks the validity of the stored token. If the token is still valid (i.e., current time is less than the stored expiration time), it is used for the API call. If the token is expired, a new token is generated from Podbean, stored with the adjusted expiration time, and then used for subsequent requests.
 > This approach enhances performance by reducing the frequency of token requests and ensures smooth operation by handling token expiration efficiently.
 
+### Styling 
+The platform's user interface is primarily styled using TailwindCSS, a utility-first CSS framework that enables rapid and efficient custom styling. This choice allows for flexible and maintainable design implementations, facilitating a cohesive visual experience across the entire platform. TailwindCSS's utility classes help streamline the development process, making it easier to build responsive and visually attractive interfaces quickly.
 ## Setup instructions 🛠️
 ### Step 1 : Clone the repository
 Start by cloning the repository to your local machine using Git :
