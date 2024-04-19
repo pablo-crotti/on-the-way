@@ -90,3 +90,32 @@ Ensure that your application is running correctly by navigating to `http://local
 - **Version control:** Avoid committing your `.env` file to version control. Use `.env.example` to share necessary environment variables with placeholders.
 
 By following these setup instructions, you should have a fully operational instance of the "On The Way" podcast platform running in your development environment. This setup provides a solid foundation for further development and customization of the platform.
+
+## Contributing
+Contributions to the platform are welcome. Please fork the repository, make your changes, and submit a pull request for review.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
+
+## Acknowledgements
+- Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud
+- City of Yverdon
+- All contributors and participants of the project :
+- - Achard Julie
+- - Azizi Nisa
+- - Crotti Pablo
+- - Da Fonseca Pinto Carina
+- - De Kerchove Marion
+- - Delgado Miranda Ricardo
+- - Fontaine Loïc
+- - Mauron Catherine
+- - Mendes Gonçalves Daniel
+- - Meuwly Nicolas
+- - Pinto Da Silva Vítor Emanuel
+- - Sanjuan Neyla
+- - Stojanovic Jovan
+- - Talon Léa
+- Project supervisors :
+- - Chabloz Nicolas
+- - Joset Patrick
+- - Renou Sylvain
