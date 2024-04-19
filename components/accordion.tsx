@@ -15,7 +15,7 @@ export const Accordion = ({ children, title }: { children: React.ReactNode, titl
           aria-expanded={accordionOpen}
           aria-controls={`accordion-text-01`}
         >
-          <span>{title}</span>
+          <span className="text-darkbg-900 dark:text-white">{title}</span>
           <svg
             className="fill-primary shrink-0 ml-8"
             width="16"

@@ -162,7 +162,7 @@ export default function Page() {
               <div key={index} className="mb-4 flex justify-center">
                 <a
                   href={`/series/${slug}/episodes?id=${episode.episode_number}`}
-                  className="flex items-center w-full bg-white border border-gray-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  className="flex items-center w-full bg-white border border-darkbg-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-darkbg-100 dark:border-darkbg-700 dark:bg-darkbg-800 dark:hover:bg-darkbg-700"
                 >
                   <img
                     className="object-cover h-full w-1/3 rounded-none rounded-s-lg"
@@ -170,15 +170,15 @@ export default function Page() {
                     alt="Pochette épisode"
                   />
                   <div className="w-full flexflex-col justify-between p-4 leading-normal">
-                    <h5 className="mb-2 text-l text-left font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h5 className="mb-2 text-l text-left font-bold tracking-tight text-darkbg-900 dark:text-white">
                       {episode.title}
                     </h5>
                     <div className="w-full flex justify-between">
-                      <p className="text-gray-400">
+                      <p className="text-darkbg-400">
                         Série {episode.season_number}, Épisode{" "}
                         {episode.episode_number}
                       </p>
-                      <p className="text-right text-gray-400">
+                      <p className="text-right text-darkbg-400">
                         {secondsToMinutes(episode.duration)}min
                       </p>
                     </div>
@@ -190,18 +190,18 @@ export default function Page() {
           <Accordion title="Personnages">
             {characters.map((character, index) => (
               <div key={index} className="mb-4 flex justify-center">
-                <div className="flex items-center w-full bg-white border border-gray-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                <div className="flex items-center w-full bg-white border border-darkbg-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-darkbg-100 dark:border-darkbg-700 dark:bg-darkbg-800 dark:hover:bg-darkbg-700">
                   <img
                     className="object-cover h-full w-1/3 rounded-none rounded-s-lg"
                     src={`/illustrations/${character.image}`}
                     alt="Pochette épisode"
                   />
                   <div className="w-full flexflex-col justify-between p-4 leading-normal">
-                    <h5 className="mb-2 text-l text-left font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h5 className="mb-2 text-l text-left font-bold tracking-tight text-darkbg-900 dark:text-white">
                       {character.name}
                     </h5>
                     <div className="w-full">
-                      <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                      <ul className="max-w-md space-y-1 text-darkbg-500 list-disc list-inside dark:text-darkbg-400">
                         {character.description.map((desc: any, index) => {
                           return desc ? <li key={index}>{desc}</li> : null;
                         })}
@@ -213,7 +213,7 @@ export default function Page() {
             ))}
           </Accordion>
           <Accordion title="Lieux">
-            <ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+            <ul className="max-w-md space-y-1 text-darkbg-500 list-disc list-inside dark:text-darkbg-400">
               {collection.places.map(
                 (place, index) =>
                   place[1] && (
