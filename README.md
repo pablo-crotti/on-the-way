@@ -75,16 +75,13 @@ The application employs Prisma as its ORM, facilitating effective database manag
 - **Character:** Details characters featured within the podcast series, linked to specific collections.
 
 
-> **_NOTE:_**  The note content.
-### ApiToken model explanation
+> **_NOTE:_**   ### ApiToken model explanation
+> The ApiToken model in the database serves as a mechanism to efficiently manage API tokens used for external services like Podbean. Here's the rationale and functionality of this model:
+> - **Token storage and management:** The ApiToken model stores tokens along with their expiration dates. This avoids the need to request a new token from the Podbean API with each fetch operation, minimizing request overhead and potential delays.
+> - **Expiration handling:** Each stored token includes an expiration attribute. To ensure continuity and minimize the risk of token expiration during an operation, the system subtracts one minute from the actual expiration time provided by Podbean. This ensures that the token is refreshed proactively before it truly expires.
+> - **Validation and refresh:** When an API request is made, the system first checks the validity of the stored token. If the token is still valid (i.e., current time is less than the stored expiration time), it is used for the API call. If the token is expired, a new token is generated from Podbean, stored with the adjusted expiration time, and then used for subsequent requests.
 
-The ApiToken model in the database serves as a mechanism to efficiently manage API tokens used for external services like Podbean. Here's the rationale and functionality of this model:
-
-- **Token storage and management:** The ApiToken model stores tokens along with their expiration dates. This avoids the need to request a new token from the Podbean API with each fetch operation, minimizing request overhead and potential delays.
-- **Expiration handling:** Each stored token includes an expiration attribute. To ensure continuity and minimize the risk of token expiration during an operation, the system subtracts one minute from the actual expiration time provided by Podbean. This ensures that the token is refreshed proactively before it truly expires.
-- **Validation and refresh:** When an API request is made, the system first checks the validity of the stored token. If the token is still valid (i.e., current time is less than the stored expiration time), it is used for the API call. If the token is expired, a new token is generated from Podbean, stored with the adjusted expiration time, and then used for subsequent requests.
-
-This approach enhances performance by reducing the frequency of token requests and ensures smooth operation by handling token expiration efficiently.
+> This approach enhances performance by reducing the frequency of token requests and ensures smooth operation by handling token expiration efficiently.
 
 ## Environment variables
 
