@@ -2,8 +2,15 @@
 import { fetchPodcasts, updatePodcast } from "../../../actions";
 import { useState, useEffect } from "react";
 
+/**
+ * React component for displaying episodes.
+ * @returns {JSX.Element} EpisodesPage component.
+ */
 export default function EpisodesPage() {
+  // State for loading indicator
   const [loading, setLoading] = useState(true);
+
+  // State for storing episodes
   const [episodes, setEpisodes] = useState<
     {
       id: string;
@@ -27,6 +34,7 @@ export default function EpisodesPage() {
     }[]
   >([]);
 
+  // State for storing collections
   const [collections, setCollections] = useState<
     {
       id: string;
@@ -36,6 +44,11 @@ export default function EpisodesPage() {
     }[]
   >([]);
 
+  /**
+   * Get collection name by number.
+   * @param {number} number - Collection number.
+   * @returns {string} Name of the collection.
+   */
   const getCollectionName = (number: number) => {
     const collection = collections.find(
       (collection) => collection.number === number
@@ -43,6 +56,11 @@ export default function EpisodesPage() {
     return collection?.name || "";
   };
 
+  /**
+   * Change episode status and update.
+   * @param {object} episode - Episode object.
+   * @returns {Promise<void>}
+   */
   const changeEpisodeStatus =
     (episode: {
       id: string;
@@ -83,11 +101,13 @@ export default function EpisodesPage() {
     };
 
   useEffect(() => {
+    // Fetch episodes
     fetchPodcasts().then((episodesData) => {
       setEpisodes(episodesData);
       setLoading(false);
     });
 
+    // Fetch collections
     fetch("/api/collection?all=true", {}).then((response) => {
       if (response.ok) {
         response.json().then((data) => {
@@ -109,14 +129,14 @@ export default function EpisodesPage() {
         </div>
       ) : (
         <>
-          <h1 className="text-xl mb-4 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white ">
+          <h1 className="text-xl mb-4 font-bold leading-tight tracking-tight text-darkbg-900 md:text-2xl dark:text-white ">
             Liste des épisodes
           </h1>
           <div className="grid grid-cols-1 gap-4">
             {episodes.map((episode) => (
               <div
                 key={episode.id}
-                className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row  dark:border-gray-700 dark:bg-gray-800"
+                className="flex flex-col items-center bg-white border border-darkbg-200 rounded-lg shadow md:flex-row  dark:border-darkbg-700 dark:bg-darkbg-800"
               >
                 <img
                   className="object-cover w-full rounded-t-lg h-full  md:min-w-48 md:max-w-48 md:rounded-none md:rounded-s-lg"
@@ -128,10 +148,10 @@ export default function EpisodesPage() {
                     {getCollectionName(episode.season_number)}
                   </span>
 
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-darkbg-900 dark:text-white">
                     {episode.title}
                   </h5>
-                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                  <p className="mb-3 font-normal text-darkbg-700 dark:text-darkbg-400">
                     {episode.content}
                   </p>
                   <div className="w-full flex justify-between items-start mt-4">
@@ -145,8 +165,8 @@ export default function EpisodesPage() {
                           checked={episode.status === "publish"}
                           onChange={changeEpisodeStatus(episode)}
                         />
-                        <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-darkbg-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-darkbg-600 peer-checked:bg-primary"></div>
-                        <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        <div className="relative w-11 h-6 bg-darkbg-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-darkbg-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-darkbg-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-darkbg-600 peer-checked:bg-primary"></div>
+                        <span className="ms-3 text-sm font-medium text-darkbg-900 dark:text-darkbg-300">
                           Épisode publié
                         </span>
                       </label>

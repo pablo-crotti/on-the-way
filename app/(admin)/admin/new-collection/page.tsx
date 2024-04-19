@@ -194,7 +194,7 @@ export default function NewCollectionPage() {
                   <div>
                     <label
                       htmlFor="title"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                     >
                       Nom de la série *
                     </label>
@@ -202,7 +202,7 @@ export default function NewCollectionPage() {
                       type="text"
                       name="title"
                       id="title"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                      className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                       placeholder="Nom de la série"
                       required
                     />
@@ -210,7 +210,7 @@ export default function NewCollectionPage() {
                   <div>
                     <label
                       htmlFor="description"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                     >
                       Description de la série *
                     </label>
@@ -218,7 +218,7 @@ export default function NewCollectionPage() {
                       id="description"
                       name="description"
                       rows={4}
-                      className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                      className="block p-2.5 w-full text-sm text-darkbg-900 bg-darkbg-50 rounded-lg border border-darkbg-300 focus:ring-primary focus:border-primary dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                       placeholder="Découvret l'histoire insolite de..."
                       required
                     ></textarea>
@@ -226,12 +226,12 @@ export default function NewCollectionPage() {
                   <div>
                     <label
                       htmlFor="illustration"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                     >
                       Illustration *
                     </label>
                     <input
-                      className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
+                      className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
                       id="illustration"
                       type="file"
                       required
@@ -269,7 +269,7 @@ export default function NewCollectionPage() {
                       <div>
                         <label
                           htmlFor={`characterName${index}`}
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                         >
                           Nom du personnage {index + 1} *
                         </label>
@@ -277,7 +277,7 @@ export default function NewCollectionPage() {
                           type="text"
                           name={`characterName${index}`}
                           id={`characterName${index}`}
-                          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                          className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                           placeholder="Nom du personnage"
                           required
                         />
@@ -285,12 +285,12 @@ export default function NewCollectionPage() {
                       <div className="mt-6">
                         <label
                           htmlFor={`characterIllustration${index}`}
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                         >
                           Illustration personnage {index + 1} *
                         </label>
                         <input
-                          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
+                          className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
                           id={`characterIllustration${index}`}
                           type="file"
                           required
@@ -299,14 +299,14 @@ export default function NewCollectionPage() {
                       <div className="mt-6">
                         <label
                           htmlFor={`characterDescription${index}`}
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                         >
                           Description du personnage {index + 1}{" "}
                           {characterInfos[index].length === 1 ? "*" : ""}
                         </label>
                         <div className="flex gap-4">
                           <input
-                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
+                            className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
                             id={`characterDescription${index}`}
                             name={`characterDescription${index}`}
                             type="text"
@@ -316,7 +316,7 @@ export default function NewCollectionPage() {
                           <button
                             type="button"
                             onClick={() => handelCharacterInfos(index)}
-                            className="text-white bg-gray-800 hover:bg-gray-700  focus:outline-none font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2"
+                            className="text-white bg-darkbg-600 hover:bg-darkbg-700  focus:outline-none font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -337,7 +337,7 @@ export default function NewCollectionPage() {
                           </button>
                         </div>
                       </div>
-                      <ul className="mt-6 max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                      <ul className="mt-6 max-w-md space-y-1 text-darkbg-500 list-disc list-inside dark:text-darkbg-400">
                         {characterInfos[index].map((value: any, i: number) =>
                           value == "" ? (
                             <span></span>
@@ -358,7 +358,7 @@ export default function NewCollectionPage() {
                   ))}
                   <div className="flex justify-end">
                     <button
-                      className="text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-0 font-medium rounded-full text-sm px-7 py-2.5 text-center me-2 mb-2"
+                      className="text-white bg-darkbg-600 hover:bg-darkbg-700 focus:outline-none focus:ring-0 font-medium rounded-full text-sm px-7 py-2.5 text-center me-2 mb-2"
                       type="button"
                       onClick={() => {
                         newCharacter();
@@ -371,20 +371,20 @@ export default function NewCollectionPage() {
                   <div className="mt-6">
                     <label
                       htmlFor="placeName"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                     >
                       Lieux de l'épisode
                     </label>
                     <div className="flex gap-4">
                       <input
-                        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
+                        className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
                         id="placeName"
                         name="placeName"
                         type="text"
                         placeholder="Nom du lieu"
                       />
                       <input
-                        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
+                        className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
                         id="placesUrl"
                         name="placesUrl"
                         type="text"
@@ -393,7 +393,7 @@ export default function NewCollectionPage() {
                       <button
                         type="button"
                         onClick={() => newPlace()}
-                        className="text-white bg-gray-800 hover:bg-gray-700  focus:outline-none font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2"
+                        className="text-white bg-darkbg-600 hover:bg-darkbg-700  focus:outline-none font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -415,7 +415,7 @@ export default function NewCollectionPage() {
                     </div>
                   </div>
 
-                  <ul className="mt-6 max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                  <ul className="mt-6 max-w-md space-y-1 text-darkbg-500 list-disc list-inside dark:text-darkbg-400">
                     {places.map((value: any, i: number) =>
                       value[0] == "" ? (
                         <span></span>
@@ -437,12 +437,12 @@ export default function NewCollectionPage() {
                   <div>
                     <label
                       htmlFor="document"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                     >
                       Document supplémentaire
                     </label>
                     <input
-                      className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
+                      className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
                       id="document"
                       type="file"
                     />

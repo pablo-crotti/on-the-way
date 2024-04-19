@@ -133,7 +133,7 @@ export default function NewEpisodePage() {
               <div>
                 <label
                   htmlFor="title"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                 >
                   Titre du podcast *
                 </label>
@@ -141,7 +141,7 @@ export default function NewEpisodePage() {
                   type="text"
                   name="title"
                   id="title"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                  className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                   placeholder="Episode 1: Introduction"
                   required
                 />
@@ -150,7 +150,7 @@ export default function NewEpisodePage() {
               <div>
                 <label
                   htmlFor="description"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                 >
                   Description du podcast *
                 </label>
@@ -158,7 +158,7 @@ export default function NewEpisodePage() {
                   id="description"
                   name="description"
                   rows={4}
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                  className="block p-2.5 w-full text-sm text-darkbg-900 bg-darkbg-50 rounded-lg border border-darkbg-300 focus:ring-primary focus:border-primary dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                   placeholder="Découvret l'histoire insolite de..."
                   required
                 ></textarea>
@@ -167,12 +167,12 @@ export default function NewEpisodePage() {
               <div>
                 <label
                   htmlFor="illustration"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                 >
                   Illustration *
                 </label>
                 <input
-                  className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
+                  className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
                   id="illustration"
                   type="file"
                   required
@@ -181,12 +181,12 @@ export default function NewEpisodePage() {
               <div>
                 <label
                   htmlFor="audio"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                 >
                   Épisode *
                 </label>
                 <input
-                  className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
+                  className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
                   id="audio"
                   type="file"
                   required
@@ -195,14 +195,14 @@ export default function NewEpisodePage() {
               <div>
                 <label
                   htmlFor="collection"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
                 >
                   Choisir une saison *
                 </label>
                 <select
                   id="collection"
                   name="collection"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                 >
                   {collections &&
@@ -222,8 +222,8 @@ export default function NewEpisodePage() {
                     value=""
                     className="sr-only peer"
                   />
-                  <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-darkbg-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-darkbg-600 peer-checked:bg-primary"></div>
-                  <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  <div className="relative w-11 h-6 bg-darkbg-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-darkbg-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-darkbg-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-darkbg-600 peer-checked:bg-primary"></div>
+                  <span className="ms-3 text-sm font-medium text-darkbg-900 dark:text-darkbg-300">
                     Publier tout de suite
                   </span>
                 </label>

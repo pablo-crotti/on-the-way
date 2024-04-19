@@ -43,10 +43,10 @@ export default function ContactPage() {
 
   return (
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-darkbg-800 dark:border-darkbg-700">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <Title type="h1">Contact</Title>
-          <p className="text-base text-center text-gray-900 dark:text-white">
+          <p className="text-base text-center text-darkbg-900 dark:text-white">
             Contactez-nous via ce formulaire de contact.
           </p>
           <h1 className="text-white font-bold">Contactez-nous</h1>
@@ -54,7 +54,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
               >
                 Email
               </label>
@@ -64,14 +64,14 @@ export default function ContactPage() {
                 name="email"
                 required
                 value={email}
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
               <label
                 htmlFor="category"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
               >
                 Sujet
               </label>
@@ -79,7 +79,7 @@ export default function ContactPage() {
                 name="category"
                 required
                 value={category}
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">--Choix du sujet--</option>
@@ -93,7 +93,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="object"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
               >
                 Objet
               </label>
@@ -102,7 +102,7 @@ export default function ContactPage() {
                 placeholder="Episode X..."
                 name="object"
                 required
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                 value={object}
                 onChange={(e) => setObject(e.target.value)}
               />
@@ -110,7 +110,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="message"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
               >
                 Message
               </label>
@@ -119,7 +119,7 @@ export default function ContactPage() {
                 placeholder="Concernant l'épisode X..."
                 name="message"
                 required
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
