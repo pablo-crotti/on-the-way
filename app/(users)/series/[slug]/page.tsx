@@ -157,7 +157,7 @@ export default function Page() {
             </Text>
           </div>
           <img src={`/illustrations/${collection.image}`} />
-          <Accordion title="Épisodes">
+          <Accordion title="Épisodes" open={true}>
             {episodes.map((episode, index) => (
               <div key={index} className="mb-4 flex justify-center">
                 <a
@@ -187,7 +187,7 @@ export default function Page() {
               </div>
             ))}
           </Accordion>
-          <Accordion title="Personnages">
+          <Accordion title="Personnages" open={false}>
             {characters.map((character, index) => (
               <div key={index} className="mb-4 flex justify-center">
                 <div className="flex items-center w-full bg-white border border-darkbg-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-darkbg-100 dark:border-darkbg-700 dark:bg-darkbg-800 dark:hover:bg-darkbg-700">
@@ -212,7 +212,7 @@ export default function Page() {
               </div>
             ))}
           </Accordion>
-          <Accordion title="Lieux">
+          <Accordion title="Lieux" open={false}>
             <ul className="max-w-md space-y-1 text-darkbg-500 list-disc list-inside dark:text-darkbg-400">
               {collection.places.map(
                 (place, index) =>
@@ -231,7 +231,7 @@ export default function Page() {
             </ul>
           </Accordion>
           {collection.document && (
-            <Accordion title="Document">
+            <Accordion title="Document" open={false}>
               <a
                 className="text-primary underline hover:text-secondary"
                 href={`/documents/${collection.document}`}
