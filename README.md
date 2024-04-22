@@ -1,7 +1,7 @@
 # 🎧 On The Way Podcast Platform 
 
 ## 🌐 Project overview 
-"On The Way" is a podcast platform developed for the city of Yverdon as part of the integration project at the Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud, media engineering track. The platform facilitates communication between the city and its residents through multimedia content.
+"On The Way" is a podcast platform developed for the city of Yverdonles-Bains as part of the integration project at the Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud, media engineering track. The platform facilitates communication between the city and its residents through multimedia content.
 
 ## ✨ Key features 
 
@@ -102,7 +102,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) f
 
 ## 🙏 Acknowledgements 
 - Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud
-- City of Yverdon
+- City of Yverdon-les-Bains
 - All contributors and participants of the project :
   - Achard Julie
   - Azizi Nisa
