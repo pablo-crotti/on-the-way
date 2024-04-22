@@ -145,7 +145,7 @@ export default function Page() {
           />
         </div>
       ) : (
-        <>
+        <div className="p-4">
           <Title type="h1">{collection.name}</Title>
           <div className="mb-6">
             <Text>{collection.description}</Text>
@@ -156,7 +156,9 @@ export default function Page() {
               lundi aux alentours de 7h30. Ne ratez donc aucun épisode !!
             </Text>
           </div>
-          <img src={`/illustrations/${collection.image}`} />
+          <div className="flex justify-center">
+          <img className="max-w-screen-sm" src={`/illustrations/${collection.image}`} />
+          </div>
           <Accordion title="Épisodes" open={true}>
             {episodes.map((episode, index) => (
               <div key={index} className="mb-4 flex justify-center">
@@ -242,7 +244,7 @@ export default function Page() {
             </Accordion>
           
           )}
-        </>
+        </div>
       )}
     </div>
   );

@@ -8,7 +8,6 @@ import { Text } from "@/components/text";
 import { Foot } from "@/components/foot";
 import { AudioPlayer } from "@/components/audioplayer/AudioPlayer";
 
-
 export default function Page() {
   const collectionModel = {
     id: "",
@@ -40,15 +39,13 @@ export default function Page() {
       content_explicit: "",
       object: "",
     },
-  ];  
+  ];
 
   const [collection, setCollection] = useState(collectionModel);
   const [episodes, setEpisodes] = useState(episodesModel);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [firstLoad, setFirstLoad] = useState(true);
-
-  
 
   const pathnameSlug = usePathname();
   const searchParams = useSearchParams().get("id");
@@ -102,7 +99,7 @@ export default function Page() {
     console.log("audio loaded");
     if (firstLoad) {
       setFirstLoad(false);
-      if(searchParams) {
+      if (searchParams) {
         setIndex(Number(searchParams) - 1);
       }
     }
@@ -126,11 +123,13 @@ export default function Page() {
       ) : (
         <>
           <Title type="h2">{collection.name}</Title>
-          <img
-            className="mb-2"
-            src={episodes[index].logo}
-            alt="Image de l'épisode"
-          />
+          <div className="flex justify-center">
+            <img
+              className="mb-2 max-w-screen-sm"
+              src={episodes[index].logo}
+              alt="Image de l'épisode"
+            />
+          </div>
           <Title type="h2">Épisode {episodes[index].episode_number}</Title>
           <Title type="h2">{episodes[index].title}</Title>
           <Text>{constDeleteDscHTML(episodes[index].content)}</Text>

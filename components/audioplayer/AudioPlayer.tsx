@@ -88,7 +88,8 @@ export const AudioPlayer = (props: any) => {
   }
 
   return (
-    <div>
+    <div className="max-w-screen-sm m-auto">
+    
       <audio
         src={props.episodeSource}
         preload="auto"
