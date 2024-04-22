@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { useState } from "react";
 
-export const Accordion = ({ children, title }: { children: React.ReactNode, title: String}) => {
-  const [accordionOpen, setAccordionOpen] = useState<boolean>(false);
+export const Accordion = ({ children, title, open }: { children: React.ReactNode, title: String, open: boolean}) => {
+  const [accordionOpen, setAccordionOpen] = useState<boolean>(open);
   return (
     <div className="py-2">
       <h2>

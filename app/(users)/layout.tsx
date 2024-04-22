@@ -18,7 +18,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className="w-full h-full dark:bg-darkbg-900">
+      <body className="w-full p-4 h-full dark:bg-darkbg-900">
         <div>
           <Nav />
           <div className="">{children}</div>
