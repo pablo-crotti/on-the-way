@@ -102,7 +102,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) f
 
 ## 🙏 Acknowledgements 
 - Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud
-- City of Yverdon
+- City of Yverdon-les-Bains
 - All contributors and participants of the project :
   - Achard Julie
   - Azizi Nisa
