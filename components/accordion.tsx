@@ -4,7 +4,7 @@ import { useState } from "react";
 export const Accordion = ({ children, title, open }: { children: React.ReactNode, title: String, open: boolean}) => {
   const [accordionOpen, setAccordionOpen] = useState<boolean>(open);
   return (
-    <div className="py-2">
+    <div className="py-2 max-w-screen-sm m-auto">
       <h2>
         <button
           className="flex items-center justify-between w-full text-left font-semibold py-2"
