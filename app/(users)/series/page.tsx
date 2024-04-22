@@ -32,7 +32,7 @@ export default function SeriesPage() {
     getCollections();
   }, []);
   return (
-    <div className="mx-4 flex flex-col gap-8">
+    <div className="p-4 flex flex-col gap-8">
       <Title type="h1" children="A propos de nous" />
       <Text>Vous vous trouvez sur le site dédié à notre podcast On The Way dont le but est de partager des histoires incroyables.</Text>
       {loading ? (<Loading />) : (
