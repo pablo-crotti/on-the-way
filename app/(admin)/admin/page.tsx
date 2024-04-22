@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { fetchPodcastEngagementStats, fetchPodcasts } from "../../actions";
 import { Title } from "@/components/title";
+import { get } from "http";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -10,6 +11,7 @@ export default function Home() {
   const [lastMonthSum, setLastMonthSum] = useState(0);
   const [lastPodcasts, setLastPodcasts] = useState<any>([]);
   const [totalEpisodes, setTotalEpisodes] = useState(0);
+  const [totalPageViews, setTotalPageViews] = useState(0);
 
   const getPercentage = (monthSum: number, lastMonthSum: number) => {
     if (monthSum > lastMonthSum) {
@@ -21,7 +23,35 @@ export default function Home() {
     }
   };
 
+  const getTotalPageViews = () => {
+    const interval = 1000 * 60 * 60 * 24 * 30;
+    const toDateTime = new Date();
+    const fromDateTime = new Date(toDateTime.getTime() - interval);
+    fetch(`/api/analytics?category=os_name&from=${encodeURIComponent(fromDateTime.toISOString())}&to=${encodeURIComponent(toDateTime.toISOString())}`, { method: "GET" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (!data || !data.data) {
+          throw new Error('Data is undefined or empty');
+        }
+        const tab = Array.from(data.data);
+        let total = 0;
+        tab.forEach((element: any) => {
+          total += element.devices;
+        });
+        setTotalPageViews(total);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  };
+
   useEffect(() => {
+    getTotalPageViews();
     fetchPodcastEngagementStats().then((data) => {
       setStats(data);
       setLoading(false);
@@ -119,7 +149,7 @@ export default function Home() {
                 </svg>
               </div>
               <div className="flex-grow flex flex-col ml-4">
-                <span className="text-xl font-bold dark:text-white">50</span>
+                <span className="text-xl font-bold dark:text-white">{totalPageViews}</span>
                 <span className="text-gray-500 dark:text-gray-200">
                   Visites des derniers 30 jours
                 </span>
@@ -161,16 +191,11 @@ export default function Home() {
                 <div className="flex flex-col justify-between p-4 leading-normal w-2/3">
                   <h4 className="w-full break-words text-base text-left font-medium tracking-tight text-gray-900 dark:text-white">Série {podcast.season_number}</h4>
                   <h5 className="w-full break-words text-lg text-left font-bold tracking-tight text-gray-900 dark:text-white">Episode {podcast.episode_number}</h5>
-                  <p className="text-gray-500 dark:text-gray-200">Publié le : {new Date(podcast.publish_time).toLocaleString("fr-CH", { day: "2-digit", month: "2-digit", year: "numeric" })}</p>
+                  <p className="text-gray-500 dark:text-gray-200">Publié le : {new Date(podcast.publish_time * 1000).toLocaleString("fr-CH", { day: "2-digit", month: "2-digit", year: "numeric" })}</p>
                   <p className="text-gray-500 dark:text-gray-200">Statut : {podcast.status === "publish" ? "Public" : "Brouillon"}</p>
                   <div className="flex flex-row gap-2 mt-2">
-                    <a>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeWidth="1.5" className="w-6 h-6 text-green-700 fill-none hover:fill-current stroke-current">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
-                      </svg>
-                    </a>
                     <a href={`/admin/episodes/${podcast.id}`}>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeWidth="1.5" className="w-6 h-6 text-green-700 fill-none hover:fill-current stroke-current">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeWidth="1.5" className="w-6 h-6 text-green-700 fill-none stroke-current">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                       </svg>
                     </a>
