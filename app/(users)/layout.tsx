@@ -18,11 +18,10 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className="w-full p-4 h-full dark:bg-darkbg-900">
-        <div>
-          <Nav />
-          <div className="">{children}</div>
-        </div>
+      <body className="w-full h-full dark:bg-darkbg-900">
+        <Nav />
+          
+          <div className="p-4 m-auto max-w-screen-xl flex justify-center">{children}</div>
         <Analytics />
         <Footer />
       </body>

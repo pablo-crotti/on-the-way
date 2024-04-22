@@ -40,3 +40,5 @@ next-env.d.ts
 .vercel
 
 seed.ts
+
+links.txt
