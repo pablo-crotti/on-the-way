@@ -96,7 +96,6 @@ export default function Page() {
   };
 
   function handleLoaded() {
-    console.log("audio loaded");
     if (firstLoad) {
       setFirstLoad(false);
       if (searchParams) {
@@ -104,6 +103,15 @@ export default function Page() {
       }
     }
     setLoading(false);
+  }
+
+  const getDate = (date: number) => {
+    const newDate = new Date(date * 1000);
+    return newDate.toLocaleDateString("fr-FR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
   }
 
   useEffect(() => {
@@ -122,17 +130,29 @@ export default function Page() {
         </div>
       ) : (
         <>
-          <Title type="h2">{collection.name}</Title>
           <div className="flex justify-center">
             <img
-              className="mb-2 max-w-screen-sm"
+              className="mb-2 w-full max-w-screen-sm"
               src={episodes[index].logo}
               alt="Image de l'épisode"
             />
           </div>
-          <Title type="h2">Épisode {episodes[index].episode_number}</Title>
-          <Title type="h2">{episodes[index].title}</Title>
-          <Text>{constDeleteDscHTML(episodes[index].content)}</Text>
+          <h1 className="text-xl mb-4 font-bold text-left leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white ">
+            Épisode {episodes[index].title}
+          </h1>
+          <div className="flex justify-between items-center">
+            <div className="flex justify-start gap-1 items-center">
+              <img
+                className="mb-2 w-10"
+                src={episodes[index].logo}
+                alt="Image de l'épisode"
+              />
+              <p className="text-left text-xs font-bold text-gray-900 dark:text-white">
+                {collection.name}
+              </p>
+            </div>
+            <p className="text-left text-xs text-gray-900 dark:text-white">{getDate(episodes[index].publish_time)}</p>
+          </div>
 
           <div className="flex justify-center ">
             {index == 0 ? (
@@ -243,6 +263,9 @@ export default function Page() {
               </button>
             )}
           </div>
+
+          <h2 className="text-xl mb-4 font-bold text-left leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white ">Résumé</h2>
+          <p className="text-left text-xs text-gray-900 dark:text-white mb-4">{episodes[index].content}</p>
         </>
       )}
       <div className={loading ? "invisible" : ""}>
