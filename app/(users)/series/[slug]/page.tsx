@@ -157,7 +157,7 @@ export default function Page() {
             </Text>
           </div>
           <div className="flex justify-center">
-          <img className="w-full md:max-w-md" src={`/illustrations/${collection.image}`} />
+          <img className="w-full md:max-w-md" src={`${collection.image}`} />
           </div>
           <Accordion title="Épisodes" open={true}>
             {episodes.map((episode, index) => (
@@ -195,7 +195,7 @@ export default function Page() {
                 <div className="flex items-center w-full bg-white border border-darkbg-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-darkbg-100 dark:border-darkbg-700 dark:bg-darkbg-800 dark:hover:bg-darkbg-700">
                   <img
                     className="object-cover h-full w-1/3 rounded-none rounded-s-lg"
-                    src={`/illustrations/${character.image}`}
+                    src={`${character.image}`}
                     alt="Pochette épisode"
                   />
                   <div className="w-full flexflex-col justify-between p-4 leading-normal">
@@ -236,7 +236,7 @@ export default function Page() {
             <Accordion title="Document" open={false}>
               <a
                 className="text-primary underline hover:text-secondary"
-                href={`/documents/${collection.document}`}
+                href={`${collection.document}`}
                 target="_blank"
               >
                 Infos supplémentaires

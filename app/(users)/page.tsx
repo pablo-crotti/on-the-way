@@ -114,7 +114,7 @@ setLastDescr(min);
             slideIndex - i != 0 ? (slideIndex>i ? ("before") : ("after")) : "active"
           } flex justify-center`}
         >
-          <img src={`/illustrations/${collection.image}`} />
+          <img src={`${collection.image}`} />
           <h1 className="text-center dark:text-white my-3">{collection.name}</h1>
           <a
             className="flex justify-center"
@@ -229,7 +229,7 @@ setSlideIndex(slideIndex + 1);
               >
                 <img
                   className="max-w-60 h-auto "
-                  src={`/illustrations/${lastCollection.image}`}
+                  src={`${lastCollection.image}`}
                   alt=""
                 />
                 <h1 className="text-center dark:text-white mt-3">{lastCollection.name}</h1>

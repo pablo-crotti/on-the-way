@@ -46,7 +46,7 @@ export default function SeriesPage() {
                 >
                   <img
                     className="object-cover h-auto w-1/3 rounded-none rounded-s-lg"
-                    src={`/illustrations/${collection.image}`}
+                    src={`${collection.image}`}
                     alt=""
                   />
                   <div className="flex flex-col justify-between p-4 leading-normal w-2/3">
