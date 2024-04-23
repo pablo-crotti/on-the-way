@@ -74,6 +74,7 @@ Edit the `.env` file using your favorite text editor and replace placeholders wi
 - **NextAuth configuration :** Setup the `NEXTAUTH_SECRET` and `NEXTAUTH_URL` for handling authentication in your development environment.
 - **Vercel settings :** If you are deploying on Vercel, set up the Vercel specific environment variables. This includes details like `VERCEL_PROJECT_ID` and `VERCEL_TEAM_ID` for deployment configurations.
 - **Base URL :** Set the `BASE_URL` to your local or production URL, depending on where you are running your application.
+- **Amazon S3 :** Set the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION` and `AWS_BUCKET_NAME` for handling image and document upload to S3.
 
 ### Step 4 : Start the development server
 With your environment configured, you can start the development server :
