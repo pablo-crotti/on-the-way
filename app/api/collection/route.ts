@@ -39,97 +39,91 @@ export async function POST(request: NextRequest) {
     if (file) {
 
         const illustrationUrl = await uploadFile(file, imgName);
-        let documentUrl = null;
-        if (illustrationUrl) {
-            let documentName = "";
-            if (formData.get('document') && formData.get("documentName")) {
-                const document = formData.get('document') as File;
-                documentName = formData.get('documentName') as string;
+        return new NextResponse(JSON.stringify(illustrationUrl), { status: 500 });
+        
+        
+        // let documentUrl = null;
+        // if (illustrationUrl) {
+        //     let documentName = "";
+        //     if (formData.get('document') && formData.get("documentName")) {
+        //         const document = formData.get('document') as File;
+        //         documentName = formData.get('documentName') as string;
 
-                documentUrl = await uploadFile(document, documentName);
+        //         documentUrl = await uploadFile(document, documentName);
 
-                return new NextResponse(JSON.stringify(documentUrl), { status: 500 });
+                
 
-                //if (!documentUrl) {
-                    //return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
-                //}
+        //         if (!documentUrl) {
+        //             return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
+        //         }
 
-            }
+        //     }
 
-
-            // const response = await ft.fetch(file);
-            // const fileBuffer = await file.stream();
-
-
-
-
-
-
-        } else {
+        // } else {
             
-            return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
-        }
+        //     return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
+        // }
 
-        const max = await prisma.collection.findFirst({
-            select: {
-                number: true
-            },
-            orderBy: {
-                number: 'desc'
-            }
-        })
+        // const max = await prisma.collection.findFirst({
+        //     select: {
+        //         number: true
+        //     },
+        //     orderBy: {
+        //         number: 'desc'
+        //     }
+        // })
 
-        let number: number | undefined;
+        // let number: number | undefined;
 
-        if (max) {
-            number = max.number + 1;
-        } else {
-            number = 1;
-        }
+        // if (max) {
+        //     number = max.number + 1;
+        // } else {
+        //     number = 1;
+        // }
 
-        const upload = await prisma.collection.create({
-            data: {
-                name: formData.get('title') as string,
-                description: formData.get('description') as string,
-                image: typeof illustrationUrl === 'string' ? illustrationUrl : '',
-                number: number,
-                places: formData.getAll('places') as string[],
-                document: typeof documentUrl === 'string' ? documentUrl : undefined
-            }
-        });
+        // const upload = await prisma.collection.create({
+        //     data: {
+        //         name: formData.get('title') as string,
+        //         description: formData.get('description') as string,
+        //         image: typeof illustrationUrl === 'string' ? illustrationUrl : '',
+        //         number: number,
+        //         places: formData.getAll('places') as string[],
+        //         document: typeof documentUrl === 'string' ? documentUrl : undefined
+        //     }
+        // });
 
 
-        const uplodadId = upload.id;
-        const indexSum = formData.get('indexSum');
+        // const uplodadId = upload.id;
+        // const indexSum = formData.get('indexSum');
 
-        const indexSumValue = parseInt(indexSum as string);
+        // const indexSumValue = parseInt(indexSum as string);
 
-        for (let i = 0; i < indexSumValue; i++) {
+        // for (let i = 0; i < indexSumValue; i++) {
 
-            if (formData.get(`characterIllustration${i}`) as File) {
-                const illustration = formData.get(`characterIllustration${i}`) as File;
-                const illustrationName = formData.get(`characterIllustrationName${i}`) as string;
+        //     if (formData.get(`characterIllustration${i}`) as File) {
+        //         const illustration = formData.get(`characterIllustration${i}`) as File;
+        //         const illustrationName = formData.get(`characterIllustrationName${i}`) as string;
 
-                const illustrationUrl = await uploadFile(illustration, illustrationName);
+        //         const illustrationUrl = await uploadFile(illustration, illustrationName);
 
-                if (!illustrationUrl) {
-                    return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
-                } 
+        //         if (!illustrationUrl) {
+        //             return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
+        //         } 
 
-                const uploadCharacter = await prisma.character.create({
-                    data: {
-                        name: formData.get(`characterName${i}`) as string,
-                        description: formData.getAll(`characterDescription${i}`) as string[],
-                        image: typeof illustrationUrl === 'string' ? illustrationUrl : '',
-                        collectionId: uplodadId
-                    }
-                });
+        //         const uploadCharacter = await prisma.character.create({
+        //             data: {
+        //                 name: formData.get(`characterName${i}`) as string,
+        //                 description: formData.getAll(`characterDescription${i}`) as string[],
+        //                 image: typeof illustrationUrl === 'string' ? illustrationUrl : '',
+        //                 collectionId: uplodadId
+        //             }
+        //         });
 
-            }
+        //     }
 
-        }
+        // }
 
-        return new NextResponse(JSON.stringify(upload), { status: 200 });
+        // return new NextResponse(JSON.stringify(upload), { status: 200 });
     } else {
         return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
     }
