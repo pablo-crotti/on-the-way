@@ -103,6 +103,7 @@ export const fetchPodcasts = async () => {
             }
             return b.season_number - a.season_number;
         });
+
         return response.data.episodes;
     } else {
         console.error("Failed to fetch podcasts");
