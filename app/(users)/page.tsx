@@ -70,7 +70,6 @@ export default function Home() {
         setAllCollections(data);
         setNbCollection(data.length);
         setLastCollection(data[0]);
-        console.log(data);
         getLastEpisode(data[data.length - 1].number);
       })
     );
@@ -78,12 +77,6 @@ export default function Home() {
 
 const descr = "Noah n'a jamais connu sa grand-mère, une femme tourmentée par ses démons, disparue de sa vie depuis longtemps. Lorsque sa mère, Marie, lui annonce son décès, Noah est chargée de vider son appartement à Yverdon-les-bains. Plongée dans les souvenirs de ces deux femmes, elle découvre un secret profondément enfoui qui pourrait éclairer les zones d'ombre de leur histoire familiale. Entre révélations et quête d'identité, Noah doit affronter un passé douloureux pour comprendre et accepter ses racines."
 
-function getNbwords(text: string) {
-  console.log("text length")
-  console.log(text.length); 
-  const min = text.slice(0, 200) + "...";
-setLastDescr(min);
-}
 
 
   function getMonthYear(date: string) {
