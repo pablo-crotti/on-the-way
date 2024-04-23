@@ -3,6 +3,36 @@ import fs from 'fs';
 import path from 'path';
 import prisma from "@/lib/prisma";
 
+import AWS from 'aws-sdk';
+import { buffer } from 'stream/consumers';
+import * as ft from 'node-fetch';
+import fetch from 'node-fetch';
+
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_DEFAULT_REGION,
+});
+
+const uploadFile = async (file: File, imgName: String) => {
+    const fileBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(fileBuffer);
+
+    const params: AWS.S3.PutObjectRequest = {
+        Bucket: process.env.AWS_BUCKET_NAME || '',
+        Key: `uploads/${imgName}`,
+        Body: buffer,
+        ContentType: file.type,
+    };
+
+    try {
+        const data = await s3.upload(params).promise();
+        return (data.Location);
+    } catch (err) {
+        return null;
+    }
+}
+
 export async function POST(request: NextRequest) {
     const formData = await request.formData();
 
@@ -10,99 +40,100 @@ export async function POST(request: NextRequest) {
     const imgName = formData.get('imgName') as string;
     let uploadPath = '';
     if (file) {
-        const fileBuffer = await file.arrayBuffer();
-        uploadPath = path.join(process.cwd(), 'public', 'illustrations', imgName);
-        
 
-        try {
-            await fs.promises.writeFile(uploadPath, Buffer.from(fileBuffer));
-            uploadPath = ''
+        const illustrationUrl = await uploadFile(file, imgName);
+        let documentUrl = null;
+        if (illustrationUrl) {
             let documentName = "";
-            if(formData.get('document') && formData.get("documentName")) {
+            if (formData.get('document') && formData.get("documentName")) {
                 const document = formData.get('document') as File;
                 documentName = formData.get('documentName') as string;
-                const documentBuffer = await document.arrayBuffer();
-                const documentPath = path.join(process.cwd(), 'public', 'documents', documentName);
 
-                try {
-                    await fs.promises.writeFile(documentPath, Buffer.from(documentBuffer));
-                } catch (err) {
-                    console.error('Erreur lors de l\'écriture du fichier :', err);
+                documentUrl = await uploadFile(document, documentName);
+
+                if (!documentUrl) {
                     return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
                 }
-            } 
 
-            const max = await prisma.collection.findFirst({
-                select: {
-                    number: true
-                },
-                orderBy: {
-                    number: 'desc'
-                }
-            })
-
-            let number: number | undefined;
-
-            if (max) {
-                number = max.number + 1;
-            } else {
-                number = 1;
-            }
-            
-            const upload = await prisma.collection.create({
-                data: {
-                    name: formData.get('title') as string,
-                    description: formData.get('description') as string,
-                    image: imgName,
-                    number: number,
-                    places: formData.getAll('places') as string[],
-                    document: documentName
-                }
-            });
-
-            const uplodadId = upload.id;
-            const indexSum = formData.get('indexSum');
-
-
-
-            const indexSumValue = parseInt(indexSum as string);
-
-            for (let i = 0; i < indexSumValue; i++) {
-                uploadPath = '';
-                if (formData.get(`characterIllustration${i}`) as File) {
-                    const illustration = formData.get(`characterIllustration${i}`) as File;
-                    const fileBuffer = await illustration.arrayBuffer();
-                    uploadPath = path.join(process.cwd(), 'public', 'illustrations', illustration.name);
-                    try {
-                        await fs.promises.writeFile(uploadPath, Buffer.from(fileBuffer));
-                    } catch (err) {
-                        console.error('Erreur lors de l\'écriture du fichier :', err);
-                        return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
-                    }
-
-                    const uploadCharacter = await prisma.character.create({
-                        data: {
-                            name: formData.get(`characterName${i}`) as string,
-                            description: formData.getAll(`characterDescription${i}`) as string[],
-                            image: illustration.name,
-                            collectionId: uplodadId
-                        }
-                    });
-                }
             }
 
-            return new NextResponse(JSON.stringify(upload), { status: 200 });
 
-        } catch (err) {
-            console.error('Erreur lors de l\'écriture du fichier :', err);
+            // const response = await ft.fetch(file);
+            // const fileBuffer = await file.stream();
+
+
+
+
+
+
+        } else {
             return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
         }
+
+        const max = await prisma.collection.findFirst({
+            select: {
+                number: true
+            },
+            orderBy: {
+                number: 'desc'
+            }
+        })
+
+        let number: number | undefined;
+
+        if (max) {
+            number = max.number + 1;
+        } else {
+            number = 1;
+        }
+
+        const upload = await prisma.collection.create({
+            data: {
+                name: formData.get('title') as string,
+                description: formData.get('description') as string,
+                image: illustrationUrl,
+                number: number,
+                places: formData.getAll('places') as string[],
+                document: documentUrl || undefined
+            }
+        });
+
+
+        const uplodadId = upload.id;
+        const indexSum = formData.get('indexSum');
+
+        const indexSumValue = parseInt(indexSum as string);
+
+        for (let i = 0; i < indexSumValue; i++) {
+
+            if (formData.get(`characterIllustration${i}`) as File) {
+                const illustration = formData.get(`characterIllustration${i}`) as File;
+                const illustrationName = formData.get(`characterIllustrationName${i}`) as string;
+
+                const illustrationUrl = await uploadFile(illustration, illustrationName);
+
+                if (!illustrationUrl) {
+                    return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
+                } 
+
+                const uploadCharacter = await prisma.character.create({
+                    data: {
+                        name: formData.get(`characterName${i}`) as string,
+                        description: formData.getAll(`characterDescription${i}`) as string[],
+                        image: illustrationUrl,
+                        collectionId: uplodadId
+                    }
+                });
+
+            }
+
+        }
+
+        return new NextResponse(JSON.stringify(upload), { status: 200 });
     } else {
-        console.error('Aucun fichier trouvé dans la requête.');
-        return new NextResponse('Aucun fichier trouvé dans la requête.', { status: 400 });
+        return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
     }
 }
-
 export async function GET(request: NextRequest) {
     const params = request.nextUrl.searchParams;
     const number = params.get('number');
