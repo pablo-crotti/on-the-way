@@ -4,9 +4,6 @@ import path from 'path';
 import prisma from "@/lib/prisma";
 
 import AWS from 'aws-sdk';
-import { buffer } from 'stream/consumers';
-import * as ft from 'node-fetch';
-import fetch from 'node-fetch';
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -29,7 +26,7 @@ const uploadFile = async (file: File, imgName: String) => {
         const data = await s3.upload(params).promise();
         return (data.Location);
     } catch (err) {
-        return null;
+        return new NextResponse(JSON.stringify(err), { status: 505 });
     }
 }
 
@@ -67,6 +64,7 @@ export async function POST(request: NextRequest) {
 
 
         } else {
+            
             return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
         }
 
@@ -91,10 +89,10 @@ export async function POST(request: NextRequest) {
             data: {
                 name: formData.get('title') as string,
                 description: formData.get('description') as string,
-                image: illustrationUrl,
+                image: typeof illustrationUrl === 'string' ? illustrationUrl : '',
                 number: number,
                 places: formData.getAll('places') as string[],
-                document: documentUrl || undefined
+                document: typeof documentUrl === 'string' ? documentUrl : undefined
             }
         });
 
@@ -120,7 +118,7 @@ export async function POST(request: NextRequest) {
                     data: {
                         name: formData.get(`characterName${i}`) as string,
                         description: formData.getAll(`characterDescription${i}`) as string[],
-                        image: illustrationUrl,
+                        image: typeof illustrationUrl === 'string' ? illustrationUrl : '',
                         collectionId: uplodadId
                     }
                 });
