@@ -115,7 +115,7 @@ setLastDescr(min);
           } flex justify-center`}
         >
           <img src={`/illustrations/${collection.image}`} />
-          <h1 className="text-center my-3">{collection.name}</h1>
+          <h1 className="text-center dark:text-white my-3">{collection.name}</h1>
           <a
             className="flex justify-center"
             href={`/series/${allCollections[allCollections.length - 1].id}`}
@@ -167,7 +167,7 @@ setSlideIndex(slideIndex + 1);
                 className="md:w-1/2"
               />
               <div className="md:flex md:items-center md:w-1/2">
-                <p className="text-base text-gray-900 dark:text-white">
+                <p className="text-base text-darkbg-900 dark:text-white">
                   Explorez notre site web dédié au podcast On the Way, portail
                   vers des aventures épiques! Chaque épisode inédit de séries
                   est à écouter lors de vos trajets et vous embarque dans un
@@ -184,14 +184,14 @@ setSlideIndex(slideIndex + 1);
             </div>
             <div className="p-4">
               <Title type="h2">Les ombres du passé</Title>
-              <p className="text-base text-gray-900 dark:text-white">
+              <p className="text-base text-darkbg-900 dark:text-white">
                 Venez découvrir le nouvel épisode de notre série Les ombres du
                 passé !
               </p>
               <div className="mb-4 flex justify-center pt-6 ">
                 <a
                   href={`/series/${lastCollection.id}/episodes?id=${lastEpisode.episode_number}`}
-                  className="flex items-center w-full bg-white border border-gray-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  className="flex items-center w-full bg-white border border-darkbg-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-darkbg-100 dark:border-darkbg-700 dark:bg-darkbg-800 dark:hover:bg-darkbg-700"
                 >
                   <img
                     className="object-cover h-full w-1/3 rounded-none rounded-s-lg"
@@ -199,15 +199,15 @@ setSlideIndex(slideIndex + 1);
                     alt="Pochette épisode"
                   />
                   <div className="w-full flexflex-col justify-between p-4 leading-normal">
-                    <h5 className="mb-2 text-l text-left font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h5 className="mb-2 text-l text-left font-bold tracking-tight text-darkbg-900 dark:text-white">
                       {lastEpisode.title}
                     </h5>
                     <div className="w-full flex justify-between">
-                      <p className="text-gray-400">
+                      <p className="text-darkbg-400">
                         Série {lastEpisode.season_number}, Épisode{" "}
                         {lastEpisode.episode_number}
                       </p>
-                      <p className="text-right text-gray-400">
+                      <p className="text-right text-darkbg-400">
                         {secondsToMinutes(lastEpisode.duration)}min
                       </p>
                     </div>
@@ -221,7 +221,7 @@ setSlideIndex(slideIndex + 1);
               La série du moment
             </div>
             <Title type="h2">{lastCollection.name}</Title>
-            <p className="text-base text-gray-900 dark:text-white">{ expandText ? (lastCollection.description.slice(0, 300)) : (lastCollection.description)  } {lastCollection.description.length > 300 ? (<a className="text-[#1C8D70] cursor-pointer" onClick={()=>setExpandText(!expandText)}>{expandText ? ("...Voir plus") : ("Voir moins")}</a>) : ("")} </p>
+            <p className="text-base text-darkbg-900 dark:text-white">{ expandText ? (lastCollection.description.slice(0, 300)) : (lastCollection.description)  } {lastCollection.description.length > 300 ? (<a className="text-[#1C8D70] cursor-pointer" onClick={()=>setExpandText(!expandText)}>{expandText ? ("...Voir plus") : ("Voir moins")}</a>) : ("")} </p>
             <div className="flex justify-center mt-7">
               <a
                 href={`/series/${lastCollection.id}`}   
@@ -232,15 +232,15 @@ setSlideIndex(slideIndex + 1);
                   src={`/illustrations/${lastCollection.image}`}
                   alt=""
                 />
-                <h1 className="text-center mt-3">{lastCollection.name}</h1>
+                <h1 className="text-center dark:text-white mt-3">{lastCollection.name}</h1>
                 <p className="text-center text-[#1C8D70] text-sm">{`${lastEpisode.episode_number} épisodes`}</p>
-                <p className="text-center text-gray-400 text-sm">
+                <p className="text-center text-darkbg-400 text-sm">
                   Réalisé par On the way
                 </p>
-                <p className="text-center text-gray-400 text-sm">
+                <p className="text-center text-darkbg-400 text-sm">
                   {getMonthYear(lastCollection.createdAt)}
                 </p>
-                <p className="text-center mt-6  ">
+                <p className="text-center dark:text-white mt-6  ">
                   Retrouvez-la tous les lundis à 7h30 !
                 </p>
               </a>
@@ -286,7 +286,7 @@ setSlideIndex(slideIndex + 1);
 
           <div className="my-8 p-4 flex justify-center flex-col md:px-60 xl:px-80 2xl:px-96">
             <Title type="h2">À propos de nous </Title>
-            <p className="text-base text-gray-900 dark:text-white">
+            <p className="text-base text-darkbg-900 dark:text-white">
               Vous vous trouvez sur le site dédié au podcast On The Way qui a
               pour objectif de vous faire découvrir la ville
               d'Yverdon-les-Bains. Venez donc découvrir les lieux de la ville,
@@ -299,8 +299,8 @@ setSlideIndex(slideIndex + 1);
                 src="/logo/pochette.jpg"
               ></img>
             </div>
-            <h1 className="text-center mt-3">On the way</h1>
-            <p className="text-center text-gray-400 text-sm">
+            <h1 className="text-center dark:text-white mt-3">On the way</h1>
+            <p className="text-center text-darkbg-400 text-sm">
               Chaque lundi à 7h30
             </p>
           </div>
@@ -314,7 +314,7 @@ setSlideIndex(slideIndex + 1);
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <a href="#" target="_blank">
+                <a href="https://open.spotify.com/show/5KltPDMmojkE2Xmb3PX6y4" target="_blank">
                 <path
                   d="M28.3471 0.251278C16.3525 1.80183 6.14667 9.95439 1.92317 21.3388C0.507865 25.105 0.0261404 28.0193 0 32.5626C0 39.5382 1.68417 45.0978 5.60893 51.0011C7.21468 53.4073 11.0872 57.3901 13.5182 59.1014C17.1255 61.6383 21.883 63.6447 26.719 64.6609C28.8027 65.113 35.8568 65.113 38.0488 64.6609C44.9162 63.2972 50.6596 60.3044 55.335 55.6789C62.3368 48.7332 65.862 38.9516 64.8201 29.3307C63.9911 21.7124 60.7609 14.9236 55.4432 9.58076C48.3331 2.49678 38.2094 -1.00411 28.3471 0.251278ZM38.2094 16.5003C45.4502 17.8641 51.7799 20.6962 57.232 25.0265C58.9684 26.4164 59.4502 27.6718 58.834 29.1439C58.3261 30.3731 57.3403 31.0382 56.0034 31.012C55.1221 30.9859 54.5321 30.6646 52.4483 29.114C48.363 26.0166 43.5532 23.8757 37.8883 22.6204C35.6962 22.1421 34.3594 22.0338 29.7923 22.0338C23.5112 22.0076 20.6806 22.4335 15.1762 24.2531C12.663 25.0788 11.89 25.2395 11.1133 25.0527C9.78015 24.7612 8.95113 23.6628 8.95113 22.1944C8.95113 20.3487 9.993 19.4931 13.6526 18.3199C16.7782 17.3036 20.8412 16.4219 24.1796 15.9922C27.4135 15.6186 34.8411 15.8876 38.2094 16.5003ZM35.1361 27.9147C39.8899 28.7404 44.4607 30.6123 48.7364 33.4705C52.101 35.716 52.635 36.3026 52.635 37.7747C52.635 39.1384 51.8359 40.1809 50.6073 40.4461C49.6962 40.6591 48.897 40.2593 45.9282 38.2006C43.2059 36.3026 39.4903 34.569 36.2825 33.7134C33.9075 33.0446 33.2391 32.9923 28.7243 32.9923C23.3805 32.9923 21.054 33.3659 17.3683 34.8342C14.3733 36.0373 12.5585 35.4769 12.2373 33.2052C12.0245 31.5725 12.9058 30.6907 15.8447 29.6221C22.0175 27.3766 28.7504 26.79 35.1361 27.9147ZM34.7627 40.689C38.7173 41.5147 42.5375 43.2782 45.8498 45.8189C46.705 46.4615 47.4257 47.2611 47.534 47.6347C47.7468 48.4903 47.3211 49.5589 46.6527 49.9064C45.6892 50.4407 44.8864 50.2015 43.2843 48.9985C41.04 47.2873 37.2983 45.4976 34.6021 44.8549C30.3263 43.8424 24.0751 44.2945 20.3594 45.8974C18.7313 46.5923 18.2757 46.5923 17.3944 45.8974C16.8604 45.4714 16.6998 45.1239 16.6998 44.2945C16.6998 43.3866 16.8343 43.1736 17.5811 42.7178C18.7836 41.9444 22.2826 40.902 25.1169 40.4461C27.8953 39.994 31.9843 40.0987 34.7627 40.689Z"
                   fill="#1C8D70"

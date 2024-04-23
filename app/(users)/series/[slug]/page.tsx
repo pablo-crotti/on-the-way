@@ -157,7 +157,7 @@ export default function Page() {
             </Text>
           </div>
           <div className="flex justify-center">
-          <img className="max-w-screen-sm" src={`/illustrations/${collection.image}`} />
+          <img className="w-full md:max-w-md" src={`/illustrations/${collection.image}`} />
           </div>
           <Accordion title="Épisodes" open={true}>
             {episodes.map((episode, index) => (

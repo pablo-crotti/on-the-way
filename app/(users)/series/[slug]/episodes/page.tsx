@@ -129,7 +129,7 @@ export default function Page() {
           />
         </div>
       ) : (
-        <>
+        <div className="p-4">
           <div className="flex justify-center">
             <img
               className="mb-2 w-full max-w-screen-sm"
@@ -137,10 +137,10 @@ export default function Page() {
               alt="Image de l'épisode"
             />
           </div>
-          <h1 className="text-xl mb-4 font-bold text-left leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white ">
+          <h1 className="text-xl mb-4 font-bold max-w-2xl m-auto text-left leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white ">
             Épisode {episodes[index].title}
           </h1>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center max-w-2xl m-auto">
             <div className="flex justify-start gap-1 items-center">
               <img
                 className="mb-2 w-10"
@@ -264,9 +264,9 @@ export default function Page() {
             )}
           </div>
 
-          <h2 className="text-xl mb-4 font-bold text-left leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white ">Résumé</h2>
-          <p className="text-left text-xs text-gray-900 dark:text-white mb-4">{episodes[index].content}</p>
-        </>
+          <h2 className="text-xl max-w-xl m-auto mb-4 font-bold text-left leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white ">Résumé</h2>
+          <p className="text-left max-w-xl m-auto text-xs text-gray-900 dark:text-white mb-4">{episodes[index].content}</p>
+        </div>
       )}
       <div className={loading ? "invisible" : ""}>
         <AudioPlayer
