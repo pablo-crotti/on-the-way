@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+  /* Fonts */
+  font-family: DINosaur, sans-serif;
   /* Colors */
   --black: #000000;
   --gray: #313131;
