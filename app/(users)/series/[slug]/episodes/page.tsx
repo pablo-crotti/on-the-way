@@ -62,6 +62,7 @@ export default function Page() {
     fetch(`/api/collection?id=${slug}`).then((res) =>
       res.json().then((data) => {
         setCollection(data);
+        console.log(data);
         fetchCollectionPodcast(data.number).then((episodesData) => {
           episodesData.forEach((episode: any, index: number) => {
             if (episode.status === "draft") {
@@ -138,19 +139,23 @@ export default function Page() {
             />
           </div>
           <h1 className="text-xl mb-4 font-bold max-w-2xl m-auto text-left leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white ">
-            Épisode {episodes[index].title}
+            {episodes[index].title}
           </h1>
           <div className="flex justify-between items-center max-w-2xl m-auto">
+            <a href={`/series/${collection.id}`}>
             <div className="flex justify-start gap-1 items-center">
+              
               <img
                 className="mb-2 w-10"
-                src={episodes[index].logo}
+                src={collection.image}
                 alt="Image de l'épisode"
               />
               <p className="text-left text-xs font-bold text-gray-900 dark:text-white">
                 {collection.name}
               </p>
+
             </div>
+                          </a>
             <p className="text-left text-xs text-gray-900 dark:text-white">{getDate(episodes[index].publish_time)}</p>
           </div>
 
