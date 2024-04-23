@@ -147,10 +147,10 @@ export default function Page() {
       ) : (
         <div className="p-4">
           <Title type="h1">{collection.name}</Title>
-          <div className="mb-6">
+          <div className="mb-6 max-w-2xl m-auto">
             <Text>{collection.description}</Text>
           </div>
-          <div className="mb-6">
+          <div className="mb-6 max-w-2xl m-auto">
             <Text>
               La série sera composée de 6 épisodes et chaque épisode sortira le
               lundi aux alentours de 7h30. Ne ratez donc aucun épisode !!
