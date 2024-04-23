@@ -4,8 +4,6 @@ import { signOut } from "next-auth/react";
 
 export const Nav = () => {
   const url = usePathname();
-
-  // console.log(url);
   return (
     <div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
@@ -56,7 +54,8 @@ export const Nav = () => {
                 <a
                   href="/series"
                   className={
-                    url === "/series"
+                    url === "/series" ||
+                    url.split("/").slice(0, 2).join("/") === "/series"
                       ? "block py-2 px-3 text-white bg-primary rounded md:bg-transparent md:text-primary md:p-0 dark:text-white md:dark:text-primary"
                       : "block py-2 px-3 text-darkbg-700 rounded hover:bg-darkbg-100 md:hover:bg-transparent md:border-0 md:hover:text-primary md:p-0 dark:text-white md:dark:hover:text-primary dark:hover:bg-darkbg-700 dark:hover:text-white md:dark:hover:bg-transparent"
                   }
