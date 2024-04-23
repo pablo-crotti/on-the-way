@@ -160,6 +160,7 @@ export default function NewCollectionPage() {
           
           setLoading(false)
         } else {
+          console.error(response)
           console.error("Erreur lors du téléchargement du fichier.");
           setLoading(false)
         }
