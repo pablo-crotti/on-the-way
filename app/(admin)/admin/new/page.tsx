@@ -10,12 +10,14 @@ import {
 } from "@/app/actions";
 
 export default function NewEpisodePage() {
+  const [loading, setLoading] = useState(true);
   const generateId = () => {
     return Math.random().toString(36).substr(2, 9);
   };
 
   const handelSubmit = async (event: any) => {
     event.preventDefault();
+    setLoading(true);
 
     const imageExtension = event.target.illustration.files[0].name
       .split(".")
@@ -104,6 +106,9 @@ export default function NewEpisodePage() {
       const simpleEpisode = Object.assign({}, episode);
 
       publishPodcast(simpleEpisode);
+      setLoading(false);
+
+      event.target.reset();
     });
   };
 
@@ -113,6 +118,7 @@ export default function NewEpisodePage() {
     fetch(`/api/collection?all=true}`).then((res) =>
       res.json().then((data) => {
         setCollections(data);
+        setLoading(false);
       })
     );
   };
@@ -120,121 +126,136 @@ export default function NewEpisodePage() {
     getCollections();
   }, []);
   return (
-    <div className="w-full h-full flex-col justify-center align-center p-4">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <>
+      {loading ? (
+        <div className="w-full min-h-screen flex justify-center items-center">
+          <img
+            className="w-64 h-64"
+            src="/loader/loader.gif"
+            alt="Chargement..."
+          />
+        </div>
+      ) : (
+        <div className="w-full h-full flex-col justify-center align-center p-4">
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
-      <h1 className="text-xl font-bold text-center leading-tight tracking-tight text-darkbg-900 md:text-2xl dark:text-white  mb-10">
-        Publier un épisode
-      </h1>
-      <div className="flex justify-center">
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-2xl xl:p-0 dark:bg-darkbg-800 dark:border-darkbg-700">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <form className="space-y-4 md:space-y-6" onSubmit={handelSubmit}>
-              <div>
-                <label
-                  htmlFor="title"
-                  className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
+          <h1 className="text-xl font-bold text-center leading-tight tracking-tight text-darkbg-900 md:text-2xl dark:text-white  mb-10">
+            Publier un épisode
+          </h1>
+          <div className="flex justify-center">
+            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-2xl xl:p-0 dark:bg-darkbg-800 dark:border-darkbg-700">
+              <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <form
+                  className="space-y-4 md:space-y-6"
+                  onSubmit={handelSubmit}
                 >
-                  Titre du podcast *
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  id="title"
-                  className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                  placeholder="Episode 1: Introduction"
-                  required
-                />
-              </div>
+                  <div>
+                    <label
+                      htmlFor="title"
+                      className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
+                    >
+                      Titre du podcast *
+                    </label>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                      placeholder="Episode 1: Introduction"
+                      required
+                    />
+                  </div>
 
-              <div>
-                <label
-                  htmlFor="description"
-                  className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
-                >
-                  Description du podcast *
-                </label>
-                <textarea
-                  id="description"
-                  name="description"
-                  rows={4}
-                  className="block p-2.5 w-full text-sm text-darkbg-900 bg-darkbg-50 rounded-lg border border-darkbg-300 focus:ring-primary focus:border-primary dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
-                  placeholder="Découvret l'histoire insolite de..."
-                  required
-                ></textarea>
-              </div>
+                  <div>
+                    <label
+                      htmlFor="description"
+                      className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
+                    >
+                      Description du podcast *
+                    </label>
+                    <textarea
+                      id="description"
+                      name="description"
+                      rows={4}
+                      className="block p-2.5 w-full text-sm text-darkbg-900 bg-darkbg-50 rounded-lg border border-darkbg-300 focus:ring-primary focus:border-primary dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                      placeholder="Découvret l'histoire insolite de..."
+                      required
+                    ></textarea>
+                  </div>
 
-              <div>
-                <label
-                  htmlFor="illustration"
-                  className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
-                >
-                  Illustration *
-                </label>
-                <input
-                  className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
-                  id="illustration"
-                  type="file"
-                  required
-                />
+                  <div>
+                    <label
+                      htmlFor="illustration"
+                      className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
+                    >
+                      Illustration *
+                    </label>
+                    <input
+                      className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
+                      id="illustration"
+                      type="file"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="audio"
+                      className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
+                    >
+                      Épisode *
+                    </label>
+                    <input
+                      className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
+                      id="audio"
+                      type="file"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="collection"
+                      className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
+                    >
+                      Choisir une saison *
+                    </label>
+                    <select
+                      id="collection"
+                      name="collection"
+                      className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      required
+                    >
+                      {collections &&
+                        Array.isArray(collections) &&
+                        collections.map((collection: any) => (
+                          <option key={collection.id} value={collection.number}>
+                            Série no. {collection.number} | {collection.name}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="inline-flex items-center mb-5 cursor-pointer">
+                      <input
+                        name="publish"
+                        type="checkbox"
+                        value=""
+                        className="sr-only peer"
+                      />
+                      <div className="relative w-11 h-6 bg-darkbg-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-darkbg-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-darkbg-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-darkbg-600 peer-checked:bg-primary"></div>
+                      <span className="ms-3 text-sm font-medium text-darkbg-900 dark:text-darkbg-300">
+                        Publier tout de suite
+                      </span>
+                    </label>
+                  </div>
+                  <div className="flex justify-end">
+                    <PrimaryButton type="submit">Publier</PrimaryButton>
+                  </div>
+                </form>
               </div>
-              <div>
-                <label
-                  htmlFor="audio"
-                  className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
-                >
-                  Épisode *
-                </label>
-                <input
-                  className="block w-full text-sm text-darkbg-900 border border-darkbg-300 rounded-lg cursor-pointer bg-darkbg-50 dark:text-darkbg-400 focus:outline-none dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400"
-                  id="audio"
-                  type="file"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="collection"
-                  className="block mb-2 text-sm font-medium text-darkbg-900 dark:text-white"
-                >
-                  Choisir une saison *
-                </label>
-                <select
-                  id="collection"
-                  name="collection"
-                  className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required
-                >
-                  {collections &&
-                    Array.isArray(collections) &&
-                    collections.map((collection: any) => (
-                      <option key={collection.id} value={collection.number}>
-                        Série no. {collection.number} | {collection.name}
-                      </option>
-                    ))}
-                </select>
-              </div>
-              <div>
-                <label className="inline-flex items-center mb-5 cursor-pointer">
-                  <input
-                    name="publish"
-                    type="checkbox"
-                    value=""
-                    className="sr-only peer"
-                  />
-                  <div className="relative w-11 h-6 bg-darkbg-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer dark:bg-darkbg-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-darkbg-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-darkbg-600 peer-checked:bg-primary"></div>
-                  <span className="ms-3 text-sm font-medium text-darkbg-900 dark:text-darkbg-300">
-                    Publier tout de suite
-                  </span>
-                </label>
-              </div>
-              <div className="flex justify-end">
-                <PrimaryButton type="submit">Publier</PrimaryButton>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
