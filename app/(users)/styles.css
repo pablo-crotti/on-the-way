@@ -17,7 +17,7 @@
 
 @media (min-width: 1150px) {
   .carousel-container {
-    padding-bottom: 60%;
+    padding-bottom: 45%;
     width: 70%;
   }
 }
@@ -34,10 +34,10 @@ ul {
 }
 
 .animate {
-  -webkit-transition-duration: 0.5s;
-  -moz-transition-duration: 0.5s;
-  -o-transition-duration: 0.5s;
-  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.8s;
+  -moz-transition-duration: 0.8s;
+  -o-transition-duration: 0.8s;
+  transition-duration: 0.8s;
   -webkit-transition-property: -webkit-transform;
   -moz-transition-property: -moz-transform;
   -o-transition-property: -o-transform;
@@ -57,13 +57,11 @@ ul {
 .slide.before {
   transform: translateX(-500px);
   visibility: hidden;
-  sdisplay: none;
 }
 
 .slide.after {
   transform: translateX(500px);
   visibility: hidden;
-  sdisplay: none;
 }
 
 #controls {
