@@ -26,7 +26,7 @@ const uploadFile = async (file: File, imgName: String) => {
         const data = await s3.upload(params).promise();
         return (data.Location);
     } catch (err) {
-        return new NextResponse(JSON.stringify(err), { status: 505 });
+        return err;
     }
 }
 
@@ -48,9 +48,11 @@ export async function POST(request: NextRequest) {
 
                 documentUrl = await uploadFile(document, documentName);
 
-                if (!documentUrl) {
-                    return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
-                }
+                return new NextResponse(JSON.stringify(documentUrl), { status: 500 });
+
+                //if (!documentUrl) {
+                    //return new NextResponse('Une erreur est survenue lors de l\'écriture du fichier', { status: 500 });
+                //}
 
             }
 
