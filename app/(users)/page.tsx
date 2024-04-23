@@ -221,7 +221,7 @@ setSlideIndex(slideIndex + 1);
               La série du moment
             </div>
             <Title type="h2">{lastCollection.name}</Title>
-            <p className="text-base text-gray-900 dark:text-white">{ expandText ? (lastCollection.description.slice(0, 300)) : (lastCollection.description)  } {lastCollection.description.length > 300 ? (<a className="text-[#1C8D70] pointer" onClick={()=>setExpandText(!expandText)}>{expandText ? ("...Voir plus") : ("Voir moins")}</a>) : ("")} </p>
+            <p className="text-base text-gray-900 dark:text-white">{ expandText ? (lastCollection.description.slice(0, 300)) : (lastCollection.description)  } {lastCollection.description.length > 300 ? (<a className="text-[#1C8D70] cursor-pointer" onClick={()=>setExpandText(!expandText)}>{expandText ? ("...Voir plus") : ("Voir moins")}</a>) : ("")} </p>
             <div className="flex justify-center mt-7">
               <a
                 href={`/series/${lastCollection.id}`}   
