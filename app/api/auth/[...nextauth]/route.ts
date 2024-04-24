@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt";
 import prisma from "@/lib/prisma";
 
-const handler = NextAuth ({
+const handler = NextAuth({
   session: {
     strategy: "jwt",
   },
@@ -34,7 +34,7 @@ const handler = NextAuth ({
 
         const isPasswordValid = await compare(
           credentials.password,
-          user.password || "" 
+          user.password || ""
         );
 
 

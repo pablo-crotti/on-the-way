@@ -2,6 +2,11 @@ import prisma from "@/lib/prisma";
 import { Category } from "@prisma/client";
 import { NextRequest, NextResponse } from 'next/server';
 
+/**
+ * Create a new message.
+ * @param {NextRequest} request - The request object.
+ * @returns {Promise<NextResponse>} A promise that resolves to the response.
+ */
 export async function POST(request: NextRequest) {
     const formData = await request.formData();
     const email = formData.get('email');
@@ -27,6 +32,11 @@ export async function POST(request: NextRequest) {
     }
 }
 
+/**
+ * Retrieve messages.
+ * @param {NextRequest} request - The request object.
+ * @returns {Promise<NextResponse>} A promise that resolves to the response.
+ */
 export async function GET(request: NextRequest) {
     const params = request.nextUrl.searchParams;
     const total = params.get('total');
@@ -51,6 +61,11 @@ export async function GET(request: NextRequest) {
     }
 }
 
+/**
+ * Update a message's favorite status.
+ * @param {NextRequest} request - The request object.
+ * @returns {Promise<NextResponse>} A promise that resolves to the response.
+ */
 export async function PUT(request: NextRequest) {
     const formData = await request.formData();
     const id = formData.get('id');
@@ -83,6 +98,11 @@ export async function PUT(request: NextRequest) {
     }
 }
 
+/**
+ * Delete one or more messages.
+ * @param {NextRequest} request - The request object.
+ * @returns {Promise<NextResponse>} A promise that resolves to the response.
+ */
 export async function DELETE(request: NextRequest) {
     const idsToDelete = await request.json();
     if (!idsToDelete) {
