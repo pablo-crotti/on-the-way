@@ -8,6 +8,18 @@ import { Text } from "@/components/text";
 import { Foot } from "@/components/foot";
 import { AudioPlayer } from "@/components/audioplayer/AudioPlayer";
 
+/**
+ * `Page` component displays a specific podcast collection and its episodes based on the URL slug or search parameters.
+ * It fetches and filters collection data including published episodes and handles initial renderings and state updates
+ * based on user interactions or data fetching. This component uses models for collections and episodes to maintain a
+ * predictable structure of state.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Page />
+ * )
+ */
 export default function Page() {
   const collectionModel = {
     id: "",
@@ -58,11 +70,14 @@ export default function Page() {
     return str.replace(/<[^>]*>/g, "");
   };
 
+  /**
+   * Fetches collection and episodes data from the server based on the identified slug.
+   * Filters out episodes that are still drafts and sets the filtered episodes in the state.
+   */
   const getCollection = () => {
     fetch(`/api/collection?id=${slug}`).then((res) =>
       res.json().then((data) => {
         setCollection(data);
-        console.log(data);
         fetchCollectionPodcast(data.number).then((episodesData) => {
           episodesData.forEach((episode: any, index: number) => {
             if (episode.status === "draft") {
@@ -96,6 +111,7 @@ export default function Page() {
     );
   };
 
+  // Handling initial load and optional URL search parameters to set episode index
   function handleLoaded() {
     if (firstLoad) {
       setFirstLoad(false);
@@ -106,6 +122,12 @@ export default function Page() {
     setLoading(false);
   }
 
+  /**
+   * Converts a UNIX timestamp to a human-readable date format.
+   *
+   * @param {number} date - The UNIX timestamp to convert.
+   * @returns {string} The formatted date string.
+   */
   const getDate = (date: number) => {
     const newDate = new Date(date * 1000);
     return newDate.toLocaleDateString("fr-FR", {
@@ -113,8 +135,9 @@ export default function Page() {
       month: "long",
       day: "numeric",
     });
-  }
+  };
 
+  // Fetching data on component mount
   useEffect(() => {
     getCollection();
   }, []);
@@ -143,20 +166,20 @@ export default function Page() {
           </h1>
           <div className="flex justify-between items-center max-w-2xl m-auto">
             <a href={`/series/${collection.id}`}>
-            <div className="flex justify-start gap-1 items-center">
-              
-              <img
-                className="mb-2 w-10"
-                src={collection.image}
-                alt="Image de l'épisode"
-              />
-              <p className="text-left text-xs font-bold text-gray-900 dark:text-white">
-                {collection.name}
-              </p>
-
-            </div>
-                          </a>
-            <p className="text-left text-xs text-gray-900 dark:text-white">{getDate(episodes[index].publish_time)}</p>
+              <div className="flex justify-start gap-1 items-center">
+                <img
+                  className="mb-2 w-10"
+                  src={collection.image}
+                  alt="Image de l'épisode"
+                />
+                <p className="text-left text-xs font-bold text-gray-900 dark:text-white">
+                  {collection.name}
+                </p>
+              </div>
+            </a>
+            <p className="text-left text-xs text-gray-900 dark:text-white">
+              {getDate(episodes[index].publish_time)}
+            </p>
           </div>
 
           <div className="flex justify-center ">
@@ -269,8 +292,12 @@ export default function Page() {
             )}
           </div>
 
-          <h2 className="text-xl max-w-xl m-auto mb-4 font-bold text-left leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white ">Résumé</h2>
-          <p className="text-left max-w-xl m-auto text-xs text-gray-900 dark:text-white mb-4">{episodes[index].content}</p>
+          <h2 className="text-xl max-w-xl m-auto mb-4 font-bold text-left leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white ">
+            Résumé
+          </h2>
+          <p className="text-left max-w-xl m-auto text-xs text-gray-900 dark:text-white mb-4">
+            {episodes[index].content}
+          </p>
         </div>
       )}
       <div className={loading ? "invisible" : ""}>

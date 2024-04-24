@@ -1,10 +1,19 @@
 "use client";
-import { LoginButton } from "@/components/auth";
-import AuthInput from "@/components/authInput";
 import { signIn } from "next-auth/react";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
+/**
+ * `SignInPage` component facilitates user sign-in using email and password. It leverages the `next-auth/react`
+ * library to authenticate users. The component manages the sign-in process, displays any authentication errors,
+ * and redirects authenticated users to a specified admin dashboard.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SignInPage />
+ * )
+ */
 export default function SignInPage() {
   const email = useRef("");
   const password = useRef("");
@@ -13,6 +22,13 @@ export default function SignInPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
+  /**
+   * Handles the form submission for signing in. It prevents default form behavior, sets loading state,
+   * and calls the signIn method from next-auth/react with credentials. It handles errors, sets error states,
+   * and navigates to the admin page upon successful authentication.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e - The form event triggered by submitting the sign in form.
+   */
   const handelSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);

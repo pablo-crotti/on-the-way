@@ -4,7 +4,17 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Suspense } from "react";
 
-
+/**
+ * `SignUpConfirmPage` wraps the `SignUpConfirmContent` component within a Suspense fallback.
+ * This component handles the user signup confirmation process. If the necessary token is not
+ * found in the URL parameters, the user is redirected to the signin page.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SignUpConfirmPage />
+ * )
+ */
 export default function SignUpConfirmPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -13,19 +23,27 @@ export default function SignUpConfirmPage() {
   );
 }
 
+/**
+ * `SignUpConfirmContent` component uses the token from URL search parameters to fetch user data
+ * and confirm their registration. If the token is valid, it completes the registration process;
+ * otherwise, it redirects to the signin page. It handles both the initial fetching of user data
+ * based on the token and the final submission of the confirmation.
+ *
+ * @component
+ */
 function SignUpConfirmContent() {
   const router = useRouter();
   const token = useSearchParams().get("token");
-  
 
-  if(!token) {
+  // Redirects to signin if the token is missing or invalid
+  if (!token) {
     router.replace("/signin");
   }
-
 
   const [userId, setUserId] = useState("");
   const [userEmail, setUserEmail] = useState("");
 
+  // Fetches user data using the provided token
   const request = fetch(`/api/auth/register?token=${token}`)
     .then((response) => response.json())
     .then((data) => {
@@ -35,12 +53,18 @@ function SignUpConfirmContent() {
       setUserEmail(data.email);
     });
 
+  /**
+   * Handles the form submission for user registration confirmation.
+   * Submits user data and redirects based on the response from the server.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} event - The form event triggered by submitting the form.
+   */
   const handelSubmit = async (event: any) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     formData.append("id", userId);
-    
+
     try {
       const response = await fetch("/api/auth/register", {
         method: "PUT",
@@ -58,8 +82,6 @@ function SignUpConfirmContent() {
     } catch (error: any) {
       alert(error.message);
     }
-
-    
   };
   return (
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

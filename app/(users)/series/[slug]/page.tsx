@@ -7,6 +7,17 @@ import { Title } from "@/components/title";
 import { Text } from "@/components/text";
 import { Accordion } from "@/components/accordion";
 
+/**
+ * `Page` component fetches and displays details about a specific podcast collection,
+ * its episodes, and associated characters from an API based on the URL slug.
+ * It processes and displays these details using the `Accordion` component and other presentation components.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Page />
+ * )
+ */
 export default function Page() {
   const collectionModel = {
     name: "",
@@ -56,10 +67,21 @@ export default function Page() {
   const pathname = usePathname();
   const slug = pathname.split("/").pop();
 
+  /**
+   * Converts seconds into minutes.
+   *
+   * @param {number} seconds - The number of seconds to convert.
+   * @returns {number} The equivalent minutes.
+   */
   const secondsToMinutes = (seconds: number) => {
     return new Date(seconds * 1000).getMinutes();
   };
 
+  /**
+   * Fetches character data for a given collection from the API.
+   *
+   * @param {string} collectionId - The ID of the collection for which to fetch character data.
+   */
   const getCharacters = (collectionId: string) => {
     fetch(`/api/characters?collection=${collectionId}`).then((res) =>
       res.json().then((data) => {
@@ -82,6 +104,10 @@ export default function Page() {
     );
   };
 
+  /**
+   * Fetches collection and episodes data from the server and sets up the state.
+   * It filters out episodes that are still drafts and initializes characters fetching.
+   */
   const getCollection = () => {
     fetch(`/api/collection?id=${slug}`).then((res) =>
       res.json().then((data) => {
@@ -131,6 +157,7 @@ export default function Page() {
     );
   };
 
+  // Fetches data on component mount.
   useEffect(() => {
     getCollection();
   }, []);
@@ -157,7 +184,7 @@ export default function Page() {
             </Text>
           </div>
           <div className="flex justify-center">
-          <img className="w-full md:max-w-md" src={`${collection.image}`} />
+            <img className="w-full md:max-w-md" src={`${collection.image}`} />
           </div>
           <Accordion title="Épisodes" open={true}>
             {episodes.map((episode, index) => (
@@ -242,7 +269,6 @@ export default function Page() {
                 Infos supplémentaires
               </a>
             </Accordion>
-          
           )}
         </div>
       )}

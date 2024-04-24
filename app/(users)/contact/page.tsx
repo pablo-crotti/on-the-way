@@ -1,9 +1,18 @@
 "use client";
-
 import { useState } from "react";
 import { Title } from "@/components/title";
-import { Text } from "@/components/text";
 
+/**
+ * `ContactPage` component provides a form for users to submit contact messages. It manages form state,
+ * submission status, and handles the post-submission logic. The form allows users to input their email,
+ * select a category, set a subject (object), and write a message.
+ *
+ * @component
+ * @example
+ * return (
+ *   <ContactPage />
+ * )
+ */
 export default function ContactPage() {
   const [email, setEmail] = useState("");
   const [category, setCategory] = useState("");
@@ -12,6 +21,13 @@ export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  /**
+   * Handles the form submission event. Submits the contact form data to the server via POST request.
+   * If the submission is successful, it clears the form and sets a submitted state to true.
+   * If there is an error, it alerts the user with the error message.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e - The form event triggered by submitting the form.
+   */
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -121,7 +137,6 @@ export default function ContactPage() {
                 className="bg-darkbg-50 border border-darkbg-300 text-darkbg-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-darkbg-700 dark:border-darkbg-600 dark:placeholder-darkbg-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-              
               />
             </div>
             <div className="flex justify-end">
