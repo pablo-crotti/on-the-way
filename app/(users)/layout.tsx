@@ -18,11 +18,16 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <link rel="stylesheet" href="https://use.typekit.net/flr7hfx.css"></link>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/flr7hfx.css"
+        ></link>
+      </head>
       <body className="w-full h-full dark:bg-darkbg-900">
         <Nav />
-          
-          <div className="md:p-0 md:py-4">{children}</div>
+
+        <div className="md:p-0 md:py-4">{children}</div>
         <Analytics />
         <Footer />
       </body>

@@ -2,8 +2,19 @@
 import { useEffect, useState } from "react";
 import { fetchPodcastEngagementStats, fetchPodcasts } from "../../actions";
 import { Title } from "@/components/title";
-import { get } from "http";
 
+/**
+ * Home component serves as the landing page for the podcast management dashboard.
+ * It fetches and displays engagement statistics, total page views, and recent podcast episodes.
+ * It handles state management for loading status, statistics, and podcast data.
+ * Uses useEffect to fetch data on component mount.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Home />
+ * )
+ */
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<any>([]);
@@ -13,6 +24,14 @@ export default function Home() {
   const [totalEpisodes, setTotalEpisodes] = useState(0);
   const [totalPageViews, setTotalPageViews] = useState(0);
 
+  /**
+   * Calculates the percentage change between the current month and the last month.
+   * Positive values indicate an increase, negative values indicate a decrease, and zero indicates no change.
+   *
+   * @param {number} monthSum - Total for the current month.
+   * @param {number} lastMonthSum - Total for the previous month.
+   * @returns {number} The percentage change.
+   */
   const getPercentage = (monthSum: number, lastMonthSum: number) => {
     if (monthSum > lastMonthSum) {
       return Math.round(((monthSum - lastMonthSum) / lastMonthSum) * 100);
@@ -23,6 +42,10 @@ export default function Home() {
     }
   };
 
+  /**
+   * Fetches total page views from an analytics API endpoint and updates the state.
+   * Handles network errors and data parsing issues gracefully.
+   */
   const getTotalPageViews = () => {
     const interval = 1000 * 60 * 60 * 24 * 30;
     const toDateTime = new Date();
@@ -54,7 +77,8 @@ export default function Home() {
         console.error("Error fetching data:", error);
       });
   };
-
+  
+  // useEffect hook to load data on component mount
   useEffect(() => {
     getTotalPageViews();
     fetchPodcastEngagementStats().then((data) => {
@@ -84,16 +108,14 @@ export default function Home() {
       } else if (dataSorted.length == 2) {
         setLastPodcasts([dataSorted[0], dataSorted[1]]);
       } else {
-        setLastPodcasts(
-          {
-            season_number: "0",
-            episode_number: "0",
-            publish_time: "0",
-            logo: "https://sofft.be/wp-content/uploads/2023/10/placeholder-33.png",
-            status: "0",
-            id: "fake",
-          },
-        );
+        setLastPodcasts({
+          season_number: "0",
+          episode_number: "0",
+          publish_time: "0",
+          logo: "https://sofft.be/wp-content/uploads/2023/10/placeholder-33.png",
+          status: "0",
+          id: "fake",
+        });
       }
       setLoading(false);
     });
@@ -166,7 +188,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col items-center p-4 w-max min-w-full bg-white border border-gray-200 rounded-lg shadow md:flex-row  dark:border-darkbg-700 dark:bg-darkbg-800">
+            <div className="flex flex-col items-center p-4 w-2/5 min-w-full bg-white border border-gray-200 rounded-lg shadow md:flex-row  dark:border-darkbg-700 dark:bg-darkbg-800">
               <div className="flex flex-shrink-0 items-center justify-center bg-green-200 h-16 w-16 rounded">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +230,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex flex-row items-start gap-4 p-4 w-max basis-1/3 bg-white border border-gray-200 rounded-lg shadow md:flex-col  dark:border-darkbg-700 dark:bg-darkbg-800">
+          <div className="flex flex-row items-start gap-4 p-4 w-2/5 bg-white border border-gray-200 rounded-lg shadow md:flex-col  dark:border-darkbg-700 dark:bg-darkbg-800">
             <div className="flex flex-row items-center gap-4 w-max">
               <div className="flex flex-shrink-0 items-center justify-center bg-green-200 h-16 w-16 rounded">
                 <svg

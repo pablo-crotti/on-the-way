@@ -5,11 +5,30 @@ import { Title } from "@/components/title";
 import PrimaryButton from "@/components/primarybutton";
 import { useState } from "react";
 
+/**
+ * NewCollectionPage component allows users to create a new collection with multiple characters and places.
+ * It provides functionality to add or remove characters and places, handle their information,
+ * and submit all details to a server. It uses multiple useState hooks to manage the state of the collection,
+ * characters, and places.
+ *
+ * @component
+ * @example
+ * return (
+ *   <NewCollectionPage />
+ * )
+ */
 export default function NewCollectionPage() {
   const [loading, setLoading] = useState(false);
   const [character, setCharacter] = useState([0]);
   const [characterInfos, setCharacterInfos] = useState<any>([[""]]);
   const [places, setPlaces] = useState<any>([["", ""]]);
+
+  /**
+   * Generates a random string of specified length using alphanumeric characters.
+   *
+   * @param {number} length - The length of the string to generate.
+   * @returns {string} The generated random string.
+   */
   const generateRandomString = (length: number) => {
     let result = "";
     const characters =
@@ -21,11 +40,19 @@ export default function NewCollectionPage() {
     return result;
   };
 
+  /**
+   * Adds a new default character to the state arrays managing characters.
+   */
   const newCharacter = () => {
     setCharacter([...character, 0]);
     setCharacterInfos([...characterInfos, [""]]);
   };
 
+  /**
+   * Handles input changes for character descriptions by updating state.
+   *
+   * @param {number} index - The index of the character in the characterInfos state array.
+   */
   const handelCharacterInfos = (index: number) => {
     const value = (
       document.getElementById(
@@ -44,6 +71,11 @@ export default function NewCollectionPage() {
     ).value = "";
   };
 
+  /**
+   * Removes a character from the state arrays based on the provided index.
+   *
+   * @param {number} index - The index of the character to remove.
+   */
   const removeCharacter = (index: number) => {
     if (character.length === 1) {
       return;
@@ -54,12 +86,21 @@ export default function NewCollectionPage() {
     setCharacter(character.filter((_, i) => i !== index));
   };
 
+  /**
+   * Deletes a specific piece of information for a character.
+   *
+   * @param {number} index - The index of the character in characterInfos.
+   * @param {number} infoIndex - The index of the information in the character's information array.
+   */
   const deleteInfo = (index: number, i: number) => {
     const newInfos = [...characterInfos];
     newInfos[index].splice(i, 1);
     setCharacterInfos(newInfos);
   };
 
+  /**
+   * Adds a new place with name and URL to the places state array.
+   */
   const newPlace = () => {
     const newPlaces = [...places];
 
@@ -76,14 +117,26 @@ export default function NewCollectionPage() {
     (document.getElementById("placesUrl") as HTMLInputElement).value = "";
   };
 
+  /**
+   * Deletes a place from the places state array based on the provided index.
+   *
+   * @param {number} index - The index of the place to delete.
+   */
   const deletePlace = (index: number): void => {
     const newPlaces = [...places];
     newPlaces.splice(index, 1);
     setPlaces(newPlaces);
   };
+
+  /**
+   * Handles form submission, prepares data, and posts it to the server. Manages loading state
+   * and resets form fields and state on successful submission.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} event - The form event triggered by submitting the form.
+   */
   const handelSubmit = (event: any) => {
     event.preventDefault();
-    setLoading(true)
+    setLoading(true);
 
     const title = event.target.title.value;
     const illustration = event.target.illustration.files[0];
@@ -101,8 +154,6 @@ export default function NewCollectionPage() {
     formData.append("illustration", illustration);
     formData.append("imgName", imgName);
     formData.append("places", JSON.stringify(places));
-
-    console.log(event.target.document.files[0]);
 
     if (event.target.document.files[0]) {
       const document = event.target.document.files[0];
@@ -142,7 +193,6 @@ export default function NewCollectionPage() {
     })
       .then((response) => {
         if (response.ok) {
-          console.log("Le fichier a été téléchargé avec succès !");
           event.target.title.value = "";
           event.target.description.value = "";
           event.target.illustration.value = "";
@@ -157,17 +207,16 @@ export default function NewCollectionPage() {
           setCharacterInfos([[""]]);
           setPlaces([["", ""]]);
 
-          
-          setLoading(false)
+          setLoading(false);
         } else {
-          console.error(response)
+          console.error(response);
           console.error("Erreur lors du téléchargement du fichier.");
-          setLoading(false)
+          setLoading(false);
         }
       })
       .catch((error) => {
         console.error("Une erreur s'est produite :", error);
-        setLoading(false)
+        setLoading(false);
       });
   };
   return (

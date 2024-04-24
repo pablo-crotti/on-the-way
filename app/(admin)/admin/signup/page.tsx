@@ -1,6 +1,23 @@
 "use client";
 
+/**
+ * SignUpPage component handles user registration. It includes a form where users can enter
+ * their registration details. Upon form submission, it sends these details to a server-side API.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SignUpPage />
+ * )
+ */
 export default function SignUpPage() {
+  /**
+   * Handles the form submission event. Prevents the default form submission behavior.
+   * It creates FormData from the form, sends it to the server-side signup API, and handles the response.
+   * Alerts the user with the response text or an error message if the request fails.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} event - The form event triggered by submitting the form.
+   */
   const handelSubmit = async (event: any) => {
     event.preventDefault();
 

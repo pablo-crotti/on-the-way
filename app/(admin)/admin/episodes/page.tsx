@@ -3,14 +3,18 @@ import { fetchPodcasts, updatePodcast } from "../../../actions";
 import { useState, useEffect } from "react";
 
 /**
- * React component for displaying episodes.
- * @returns {JSX.Element} EpisodesPage component.
+ * `EpisodesPage` component displays a list of podcast episodes and allows the user to update the status of each episode.
+ * It fetches episode data and collection data on mount. The component provides functionality to change the publish status
+ * of an episode between 'publish' and 'draft'.
+ *
+ * @component
+ * @example
+ * return (
+ *   <EpisodesPage />
+ * )
  */
 export default function EpisodesPage() {
-  // State for loading indicator
   const [loading, setLoading] = useState(true);
-
-  // State for storing episodes
   const [episodes, setEpisodes] = useState<
     {
       id: string;
@@ -33,8 +37,6 @@ export default function EpisodesPage() {
       object: string;
     }[]
   >([]);
-
-  // State for storing collections
   const [collections, setCollections] = useState<
     {
       id: string;
@@ -45,9 +47,10 @@ export default function EpisodesPage() {
   >([]);
 
   /**
-   * Get collection name by number.
-   * @param {number} number - Collection number.
-   * @returns {string} Name of the collection.
+   * Retrieves the name of a collection based on its number.
+   *
+   * @param {number} number - The collection number to find the name for.
+   * @returns {string} The name of the collection, or an empty string if not found.
    */
   const getCollectionName = (number: number) => {
     const collection = collections.find(
@@ -57,9 +60,11 @@ export default function EpisodesPage() {
   };
 
   /**
-   * Change episode status and update.
-   * @param {object} episode - Episode object.
-   * @returns {Promise<void>}
+   * Changes the status of an episode and updates its status on the server. After updating,
+   * it refetches the episodes list to reflect the changes.
+   *
+   * @param {Object} episode - The episode object with details to be updated.
+   * @returns {Function} A function to be triggered by an event, taking the event as an argument.
    */
   const changeEpisodeStatus =
     (episode: {
@@ -100,14 +105,13 @@ export default function EpisodesPage() {
       });
     };
 
+  // Fetches episodes and collections data on component mount
   useEffect(() => {
-    // Fetch episodes
     fetchPodcasts().then((episodesData) => {
       setEpisodes(episodesData);
       setLoading(false);
     });
 
-    // Fetch collections
     fetch("/api/collection?all=true", {}).then((response) => {
       if (response.ok) {
         response.json().then((data) => {

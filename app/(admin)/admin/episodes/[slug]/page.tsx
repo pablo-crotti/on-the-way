@@ -9,6 +9,17 @@ import {
 } from "../../../../actions";
 import PrimaryButton from "@/components/primarybutton";
 
+/**
+ * `Page` component serves as an episode management page where users can update podcast episode details.
+ * It handles file uploads for episode illustrations and audio, and updates episode metadata such as title and content.
+ * The component fetches initial episode data based on the URL slug and allows for updating it.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Page />
+ * )
+ */
 export default function Page() {
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
@@ -20,10 +31,22 @@ export default function Page() {
   const pathname = usePathname();
   const slug = pathname.split("/").pop();
 
+  /**
+   * Generates a random identifier to be used in file names to ensure uniqueness.
+   *
+   * @returns {string} A unique random identifier.
+   */
   const generateId = () => {
     return Math.random().toString(36).substr(2, 9);
   };
 
+  /**
+   * Handles form submission for updating episode details. It processes any new media files uploaded,
+   * fetches presigned URLs for them, uploads the files to Amazon S3, and updates the episode's metadata.
+   * It handles different scenarios based on the files provided.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} event - The form event triggered by submitting the update form.
+   */
   const handelSubmit = async (event: any) => {
     event.preventDefault();
     setLoading(true);
@@ -206,6 +229,7 @@ export default function Page() {
     }
   };
 
+  // Effect to fetch and set initial episode data based on the slug.
   useEffect(() => {
     if (!slug) {
       redirect("/admin/episodes");
@@ -218,7 +242,6 @@ export default function Page() {
       setType(data.episode.type);
       setLoading(false);
     });
-    console.log("slug", slug);
   }, [slug]);
 
   return (

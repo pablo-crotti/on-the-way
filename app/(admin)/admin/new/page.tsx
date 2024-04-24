@@ -9,12 +9,36 @@ import {
   fetchCollectionPodcast,
 } from "@/app/actions";
 
+/**
+ * `NewEpisodePage` component allows users to create and publish new podcast episodes.
+ * Users can upload audio and image files to Amazon S3 via presigned URLs, and submit episode details to a publishing API.
+ * This component fetches existing collections on mount to populate a collection dropdown.
+ *
+ * @component
+ * @example
+ * return (
+ *   <NewEpisodePage />
+ * )
+ */
 export default function NewEpisodePage() {
   const [loading, setLoading] = useState(true);
+
+  /**
+   * Generates a random alphanumeric identifier for use in file naming.
+   *
+   * @returns {string} A unique identifier.
+   */
   const generateId = () => {
     return Math.random().toString(36).substr(2, 9);
   };
 
+  /**
+   * Handles form submission for creating a new podcast episode.
+   * Processes form data to structure file information, uploads files to Amazon S3,
+   * and submits episode details to the podcast publishing API.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} event - The form event triggered by submitting the form.
+   */
   const handelSubmit = async (event: any) => {
     event.preventDefault();
     setLoading(true);
@@ -114,6 +138,10 @@ export default function NewEpisodePage() {
 
   const [collections, setCollections] = useState({});
 
+  /**
+   * Fetches collection data from the server to allow the user to select which collection the new episode belongs to.
+   * Updates the 'collections' state with the fetched data.
+   */
   const getCollections = () => {
     fetch(`/api/collection?all=true}`).then((res) =>
       res.json().then((data) => {
@@ -122,6 +150,8 @@ export default function NewEpisodePage() {
       })
     );
   };
+
+  // useEffect to fetch collections on component mount
   useEffect(() => {
     getCollections();
   }, []);
