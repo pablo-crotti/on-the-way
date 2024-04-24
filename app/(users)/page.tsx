@@ -73,6 +73,7 @@ export default function Home() {
   const [nbEpisodesLastCollection, setNbEpisodesLastCollection] = useState(0);
   const [LastDescr, setLastDescr] = useState("");
   const [expandText, setExpandText] = useState(false);
+  const [lastEpisodeCollection, setLastEpisodeCollection] = useState(0);
 
   /**
    * Fetches all collections from the server, sets the collection details,
@@ -112,6 +113,12 @@ export default function Home() {
       });
       setNbEpisodesLastCollection(episodesData.length);
       setLastEpisode(episodesData[episodesData.length - 1]);
+      fetch(`/api/collection?number=${episodesData[episodesData.length - 1].season_number}`).then((res) =>
+        res.json().then((data) => {
+          console.log(data)
+          setLastEpisodeCollection(data.id);
+        })
+      );
       setLoading(false);
     });
   }
@@ -212,7 +219,7 @@ export default function Home() {
               </p>
               <div className="mb-4 flex justify-center pt-6 ">
                 <a
-                  href={`/series/${lastCollection.id}/episodes?id=${lastEpisode.episode_number}`}
+                  href={`/series/${lastEpisodeCollection}/episodes?id=${lastEpisode.episode_number}`}
                   className="flex items-center w-full bg-white border border-darkbg-200 rounded-lg shadow flex-row md:max-w-xl hover:bg-darkbg-100 dark:border-darkbg-700 dark:bg-darkbg-800 dark:hover:bg-darkbg-700"
                 >
                   <img
