@@ -85,7 +85,7 @@ export default function Home() {
         setAllCollections(data);
         setNbCollection(data.length);
         setLastCollection(data[0]);
-        getLastEpisode(data[data.length - 1].number);
+        getLastEpisode(data[0].number);
       })
     );
   };
@@ -142,7 +142,7 @@ export default function Home() {
           </h1>
           <a
             className="flex justify-center"
-            href={`/series/${allCollections[allCollections.length - 1].id}`}
+            href={`/series/${collection.id}`}
           >
             <PrimaryButton type="button">Ecouter</PrimaryButton>
           </a>
