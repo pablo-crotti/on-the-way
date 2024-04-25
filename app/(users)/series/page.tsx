@@ -57,7 +57,7 @@ export default function SeriesPage() {
     <div className="p-4 flex flex-col gap-8">
       <Title type="h1" children="Les séries" />
       <Text>
-        Ici, vous retrouverez toutes les séries que nous vous proposons a écouter lors de vos trajets.
+        Ici, vous retrouverez toutes les séries que nous vous proposons d'écouter lors de vos trajets.
       </Text>
       {loading ? (
         <Loading />
