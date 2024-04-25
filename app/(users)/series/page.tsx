@@ -55,10 +55,9 @@ export default function SeriesPage() {
   }, []);
   return (
     <div className="p-4 flex flex-col gap-8">
-      <Title type="h1" children="A propos de nous" />
+      <Title type="h1" children="Les séries" />
       <Text>
-        Vous vous trouvez sur le site dédié à notre podcast On The Way dont le
-        but est de partager des histoires incroyables.
+        Ici, vous retrouverez toutes les séries que nous vous proposons d'écouter lors de vos trajets.
       </Text>
       {loading ? (
         <Loading />
